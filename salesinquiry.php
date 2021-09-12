@@ -634,7 +634,7 @@ $action = isset($action)?$action:'';
 														  <label class="form-check-label" for="flexCheckDefault">
 															Slitting
 														  </label>
-														</div>test
+														</div>
 
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="cuttingandbagging" name="chk[]" id="cuttingandbagging">
