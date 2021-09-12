@@ -30,23 +30,23 @@ else
 if(empty($_GET['sid']))
 {
 
-
+	
 }
 else
 {
 	$sales_inquiry_id = $_GET['sid'];
-
+	
 }
 
 if(empty( $_GET['action']))
 {
 
-
+	
 }
 else
 {
 	$action =  $_GET['action'];
-
+	
 }
 
 $sales_inquiry_id = isset($sales_inquiry_id)?$sales_inquiry_id:'';
@@ -58,16 +58,16 @@ $action = isset($action)?$action:'';
 
 
 //before we store information of our member, we need to start first the session
-
+	
 
 	//create a new function to check if the session variable member_id is on set
 	function logged_in() {
 		return isset($_SESSION['MEMBER_ID']);
-
+        
 	}
 	//this function if session member is not set then it will be redirected to index.php
 	function confirm_logged_in() {
-		if (!logged_in()) {
+		if (!logged_in()) { 	
 
 ?>
 			<script type="text/javascript">
@@ -77,7 +77,7 @@ $action = isset($action)?$action:'';
 		}
 	}
 	confirm_logged_in();
-
+	
 ?>
 <!DOCTYPE html>
 <head>
@@ -149,8 +149,8 @@ $action = isset($action)?$action:'';
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-
-
+                  
+                     
 
                         <!-- Nav Item - User Information -->
                      <!--   <li class="nav-item dropdown no-arrow">
@@ -160,7 +160,7 @@ $action = isset($action)?$action:'';
                                 <img class="img-profile rounded-circle"
                                     src="pic/undraw_profile.svg">
                             </a>
-
+                            
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -179,7 +179,7 @@ $action = isset($action)?$action:'';
                             </div>
                         </li> -->
 						<?php echo logindetails(); ?>
-
+						
 
                     </ul>
 
@@ -192,7 +192,7 @@ $action = isset($action)?$action:'';
 
                     <!-- Content Row -->
                     <div class="row gy-5">
-
+ 
 
                         <!-- Customer Div -->
                         <div class="col-sm-12">
@@ -217,31 +217,31 @@ $action = isset($action)?$action:'';
 
 															}
 														?>
-
+															
 														</div>
 															<div class="col-auto">
 																<select class="form-control form-select customerdropdown" name="customer" aria-label="Default select example">
 																   <option selected value="NONE">Select customer</option>
 																    <?php
-
+               
 																	echo getDropdown('tbl_customer',"customer_status = 'Active'",'customer_id',"customer_company_name");
-
+             
 																	?>
 																</select>
-
-
+																
+																
 															</div>
 														</div>
 													</form>
 																<div class="row gy-5">
 																</div>
 														<div class="col-auto customerdata hidden" id="customerdata">
+													
+													
 
-
-
-
+															
 														</div>
-
+														
 														<div class="col-auto customeradd hidden">
 															    <!-- Logout Modal-->
 															<div class="modal fade" id="createcustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -257,7 +257,7 @@ $action = isset($action)?$action:'';
 																		<div class="modal-body">
 																		<form class="user custadddata" name="custadddata"  id="custadddata">
 																		<div class="form-group row ">
-
+																		
 																			<div class="row" id="notif" style="display:none;">
 																				<div class="col-md-12">
 																					<div class="alert alert-success" id="notitext">
@@ -277,14 +277,14 @@ $action = isset($action)?$action:'';
 																			<div class="col-sm-6">
 																					<input type="text" class="form-control custrepval" name="custrepval" required placeholder="Enter Representative " aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
-
+																			
 																			<div class="col-sm-6">
 																				<p>Customer Email:</p>
 																			</div>
 																			<div class="col-sm-6">
 																					<input type="email" class="form-control custemailval" name="custemailval" required placeholder="Enter Email" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
-
+																			
 																			<div class="col-sm-6">
 																				<p>Customer Contact:</p>
 																			</div>
@@ -301,8 +301,8 @@ $action = isset($action)?$action:'';
 																					<input type="text" class="form-control custaddval" name="custaddval" required placeholder="Enter Address" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																				</div>
 																		</div>
-
-
+																	
+																																		
 																		</div>
 																		<div class="modal-footer">
 																			<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -312,11 +312,11 @@ $action = isset($action)?$action:'';
 																	</div>
 																</div>
 															</div>
-
-
-
+														
+														
+															
 														</div>
-
+													
                                                 </div>
                                             </div>
                                         </div>
@@ -325,13 +325,13 @@ $action = isset($action)?$action:'';
                             </div>
                         </div>
 
+                       
 
 
-
-
+           
 					</div>
 				<!--Image Content Row -->
-
+					
 						<div class="row gy-5">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
@@ -346,8 +346,8 @@ $action = isset($action)?$action:'';
 													<!--	<img src="img/imgprev.png" alt="Preview Image" class="img-fluid imgPlaceholder" id="imgPlaceholder"> -->
 														<div class="row gy-5 align-items-center"></div></br></br>
 														<input type="file"  class="form-control-user chooseFile" accept="image/*" name='inputfile' id='inputfile' multiple>
-
-
+														
+														
 														<script type="text/javascript">
 															$(document).ready(function(){
 
@@ -367,7 +367,7 @@ $action = isset($action)?$action:'';
 
 														});
 																													</script>
-
+														
 													</div>
 												</div>
 											</div>
@@ -376,8 +376,8 @@ $action = isset($action)?$action:'';
 								</div>
 							</div>
 					</div>
-
-
+					
+					
 					<!-- Image and Material and MFG Process Row -->
 					<div class="row gy-5">
 						<div class="col-lg-4">
@@ -390,27 +390,27 @@ $action = isset($action)?$action:'';
 													<div class="card-body">
 													 		<form class="user">
 														<div class="form-group row">
-
+														
 														<div class="col-lg-3">
 															<a href="#" data-toggle="modal" data-target="#createprodModal" class="d-none createprod d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-box-open fa-sm text-white-50"></i> Create Product</a>
 														</div>
-
+														
 																<div class="col-sm-8">
-
+																
 																	<select class="form-control form-select productdropdown" name="product" aria-label="Default select example">
 																	   <option selected value="none">Select Product</option>
-
+																		
 																	</select>
 																</div>
-
+															
 																<div class="row gy-5">
 																</div>
-
+																
 																<div class="col-auto productdata hidden" id="productdata">
-
-
+													
+															
 																</div>
-
+																
 															</form>
 																<div class="col-auto productadd hidden">
 															    <!-- Logout Modal-->
@@ -425,8 +425,8 @@ $action = isset($action)?$action:'';
 																			</button>
 																		</div>
 																		<div class="modal-body">
-
-
+																		
+																		
 																		<div class="row" id="notif2" style="display:none;">
 																				<div class="col-md-12">
 																					<div class="alert alert-success" id="notitext2">
@@ -447,14 +447,14 @@ $action = isset($action)?$action:'';
 																			<div class="col-sm-6">
 																					<input type="text" class="form-control" placeholder="Enter Material name" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div> -->
-
+																			
 																			<div class="col-sm-6">
 																				<p>Product Size:</p>
 																			</div>
 																			<div class="col-sm-6">
 																					<input type="text" class="form-control prodsizeval" name="prodsizeval" required  placeholder="Enter Product size" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
-
+																			
 																			<div class="col-sm-6">
 																				<p>Product Material Type:</p>
 																			</div>
@@ -462,9 +462,9 @@ $action = isset($action)?$action:'';
 																					<input type="text" class="form-control prodmattypeval" name="prodmattypeval" required placeholder="Enter Material type" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
 																		</div>
-
-
-
+														
+																	
+																																				
 																		</div>
 																	<div class="modal-footer">
 																		<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -474,14 +474,14 @@ $action = isset($action)?$action:'';
 																	</div>
 																</div>
 															</div>
-
-
-
+																
+														
+															
 														</div>
-
-
+																
+															
 														</div>
-
+														
 													</div>
 												</div>
 											</div>
@@ -489,8 +489,8 @@ $action = isset($action)?$action:'';
 									</div>
 								</div>
 							</div>
-
-
+					
+					
 							<div class="col-lg-4">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -499,44 +499,44 @@ $action = isset($action)?$action:'';
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Material</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-
+													
 														<div class="form-group row ">
-
-
-
+																													
+															
+															
 													<!--		<select class="selectpicker form-control materialdata" multiple data-live-search="true"   >
 															 <?php
-
+				   
 																		echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
-
+				 
 																		?>
 															</select> -->
-
-
+															
+															
 															<div class="col-lg-8">
 																<select class="form-control selecttable"	id="inv" >
 																 <?php
-
+					   
 																			echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
-
+					 
 																			?>
 																</select>
 															</div>
-
-
+															
+															
 															<div class="col-lg-4">
 																<a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="addMaterial(); return false"><i class="far fa-plus-square"></i> Add Item</a>
 															</div>
 
-
+															
 															<div class="row gy-5"></div>
-
-
+															
+															
 													<!--	<button class="btn btn-primary test"  type="button" >Submit</button>			-->
-
+													
 														</div>
 														<div class="form-group row txtResult1" id="txtResult1">
-
+															
 																															<table class="table table-bordered materialtable" id="materialtable" width="100%" cellspacing="0">
 																		<thead>
 																			<th>ID</th>
@@ -548,8 +548,8 @@ $action = isset($action)?$action:'';
 																	for($a=0;$a<count($itemarray);$a++)
 																	{
 																		$MaterialListDetails = MaterialListDetails($itemarray[$a]);
-
-
+																		
+	
 																		if($MaterialListDetails["material_id"]!="")
 																		{
 																	?>
@@ -558,21 +558,21 @@ $action = isset($action)?$action:'';
 																	<td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
 																	<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterial(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
 																			</tr>
-
-
+																	
+																	
 																	<?php     }
 																	}?>
-
-
+																
+																	
 																	</tbody>
-
-
-
+																	
+																   
+																 
 																</table>
-
+																
 														</div>
-
-
+													
+													
 													</div>
 												</div>
 											</div>
@@ -580,7 +580,7 @@ $action = isset($action)?$action:'';
 									</div>
 								</div>
 							</div>
-
+							
 							<div class="col-lg-4">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -589,61 +589,61 @@ $action = isset($action)?$action:'';
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Manufacturing Process</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-
+														
 														<div class="row gy-5"></div>
-
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="extrusion" name="chk[]" id="extrusion">
 														  <label class="form-check-label" for="flexCheckDefault">
 															Extrusion
 														  </label>
 														</div>
-
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="printing" name="chk[]" id="printing">
 														  <label class="form-check-label" for="flexCheckDefault">
 															Printing
 														  </label>
 														</div>
-
-
+														
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="1stlamination" name="chk[]" id="1stlamination">
 														  <label class="form-check-label" for="flexCheckDefault">
 															1st Lamination
 														  </label>
 														</div>
-
-
+														
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="2ndlamination" name="chk[]" id="2ndlamination">
 														  <label class="form-check-label" for="flexCheckDefault">
 															2nd Lamination
 														  </label>
 														</div>
-
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="curing" name="chk[]" id="curing">
 														  <label class="form-check-label" for="flexCheckDefault">
 															Curing
 														  </label>
 														</div>
-
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="slitting" name="chk[]" id="slitting">
 														  <label class="form-check-label" for="flexCheckDefault">
 															Slitting
 														  </label>
-														</div>test
-
+														</div>
+														
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="cuttingandbagging" name="chk[]" id="cuttingandbagging">
 														  <label class="form-check-label" for="flexCheckDefault">
 															Cutting and Bagging
 														  </label>
 														</div>
-
-
+														
+													
 													</div>
 												</div>
 											</div>
@@ -652,27 +652,27 @@ $action = isset($action)?$action:'';
 								</div>
 							</div>
 					</div>
-
+					
 					<div class="row gy-5 align-items-center">
-
+					
 						<div class="col-lg-3">
-
+						  
 						</div>
 						<div class="col-lg-6">
 						<button type="button" class="btn btn-success btn-lg btn-block submitsalesinquiry" id="submitsalesinquiry">Submit</button>
 						</div>
 						<div class="col-lg-3">
-
+						 
 						</div>
-
+						
 					</div>
-
+					
 					</br></br>
 					<div class="row gy-5 align-items-center">
 					</div>
-
+					
                 <!-- /.container-fluid -->
-
+					
             </div>
             <!-- End of Main Content -->
 
@@ -719,8 +719,8 @@ $action = isset($action)?$action:'';
 
 
 
-
-
-
+    
+   
+    
   </body>
 </html>

@@ -1,117 +1,5 @@
 
 
-
-
-
-
-$(document).ready(function() {
-
-
-  //$('.rejectdata').submit(function() {
-   //$(document).on('click', '.rejectdatasalesinquiry', function(){
-      $('.submitedituseraccount').click(function() {
-   //alert("Test");
-   var chker = 0
-   //var username = $('.username').val();
-  // var password = $('.password').val();
-  // var fname = $('.fname').val();
-  // var lname = $('.lname').val();
-  // var gender = $('.gender').val();
-  var id = $('.id').val();
-   var favorite2 = [];
-   var dept = $('.dept').val();
-   var usertype = $('.usertype').val();
-   var atLeastOneIsChecked2 = $('input[name="useraccess[]"]:checked').length > 0;
-   var useraccess = [];
-           $.each($("input[name='useraccess[]']:checked"), function(){
-               favorite2.push($(this).val());
-           });
-     useraccess =  favorite2.join(",");
-
-   var datastring = "";
-   //datastring = datastring + "username="+username;
-   //datastring = datastring + "&password="+password;
-   //datastring = datastring + "&fname="+fname;
-  // datastring = datastring + "&lname="+lname;
-  // datastring = datastring + "&gender="+gender;
-   datastring = datastring + "id="+id;
-   datastring = datastring + "&dept="+dept;
-   datastring = datastring + "&usertype="+usertype;
-   datastring = datastring + "&useraccess="+useraccess;
-
-
-   if(dept=="none")
-   {
-     alert("Please select Department.");
-     chker = chker + 1
-   }
-   else
-   {
-     chker = chker + 0
-   }
-
-   if(usertype=="none")
-   {
-     alert("Please select User Type.");
-     chker = chker + 1
-   }
-   else
-   {
-     chker = chker + 0
-   }
-
-   if(atLeastOneIsChecked2==false)
-   {
-     alert("Please check a user access");
-     chker = chker + 1
-   }
-   else
-   {
-     chker = chker + 0
-   }
-
-  //  alert(chker);
-
-     if(chker == 0)
-     {
-        // alert(datastring);
-
-
-         $.ajax({
-                         type: "POST",
-                         url: "functions/useredit.php",
-                         data: datastring,
-                         cache: false,
-                         success: function(result)
-                         {
-                          // alert(result);
-                           if(result == 1)
-                           {
-
-                             alert("User Account Edited");
-                             window.location = "userlist.php";
-
-                           }
-                           else if(result == 0)
-                           {
-                             alert("Failed to edit User Account");
-                             window.location = "user.php";
-
-                           }
-                         }
-          });
-
-
-
-     }
-
-      });
-
-
-});
-
-
-
 $(document).ready(function() {
 
 
@@ -288,9 +176,187 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+   
+   
+	//$('.rejectdata').submit(function() {
+	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
+		  $('.rejectsalesorder').click(function() {
+		 var qidr = $('.qidr').val();
+		 //var reason = $('.reason').val();
+		 var reason = $.trim($('#reason').val());
+		 var datastring = "";
+		 datastring = datastring + "qidr="+qidr;
+		 datastring = datastring + "&reason="+reason;
+		 //alert(datastring);
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/salesorderreject.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   { 
+											 //alert(result);
+											 if(result == 1)
+											 {	
+												 
+												 alert("Sales Order Rejected");
+												 window.location = "salesorderlist.php";										
+																   
+											 }
+											 else if(result == 0)
+											 {	
+												 alert("Failed to reject Sales Order");
+												 window.location = "salesorderlist.php";													
+																	 
+											 }	
+									   }
+		  });
+			 
+					 
+ 
+		});  
+ 
+ 
+  }); 
 
+ $(document).ready(function() {
+   
+   
+	//$('.rejectdata').submit(function() {
+	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
+		  $('.rejectsalesorder2').click(function() {
+		 var qidr = $('.qidr').val();
+		 //var reason = $('.reason').val();
+		 var reason = $.trim($('#reason').val());
+		 var datastring = "";
+		 datastring = datastring + "qidr="+qidr;
+		 datastring = datastring + "&reason="+reason;
+		 //alert(datastring);
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/salesorderreject2.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   { 
+											 //alert(result);
+											 if(result == 1)
+											 {	
+												 
+												 alert("Sales Order Rejected");
+												 window.location = "salesorderlist.php";										
+																   
+											 }
+											 else if(result == 0)
+											 {	
+												 alert("Failed to reject Sales Order");
+												 window.location = "salesorderlist.php";													
+																	 
+											 }	
+									   }
+		  });
+			 
+					 
+ 
+		});  
+ 
+ 
+  }); 
 
-
+//sales order assign
+$(document).ready(function() {
+   
+   
+	$(document).on('click', '.salesorderassign', function(){
+	 //   $('.quotassign').click(function() {
+			
+		   
+		 var qid = $('.qid').val();
+		 var assignperson = $('.assignperson').val();
+		 var datastring = "";
+		 
+		 if (assignperson!="none")
+		{
+		 datastring = datastring + "qid="+qid;
+		 datastring = datastring + "&assignedto="+assignperson;
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/salesorderassign.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   { 
+											 //alert(result);
+											 if(result == 1)
+											 {	
+												 
+												 alert("Sales Order Approval Assigned");
+												 window.location = "salesorderlist.php";										
+																   
+											 }
+											 else if(result == 0)
+											 {	
+												 alert("Failed to assign Sales Order Approval");
+												 window.location = "salesorderlist.php";													
+																	 
+											 }	
+									   }
+						 });
+			 
+					 
+		 }
+		});  
+	 
+ 
+  });
+ 
+ //sales order approver 1
+ $(document).ready(function() {
+	
+	
+	$(document).on('click', '.salesorderapprover', function(){
+	 //   $('.quotassign').click(function() {
+			
+		   
+		 var qid = $('.qid').val();
+		 var assignperson = $('.assignpersonapprove').val();
+		 var datastring = "";
+		 alert("test");
+		 if (assignperson!="none")
+		{
+		 datastring = datastring + "qid="+qid;
+		 datastring = datastring + "&assignedto="+assignperson;
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/salesorderapprove.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   { 
+											 alert(result);
+											 if(result == 1)
+											 {	
+												 
+												 alert("Sales Order Approved");
+												 window.location = "salesorderlist.php";										
+																   
+											 }
+											 else if(result == 0)
+											 {	
+												 alert("Failed to Approved Sales Order");
+												 window.location = "salesorderlist.php";													
+																	 
+											 }	
+									   }
+						 });
+			 
+					 
+		 }
+		});  
+	 
+ 
+  });
 
 $(document).ready(function() {
 
@@ -1691,3 +1757,111 @@ function deleteMaterial(num)
 	});
 
 }
+
+$(document).ready(function() {
+
+
+	//$('.rejectdata').submit(function() {
+	 //$(document).on('click', '.rejectdatasalesinquiry', function(){
+		$('.submitedituseraccount').click(function() {
+	 //alert("Test");
+	 var chker = 0
+	 //var username = $('.username').val();
+	// var password = $('.password').val();
+	// var fname = $('.fname').val();
+	// var lname = $('.lname').val();
+	// var gender = $('.gender').val();
+	var id = $('.id').val();
+	 var favorite2 = [];
+	 var dept = $('.dept').val();
+	 var usertype = $('.usertype').val();
+	 var atLeastOneIsChecked2 = $('input[name="useraccess[]"]:checked').length > 0;
+	 var useraccess = [];
+			 $.each($("input[name='useraccess[]']:checked"), function(){
+				 favorite2.push($(this).val());
+			 });
+	   useraccess =  favorite2.join(",");
+  
+	 var datastring = "";
+	 //datastring = datastring + "username="+username;
+	 //datastring = datastring + "&password="+password;
+	 //datastring = datastring + "&fname="+fname;
+	// datastring = datastring + "&lname="+lname;
+	// datastring = datastring + "&gender="+gender;
+	 datastring = datastring + "id="+id;
+	 datastring = datastring + "&dept="+dept;
+	 datastring = datastring + "&usertype="+usertype;
+	 datastring = datastring + "&useraccess="+useraccess;
+  
+  
+	 if(dept=="none")
+	 {
+	   alert("Please select Department.");
+	   chker = chker + 1
+	 }
+	 else
+	 {
+	   chker = chker + 0
+	 }
+  
+	 if(usertype=="none")
+	 {
+	   alert("Please select User Type.");
+	   chker = chker + 1
+	 }
+	 else
+	 {
+	   chker = chker + 0
+	 }
+  
+	 if(atLeastOneIsChecked2==false)
+	 {
+	   alert("Please check a user access");
+	   chker = chker + 1
+	 }
+	 else
+	 {
+	   chker = chker + 0
+	 }
+  
+	//  alert(chker);
+  
+	   if(chker == 0)
+	   {
+		  // alert(datastring);
+  
+  
+		   $.ajax({
+						   type: "POST",
+						   url: "functions/useredit.php",
+						   data: datastring,
+						   cache: false,
+						   success: function(result)
+						   {
+							// alert(result);
+							 if(result == 1)
+							 {
+  
+							   alert("User Account Edited");
+							   window.location = "userlist.php";
+  
+							 }
+							 else if(result == 0)
+							 {
+							   alert("Failed to edit User Account");
+							   window.location = "user.php";
+  
+							 }
+						   }
+			});
+  
+  
+  
+	   }
+  
+		});
+  
+  
+  });
+  
+  
