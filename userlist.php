@@ -226,9 +226,6 @@ if($type != "Admin")
 																	//	$quotation_id = $row['quotationID'];
 																		//$firstapprover = $row['approver'];
 																		//$secondapprover = $row['secondapprover'];
-                                    if($row['USERNAME']=="admin")
-                                    {}
-                                    else {
 
 
 
@@ -255,7 +252,6 @@ if($type != "Admin")
 
 																				echo '</td>';
 																				echo '</tr>';
-                                      }
 																	}
 																	?>
 

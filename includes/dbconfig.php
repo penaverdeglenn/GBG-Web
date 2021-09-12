@@ -16,7 +16,7 @@ function get_dbserver()
 function get_dbpassword()
 {
     //usbroot
-     return "usbw";
+     return "";
 }
 
 function get_dbuser()

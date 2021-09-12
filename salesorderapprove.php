@@ -33,14 +33,14 @@ else
   $accesstype = $_SESSION['ACCESS_TYPE'];
   
 }
-//echo $_SESSION["ACCESS_TYPE"];
+// change this to in_array()
 $pieces4 = explode(",", $accesstype);
 					$checker=0;
 					$ctr = count(array($accesstype));
 					
 					
 					
-																	for ($c=0;$c<=$ctr;$c++)
+																		for ($c=0;$c<=$ctr;$c++)
 																		{
 																			
 																			
@@ -316,11 +316,11 @@ $(document).ready(function(){
 												
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
 											
-											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND ($checker == 1 )) {  ?>	
-												
+											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND ($checker == 1 )) { ?>	
+											
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
 												
-												<a href="#" data-toggle="modal" data-target="#approveModal" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Approve </a>
+												<a href="#" data-toggle="modal" data-target="#approveModal" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Approve</a>
 												
 												<a href="#" data-toggle="modal" data-target="#rejectModal" class="d-none d-sm-inline-block btn btn-lg btn-danger shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Reject </a>
 											
@@ -855,7 +855,7 @@ $(document).ready(function(){
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Assign Sales Order Approver</div>
+                <div class="modal-body">Assign First Approver</div>
                 <div class="modal-footer">
 				<?php 
 				?>
@@ -863,17 +863,17 @@ $(document).ready(function(){
 																   <option selected value="none">Select employee</option>
 																  
 			<?php
-																	echo getDropdownuserassign('users',"USER_TYPE = 'Approver 1' AND ACCESS_TYPE LIKE '%SalesOrder%'",'id',"FIRST_NAME",$memberid);
+																	echo getDropdownuserassign('users',"USER_TYPE = 'Sales Order Approver 1' AND ACCESS_TYPE LIKE '%SalesOrder%'",'id',"FIRST_NAME",$memberid);
 																	
 																	
 	
              ?>
 					<option  value="Unassigned">Unassigned</option>												
 					</select>
-					<input class="qid" type="hidden" id="qid" name="qid" value="<?php echo $qid; ?>">
+					<input class="qid" type="hidden" id="qid" name="qid" value="<?php echo $id; ?>">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     
-					<button class="btn btn-primary quotassign" href="#" >Assign</button>
+					<button class="btn btn-primary salesorderassign" href="#" >Assign</button>
                 </div>
             </div>
         </div>
@@ -890,13 +890,22 @@ $(document).ready(function(){
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body"> 
+                <div class="modal-body"><?php if($type == "Sales Inquiry Approver 1" AND $dept =="Purchasing") {		?>	Select the next level approver. <?php } ?> 
 				Are you sure about this action? </div>
                 <div class="modal-footer">
-					<input class="qidas" type="hidden" id="qidas" name="qidas" value="<?php echo $qid; ?>">
-					<input class="assignperson" type="hidden" id="assignperson" name="assignperson" value="<?php echo $memberid; ?>">
+								<?php if($type == "Approver 1" AND $dept =="Purchasing") {		?>		 
+					 <select class="form-control form-select assignpersonapprove" name="assignpersonapprove" aria-label="Default select example">
+																   <option selected value="none">Select employee</option>
+																  
+			<?php
+			echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2'",'id',"FIRST_NAME",$memberid); // need to add access type
+			 ?>
+					<option  value="Unassigned">Unassigned</option>												
+					</select>
+			<?php } ?>
+					<input class="sid" type="hidden" id="qid" name="qid" value="<?php echo $id; ?>">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary approvequotation" href="#" >Approve</button>
+                    <button class="btn btn-primary salesorderapprover" href="#" >Approve</button>
 				
                 </div>
             </div>
@@ -920,8 +929,8 @@ $(document).ready(function(){
 			<!-- 	<form class="user rejectdata" name="rejectdata"  id="rejectdata"> -->
 					<textarea class="form-control reason" id="reason" rows="3"></textarea>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					 <input class="qidr" type="hidden" id="qidr" name="qidr" value="<?php echo $qid; ?>">				 
-                    <button type="button" class="btn btn-primary rejectdataquotation" href="#" >Reject</button>
+					 <input class="qidr" type="hidden" id="qidr" name="qidr" value="<?php echo $id; ?>">				 
+                    <button type="button" class="btn btn-primary rejectsalesorder" href="#" >Reject</button>
 				
                 </div>
             </div>
