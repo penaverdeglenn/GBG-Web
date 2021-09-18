@@ -128,7 +128,7 @@ $(document).ready(function() {
                          cache: false,
                          success: function(result)
                          {
-                           alert(result);
+                           //alert(result);
                            if(result == 2)
                            {
 
@@ -145,7 +145,7 @@ $(document).ready(function() {
                                                cache: false,
                                                success: function(result)
                                                {
-                                                 alert(result);
+                                                 //alert(result);
                                                  if(result == 1)
                                                  {
 
@@ -177,8 +177,8 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-   
-   
+
+
 	//$('.rejectdata').submit(function() {
 	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
 		  $('.rejectsalesorder').click(function() {
@@ -195,34 +195,34 @@ $(document).ready(function() {
 									   data: datastring,
 									   cache: false,
 									   success: function(result)
-									   { 
+									   {
 											 //alert(result);
 											 if(result == 1)
-											 {	
-												 
+											 {
+
 												 alert("Sales Order Rejected");
-												 window.location = "salesorderlist.php";										
-																   
+												 window.location = "salesorderlist.php";
+
 											 }
 											 else if(result == 0)
-											 {	
+											 {
 												 alert("Failed to reject Sales Order");
-												 window.location = "salesorderlist.php";													
-																	 
-											 }	
+												 window.location = "salesorderlist.php";
+
+											 }
 									   }
 		  });
-			 
-					 
- 
-		});  
- 
- 
-  }); 
+
+
+
+		});
+
+
+  });
 
  $(document).ready(function() {
-   
-   
+
+
 	//$('.rejectdata').submit(function() {
 	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
 		  $('.rejectsalesorder2').click(function() {
@@ -239,43 +239,43 @@ $(document).ready(function() {
 									   data: datastring,
 									   cache: false,
 									   success: function(result)
-									   { 
+									   {
 											 //alert(result);
 											 if(result == 1)
-											 {	
-												 
+											 {
+
 												 alert("Sales Order Rejected");
-												 window.location = "salesorderlist.php";										
-																   
+												 window.location = "salesorderlist.php";
+
 											 }
 											 else if(result == 0)
-											 {	
+											 {
 												 alert("Failed to reject Sales Order");
-												 window.location = "salesorderlist.php";													
-																	 
-											 }	
+												 window.location = "salesorderlist.php";
+
+											 }
 									   }
 		  });
-			 
-					 
- 
-		});  
- 
- 
-  }); 
+
+
+
+		});
+
+
+  });
 
 //sales order assign
 $(document).ready(function() {
-   
-   
+
+
 	$(document).on('click', '.salesorderassign', function(){
 	 //   $('.quotassign').click(function() {
-			
-		   
+
+
 		 var qid = $('.qid').val();
 		 var assignperson = $('.assignperson').val();
 		 var datastring = "";
-		 
+
 		 if (assignperson!="none")
 		{
 		 datastring = datastring + "qid="+qid;
@@ -286,39 +286,39 @@ $(document).ready(function() {
 									   data: datastring,
 									   cache: false,
 									   success: function(result)
-									   { 
+									   {
 											 //alert(result);
 											 if(result == 1)
-											 {	
-												 
+											 {
+
 												 alert("Sales Order Approval Assigned");
-												 window.location = "salesorderlist.php";										
-																   
+												 window.location = "salesorderlist.php";
+
 											 }
 											 else if(result == 0)
-											 {	
+											 {
 												 alert("Failed to assign Sales Order Approval");
-												 window.location = "salesorderlist.php";													
-																	 
-											 }	
+												 window.location = "salesorderlist.php";
+
+											 }
 									   }
 						 });
-			 
-					 
+
+
 		 }
-		});  
-	 
- 
+		});
+
+
   });
- 
+
  //sales order approver 1
  $(document).ready(function() {
-	
-	
+
+
 	$(document).on('click', '.salesorderapprover', function(){
 	 //   $('.quotassign').click(function() {
-			
-		   
+
+
 		 var qid = $('.qid').val();
 		 var assignperson = $('.assignpersonapprove').val();
 		 var datastring = "";
@@ -333,29 +333,29 @@ $(document).ready(function() {
 									   data: datastring,
 									   cache: false,
 									   success: function(result)
-									   { 
+									   {
 											 alert(result);
 											 if(result == 1)
-											 {	
-												 
+											 {
+
 												 alert("Sales Order Approved");
-												 window.location = "salesorderlist.php";										
-																   
+												 window.location = "salesorderlist.php";
+
 											 }
 											 else if(result == 0)
-											 {	
+											 {
 												 alert("Failed to Approved Sales Order");
-												 window.location = "salesorderlist.php";													
-																	 
-											 }	
+												 window.location = "salesorderlist.php";
+
+											 }
 									   }
 						 });
-			 
-					 
+
+
 		 }
-		});  
-	 
- 
+		});
+
+
   });
 
 $(document).ready(function() {
@@ -630,7 +630,7 @@ $(document).ready(function() {
 												  cache: false,
 												  success: function(result)
 												  {
-														//alert(result);
+														alert(result);
 														if(result == 1)
 														{
 
@@ -934,7 +934,7 @@ $(document).ready(function() {
 				url: "functions/getsalesinquiry.php",
 				data: {sid : salesinquiryid },
 				success: function (data) {
-						//alert(data);
+					//	alert(data);
 						$('.salesinquirydata').removeClass('hidden');
 						//$(".customeradd").addClass('hidden');
 						$(".salesinquirydata").html(data);
@@ -1061,7 +1061,7 @@ $(document).ready(function() {
                                       cache: false,
                                       success: function(result)
                                       {
-											//alert(result);
+											alert(result);
 											if(result == 1)
 											{
 
@@ -1178,12 +1178,14 @@ $(document).ready(function() {
 											{
 
 												alert("Sales Inquiry Added");
+                        window.location = "salesinquiryview.php";
 
 
 											}
 											else if(result == 0)
 											{
 												alert("Failed to add Sales Inquiry");
+                        window.location = "salesinquiryview.php";
 
 											}
                                       }
@@ -1781,7 +1783,7 @@ $(document).ready(function() {
 				 favorite2.push($(this).val());
 			 });
 	   useraccess =  favorite2.join(",");
-  
+
 	 var datastring = "";
 	 //datastring = datastring + "username="+username;
 	 //datastring = datastring + "&password="+password;
@@ -1792,8 +1794,8 @@ $(document).ready(function() {
 	 datastring = datastring + "&dept="+dept;
 	 datastring = datastring + "&usertype="+usertype;
 	 datastring = datastring + "&useraccess="+useraccess;
-  
-  
+
+
 	 if(dept=="none")
 	 {
 	   alert("Please select Department.");
@@ -1803,7 +1805,7 @@ $(document).ready(function() {
 	 {
 	   chker = chker + 0
 	 }
-  
+
 	 if(usertype=="none")
 	 {
 	   alert("Please select User Type.");
@@ -1813,7 +1815,7 @@ $(document).ready(function() {
 	 {
 	   chker = chker + 0
 	 }
-  
+
 	 if(atLeastOneIsChecked2==false)
 	 {
 	   alert("Please check a user access");
@@ -1823,14 +1825,14 @@ $(document).ready(function() {
 	 {
 	   chker = chker + 0
 	 }
-  
+
 	//  alert(chker);
-  
+
 	   if(chker == 0)
 	   {
 		  // alert(datastring);
-  
-  
+
+
 		   $.ajax({
 						   type: "POST",
 						   url: "functions/useredit.php",
@@ -1841,27 +1843,25 @@ $(document).ready(function() {
 							// alert(result);
 							 if(result == 1)
 							 {
-  
+
 							   alert("User Account Edited");
 							   window.location = "userlist.php";
-  
+
 							 }
 							 else if(result == 0)
 							 {
 							   alert("Failed to edit User Account");
 							   window.location = "user.php";
-  
+
 							 }
 						   }
 			});
-  
-  
-  
+
+
+
 	   }
-  
+
 		});
-  
-  
+
+
   });
-  
-  

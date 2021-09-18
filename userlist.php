@@ -38,7 +38,7 @@ else
 
 					$pieces4 = explode(",", $accesstype);
 					$checker=0;
-					$ctr = count($accesstype);
+					$ctr = count(array($accesstype));
 
 
 

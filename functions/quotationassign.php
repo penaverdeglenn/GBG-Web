@@ -26,10 +26,10 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 		if($type =="Sales Associate")
 		{
 			//$strSQL = "UPDATE tbl_sales_inquiry SET salesinquiry_status='Pending Approval Level 1',assignedto='".$assignedto."' WHERE sales_inquiry_id=".$sid;
-			$strSQL = "INSERT INTO tbl_tasklist(id,type, action, user,user_type,datecreated,idassigned,status) 
-					VALUES('','Quotation', 'Approval','".$assignedto."','".$user_type."','".$dateToday."','".$qid."','Not yet started')";
-			
-		
+			$strSQL = "INSERT INTO tbl_tasklist(id,type, action, user,user_type,datecreated,idassigned,status)
+					VALUES(NULL,'Quotation', 'Approval','".$assignedto."','".$user_type."','".$dateToday."','".$qid."','Not yet started')";
+
+
 		}
 		//$strSQL = "UPDATE tbl_sales_inquiry SET assignedto='".$assignedto."' WHERE sales_inquiry_id=".$sid;
 		if(mysqli_query($con, $strSQL) or die("database error: ". mysqli_error($con)))
@@ -42,7 +42,7 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 				$strSQL3 = "UPDATE tbl_quotation SET quotation_approver_1='".$assignedto."',quotation_status='".$status."' WHERE quotation_id=".$qid;
 				if(mysqli_query($con, $strSQL3) or die("database error: ". mysqli_error($con)))
 				{
-					
+
 					echo 1;
 				}
 			}
@@ -56,6 +56,5 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 			echo 0;
 		}
 
-		
-?>
 
+?>

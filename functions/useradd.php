@@ -38,7 +38,7 @@ $useraccess = $_POST['useraccess'];
 
 
 	$insert_sql = "INSERT INTO users(id,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,DEPARTMENT,USER_TYPE,ACCESS_TYPE,GENDER)
-	VALUES('','".$username."', '".$password."','".$fname."','".$lname."','".$dept."','".$usertype."', '".$useraccess."', '".$gender."')";
+	VALUES(NULL,'".$username."', '".$password."','".$fname."','".$lname."','".$dept."','".$usertype."', '".$useraccess."', '".$gender."')";
 
 
 

@@ -14,7 +14,7 @@ date_default_timezone_set('Asia/Manila');
 	  $type = $_SESSION['TYPE'];
 	  $fname = $_SESSION['FIRST_NAME'];
 	}
-	
+
 	$dateToday = date('Y-m-d');
 
 require_once __DIR__."/allfunctions.php";
@@ -23,11 +23,11 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 
 		$sid = $_POST['sid'];
 		$assignperson = $_POST['assignperson'];
-		if($type =="Sales Inquiry Approver 1")
-		{	
+		if($type =="Approver 1")
+		{
 		$strSQL = "UPDATE tbl_sales_inquiry SET salesinquiry_status='Pending Approval Level 2',approver='".$memberid."',assignedto='".$assignperson."',date_approved='".$dateToday."' WHERE sales_inquiry_id=".$sid;
 		}
-		else if($type =="Sales Inquiry Approver 2")
+		else if($type =="Approver 2")
 		{
 			$strSQL = "UPDATE tbl_sales_inquiry SET salesinquiry_status='Approved',secondapprover='".$memberid."',secondapproverdate='".$dateToday."' WHERE sales_inquiry_id=".$sid;
 		}
@@ -36,10 +36,10 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 			$strSQL2 = "UPDATE tbl_tasklist SET status='Completed' WHERE idassigned=".$sid;
 			if(mysqli_query($con, $strSQL2) or die("database error: ". mysqli_error($con)))
 			{
-				if($type =="Sales Inquiry Approver 1")
-				{	
-					$insert_sql1 = "INSERT INTO tbl_tasklist(id,type, action, user,user_type,datecreated,idassigned,status) 
-					VALUES('','Sales Inquiry', 'Approval','".$assignperson."','Sales Inquiry Approver 2','".$dateToday."','".$sid."','Not yet started')";
+				if($type =="Approver 1")
+				{
+					$insert_sql1 = "INSERT INTO tbl_tasklist(id,type, action, user,user_type,datecreated,idassigned,status)
+					VALUES(NULL,'Sales Inquiry', 'Approval','".$assignperson."','Sales Inquiry Approver 2','".$dateToday."','".$sid."','Not yet started')";
 					if(mysqli_query($con, $insert_sql1) or die("database error: ". mysqli_error($con)))
 					{
 						echo 1;
@@ -49,11 +49,11 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 						echo 0;
 					}
 				}
-				else if($type =="Sales Inquiry Approver 2")
+				else if($type =="Approver 2")
 				{
 					echo 1;
 				}
-				
+
 			}
 			else
 			{
@@ -65,6 +65,5 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 			echo 0;
 		}
 
-		
-?>
 
+?>

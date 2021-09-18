@@ -25,7 +25,7 @@ else
   $type = $_SESSION['TYPE'];
   $firstname = $_SESSION['FIRST_NAME'];
   $dept = $_SESSION['DEPT'];
-  
+
 }
 
 
@@ -36,16 +36,16 @@ $_SESSION['sid']=$sales_inquiry_id;
 
 
 //before we store information of our member, we need to start first the session
-	
+
 
 	//create a new function to check if the session variable member_id is on set
 	function logged_in() {
 		return isset($_SESSION['MEMBER_ID']);
-        
+
 	}
 	//this function if session member is not set then it will be redirected to index.php
 	function confirm_logged_in() {
-		if (!logged_in()) { 	
+		if (!logged_in()) {
 
 ?>
 			<script type="text/javascript">
@@ -55,7 +55,7 @@ $_SESSION['sid']=$sales_inquiry_id;
 		}
 	}
 	confirm_logged_in();
-	
+
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ $_SESSION['sid']=$sales_inquiry_id;
                     <span>Task</span></a>
             </li>
 
-          
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <?php echo sidebar(); ?>
@@ -131,8 +131,8 @@ $_SESSION['sid']=$sales_inquiry_id;
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                  
-                     
+
+
 
                         <!-- Nav Item - User Information -->
                       <?php echo logindetails(); ?>
@@ -153,13 +153,13 @@ $_SESSION['sid']=$sales_inquiry_id;
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-                     
-												
+
+
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Sales Inquiry Details
-												
-												
+
+
 												</div>
-												
+
 												<?php
 												$sid = $_GET['sid'];
 												$status = getRecord('salesinquiry_status','tbl_sales_inquiry','sales_inquiry_id ='.$sid);
@@ -171,43 +171,43 @@ $_SESSION['sid']=$sales_inquiry_id;
 												elseif($status == "Approved")
 												{
 													echo "<h5 class='text-lg font-weight-bold text-success text-uppercase mb-4'>".$status."</h5>";
-												
+
 												}
 												else
 												{
 												}
-												
-												?>	
-												
+
+												?>
+
 											<div class="row  align-items-center">
 
 											<div class="col sm-8">
 											<?php if($dept=="Purchasing" AND $action=="approve" AND $type =="Sales Associate")
 												{?>
 
-												
+
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
-											
-											<?php } else if($dept=="Purchasing" AND $action=="approve" AND ($type =="Sales Inquiry Approver 1" OR $type =="Sales Inquiry Approver 2" )) { ?>	
-											
+
+											<?php } else if($dept=="Purchasing" AND $action=="approve" AND ($type =="Approver 1" OR $type =="Approver 2" )) { ?>
+
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
-												
+
 												<a href="#" data-toggle="modal" data-target="#approveModal" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Approve </a>
-												
+
 												<a href="#" data-toggle="modal" data-target="#rejectModal" class="d-none d-sm-inline-block btn btn-lg btn-danger shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Reject </a>
-											
-											
+
+
 											<?php }  ?>
 												<a href="#" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg" onclick="salesinquiryprint('<?php echo $custid; ?>','<?php echo $sales_inquiry_id; ?>','<?php echo $pid; ?>');"><i class="fas fa-print fa-sm text-white-50"></i></i> Print </a>
-												
+
 												<a href="javascript:history.back();" class="d-none d-sm-inline-block btn btn-lg btn-warning shadow-lg"><i class="fas fa-arrow-left fa-sm text-white-50"></i> Back </a>
-											
+
 											</div>
 											<div class="col sm-2">
-												
+
 											</div>
 											</div>
-												
+
                         <div class="row  align-items-center">
 													<div class="card-body" >
                           <div class="row no-gutters align-items-center">
@@ -221,7 +221,7 @@ $_SESSION['sid']=$sales_inquiry_id;
                                              $SI_customer_rep = getRecord('customer_representative','tbl_customer','customer_id='.$cust_id);
                                              $SI_customer_email = getRecord('customer_email','tbl_customer','customer_id='.$cust_id);
                                              $SI_customer_address = getRecord('customer_address','tbl_customer','customer_id='.$cust_id);
-   
+
                                             echo '<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Customer Name:'. $SI_customer_name .'</div>
                                             <div class="row  align-items-center">
                                                 <div class="col-auto">
@@ -236,24 +236,24 @@ $_SESSION['sid']=$sales_inquiry_id;
 
                                                       <!-- customer details -->
                                                       <div class="form-group row">
-                                                      
-                                                        
+
+
                                                           <div class="col-sm-3">
                                                             <p>Customer Representative:</p>
                                                           </div>
                                                           <div class="col-sm-3">
                                                             <p class="h5 custrep"><b>' . $SI_customer_rep . '</b></p>
                                                           </div>
-                                                          
-                                                          
+
+
                                                           <div class="col-sm-2">
                                                             <p>Customer Email:</p>
                                                           </div>
                                                           <div class="col-sm-4">
                                                             <p class="h5 custemail"><b>'. $SI_customer_email .'</b></p>
                                                           </div>
-                                                          
-                                                          
+
+
                                                           <div class="col-sm-3">
                                                             <p>Customer Contact:</p>
                                                           </div>
@@ -261,7 +261,7 @@ $_SESSION['sid']=$sales_inquiry_id;
                                                             <p class="h5 custcontact"><b>' . $SI_contact_num . '</b></p>
                                                           </div>
                                                     <!--	</div>
-                                                      
+
                                                       <div class="form-group row"> -->
                                                           <div class="col-sm-2">
                                                             <p>Customer Address:</p>
@@ -273,9 +273,9 @@ $_SESSION['sid']=$sales_inquiry_id;
                                                         </div>
                                                         </div>';
                                           ?>
-                                          
-                                      
-														          
+
+
+
 													</div>
 												</div>
 											</div>
@@ -294,24 +294,24 @@ $_SESSION['sid']=$sales_inquiry_id;
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Image</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-                            <?php 
+                            <?php
                               $sales_id = $_GET['sid'];
                               $image_data = getRecord('product_image','tbl_sales_inquiry','sales_inquiry_id ='.$sales_id);
-							  $commaList = explode(",", $image_data);							  
+							  $commaList = explode(",", $image_data);
 							  $ctr = count($commaList);
-							  
+
 							  for ($c=1;$c<$ctr;$c++)
 							 {
 
-								
-						
+
+
 							  ?>
                               <div id="image_preview"><img src="/gbgv2/img/<?php echo $commaList[$c]; ?>"><br> <br><br> <br></div>
                               <!--	<img src="img/imgprev.png" alt="Preview Image" class="img-fluid imgPlaceholder" id="imgPlaceholder"> -->
                                 <div class="row gy-5 align-items-center"></div><br><br>
 							<?php }
                             ?>
-                            
+
 													</div>
 												</div>
 											</div>
@@ -332,16 +332,16 @@ $_SESSION['sid']=$sales_inquiry_id;
 													<div class="card-body">
 													 		<form class="user">
 														<div class="form-group row">
-											
+
 																<div class="row gy-5">
 																</div>
-																
+
 																<div class="col-auto productdata" id="productdata" wfd-invisible="true">
 
-															
+
 															<div class="form-group row proddata">
-															
-                              <?php 
+
+                              <?php
                                   $sales_id = $_GET['sid'];
                                   $SI_product_id  = getRecord('product_id','tbl_sales_inquiry','sales_inquiry_id ='.$sales_id);
                                   $SI_product_name  = getRecord('product_name','tbl_product','product_id ='.$SI_product_id);
@@ -369,13 +369,13 @@ $_SESSION['sid']=$sales_inquiry_id;
                                         </div>
                                     </div>';
                               ?>
-																	
-																	
-																	
+
+
+
 															</div>
-															
-															
-														
+
+
+
 									<!--						<div class="form-group row ">
 																	<div class="col-sm-2">
 																		<p>Customer Address:</p>
@@ -384,8 +384,8 @@ $_SESSION['sid']=$sales_inquiry_id;
 																		<p class="h5 custrep"><b></b></p>
 																	</div>
 															</div> --></div>
-																
-															
+
+
 																<div class="col-auto productadd hidden" wfd-invisible="true">
 															    <!-- Logout Modal-->
 															<div class="modal fade" id="createprodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wfd-invisible="true">
@@ -398,8 +398,8 @@ $_SESSION['sid']=$sales_inquiry_id;
 																			</button>
 																		</div>
 																		<div class="modal-body">
-																		
-																		
+
+
 																		<div class="row" id="notif2" style="display:none;" wfd-invisible="true">
 																				<div class="col-md-12">
 																					<div class="alert alert-success" id="notitext2">
@@ -420,14 +420,14 @@ $_SESSION['sid']=$sales_inquiry_id;
 																			<div class="col-sm-6">
 																					<input type="text" class="form-control" placeholder="Enter Material name" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div> -->
-																			
+
 																			<div class="col-sm-6">
 																				<p>Product Size:</p>
 																			</div>
 																			<div class="col-sm-6">
 																					<input type="text" class="form-control prodsizeval" name="prodsizeval" required="" placeholder="Enter Product size" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
-																			
+
 																			<div class="col-sm-6">
 																				<p>Product Material Type:</p>
 																			</div>
@@ -435,26 +435,26 @@ $_SESSION['sid']=$sales_inquiry_id;
 																					<input type="text" class="form-control prodmattypeval" name="prodmattypeval" required="" placeholder="Enter Material type" aria-label="Recipient's username" aria-describedby="basic-addon2">
 																			</div>
 																		</form></div>
-														
-																	
-																																				
+
+
+
 																		</div>
 																	<div class="modal-footer">
 																		<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 																		<button class="btn btn-primary prodsubmit" name="prodsubmit" id="prodsubmit" type="submit">Submit</button>
 																	</div>
-																		
+
 																	</div>
 																</div>
 															</div>
-																
-														
-															
+
+
+
 														</div>
-																
-															
+
+
 														</div></form>
-														
+
 													</div>
 												</div>
 											</div>
@@ -462,8 +462,8 @@ $_SESSION['sid']=$sales_inquiry_id;
 									</div>
 								</div>
 							</div>
-					
-					
+
+
 							<div class="col-lg-4">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -472,58 +472,58 @@ $_SESSION['sid']=$sales_inquiry_id;
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Material</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-													
+
 														<div class="form-group row ">
-																													
-															
-															
+
+
+
 													<!--		<select class="selectpicker form-control materialdata" multiple data-live-search="true"   >
 															 <option  value='1'>PET12 X 380MM</option><option  value='2'>OPP 25 X 380MM</option><option  value='3'>CPP 25 X 380MM</option><option  value='4'>VMPET 12 X 380MM</option><option  value='5'>LDPE 50 X 380MM</option><option  value='6'>NYLON 15 X 380MM</option><option  value='7'>FOIL 7 X 380MM</option><option  value='8'>PVC 40 X 380MM</option>															</select> -->
-															
-															
-															
 
-															
+
+
+
+
 															<div class="row gy-5"></div>
-															
-															
+
+
 													<!--	<button class="btn btn-primary test"  type="button" >Submit</button>			-->
-													
+
 														</div>
 														<div class="form-group row txtResult1" id="txtResult1">
-															
+
 																															<table class="table table-bordered materialtable" id="materialtable" width="100%" cellspacing="0">
 																		<thead>
 																			<tr><th>ID</th>
 																			<th>Material Name</th>
-																			
+
 																		</tr></thead>
 																	<tbody>
                                     <?php
                                      $SI_material_id = explode(",",getRecord('material_name','tbl_sales_inquiry','sales_inquiry_id ='.$sales_id));
                                      //echo $mfgprocessdata;
                                      $ctr = count($SI_material_id);
-                                     
-                                     
+
+
                                      for ($c=0;$c<$ctr;$c++)
                                      {
                                        $SI_material_name  = getRecord('material_name','tbl_material','material_id ='. $SI_material_id[$c]);
                                        echo '<tr>
                                              <td>'. $SI_material_id[$c] .'</td>
                                              <td>'. $SI_material_name .'</td>';
-                                            
-                                     } 
+
+                                     }
 
                                       ?>
 																	</tbody>
-																	
-																   
-																 
+
+
+
 																</table>
-																
+
 														</div>
-													
-													
+
+
 													</div>
 												</div>
 											</div>
@@ -531,7 +531,7 @@ $_SESSION['sid']=$sales_inquiry_id;
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-4">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -540,12 +540,12 @@ $_SESSION['sid']=$sales_inquiry_id;
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Manufacturing Process</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-														<?php 
+														<?php
                               $sales_id = $_GET['sid'];
                               $SI_product_manufacturing_process  = getRecord('product_manufacturing_process','tbl_sales_inquiry','sales_inquiry_id ='.$sales_id);
 
-                              
-                              $str_arr = explode (",", $SI_product_manufacturing_process); 
+
+                              $str_arr = explode (",", $SI_product_manufacturing_process);
                               $_extrusion = false;
                               $_printing = false;
                               $_1stLamination = false;
@@ -555,8 +555,8 @@ $_SESSION['sid']=$sales_inquiry_id;
                               $_cuttingandbagging = false;
 
                               echo'<div class="row gy-5"></div>';
-														
-                             
+
+
                               if (in_array("extrusion", $str_arr))
                               {
                                 echo '<div class="form-check">
@@ -575,7 +575,7 @@ $_SESSION['sid']=$sales_inquiry_id;
                                 </label>
                                 </div>';
                               }
-                              
+
                               if (in_array("printing", $str_arr))
                               {
                                 echo '<div class="form-check">
@@ -681,23 +681,23 @@ $_SESSION['sid']=$sales_inquiry_id;
                               }
 
                             ?>
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-													
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 													</div>
 												</div>
 											</div>
@@ -758,23 +758,23 @@ $_SESSION['sid']=$sales_inquiry_id;
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body"><?php if($type == "Sales Inquiry Approver 1" AND $dept =="Purchasing") {		?>	Select the next level approver. <?php } ?> 
+                <div class="modal-body"><?php if($type == "Approver 1" AND $dept =="Purchasing") {		?>	Select the next level approver. <?php } ?>
 				Are you sure about this action? </div>
                 <div class="modal-footer">
-								<?php if($type == "Sales Inquiry Approver 1" AND $dept =="Purchasing") {		?>		 
+								<?php if($type == "Approver 1" AND $dept =="Purchasing") {		?>
 					 <select class="form-control form-select assignpersonapprove" name="assignpersonapprove" aria-label="Default select example">
 																   <option selected value="none">Select employee</option>
-																  
+
 			<?php
-			echo getDropdownuserassign('users',"USER_TYPE = 'Sales Inquiry Approver 2'",'id',"FIRST_NAME",$memberid);
+			echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2'",'id',"FIRST_NAME",$memberid);
 			 ?>
-					<option  value="Unassigned">Unassigned</option>												
+					<option  value="Unassigned">Unassigned</option>
 					</select>
 			<?php } ?>
 					<input class="sid" type="hidden" id="sid" name="sid" value="<?php echo $sales_inquiry_id; ?>">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-primary approvesalesinquiry" href="#" >Approve</button>
-				
+
                 </div>
             </div>
         </div>
@@ -797,9 +797,9 @@ $_SESSION['sid']=$sales_inquiry_id;
 			<!-- 	<form class="user rejectdata" name="rejectdata"  id="rejectdata"> -->
 					<textarea class="form-control reason" id="reason" rows="3"></textarea>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					 <input class="sidr" type="hidden" id="sidr" name="sidr" value="<?php echo $sales_inquiry_id; ?>">					 
+					 <input class="sidr" type="hidden" id="sidr" name="sidr" value="<?php echo $sales_inquiry_id; ?>">
                     <button type="button" class="btn btn-primary rejectdatasalesinquiry" href="#" >Reject</button>
-				
+
                 </div>
             </div>
         </div>
@@ -819,35 +819,35 @@ $_SESSION['sid']=$sales_inquiry_id;
                 </div>
                 <div class="modal-body">Assign Sales Inquiry Approver</div>
                 <div class="modal-footer">
-				<?php 
+				<?php
 				?>
 					<select class="form-control form-select assignperson" name="assignperson" aria-label="Default select example">
 																   <option selected value="none">Select employee</option>
-																  
+
 			<?php
-																		
-																			
+
+
 																	if($type == "Sales Associate" AND $dept =="Purchasing")
 																	{
-																		echo getDropdownuserassign('users',"USER_TYPE = 'Sales Inquiry Approver 1'",'id',"FIRST_NAME",$memberid);
-																		
-																		   
-																			
+																		echo getDropdownuserassign('users',"USER_TYPE = 'Approver 1'",'id',"FIRST_NAME",$memberid);
+
+
+
 																	}
-																	else if($type == "Sales Inquiry Approver 1" AND $dept =="Purchasing")
+																	else if($type == "Approver 1" AND $dept =="Purchasing")
 																	{
-																		echo getDropdownuserassign('users',"USER_TYPE = 'Sales Inquiry Approver 1'",'id',"FIRST_NAME",$memberid);
-																			
+																		echo getDropdownuserassign('users',"USER_TYPE = 'Approver 1'",'id',"FIRST_NAME",$memberid);
+
 																	}
-																	
-																	else if($type == "Sales Inquiry Approver 2" AND $dept =="Purchasing")
+
+																	else if($type == "Approver 2" AND $dept =="Purchasing")
 																	{
-																			echo getDropdownuserassign('users',"USER_TYPE = 'Sales Inquiry Approver 2'",'id',"FIRST_NAME",$memberid);
+																			echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2'",'id',"FIRST_NAME",$memberid);
 																	}
-																	
-	
+
+
              ?>
-					<option  value="Unassigned">Unassigned</option>												
+					<option  value="Unassigned">Unassigned</option>
 					</select>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary assignapproversi" href="#">Assign</a>
@@ -855,8 +855,8 @@ $_SESSION['sid']=$sales_inquiry_id;
             </div>
         </div>
     </div>
-    
-   
-    
+
+
+
   </body>
 </html>

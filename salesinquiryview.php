@@ -29,16 +29,16 @@ else
 
 
 //before we store information of our member, we need to start first the session
-	
+
 
 	//create a new function to check if the session variable member_id is on set
 	function logged_in() {
 		return isset($_SESSION['MEMBER_ID']);
-        
+
 	}
 	//this function if session member is not set then it will be redirected to index.php
 	function confirm_logged_in() {
-		if (!logged_in()) { 	
+		if (!logged_in()) {
 
 ?>
 			<script type="text/javascript">
@@ -48,7 +48,7 @@ else
 		}
 	}
 	confirm_logged_in();
-	
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -122,8 +122,8 @@ else
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                  
-                     
+
+
 
                         <!-- Nav Item - User Information -->
                        <?php echo logindetails(); ?>
@@ -139,11 +139,11 @@ else
 
                     <!-- Content Row -->
                     <div class="row gy-5">
- 
 
-                      
+
+
 				<!--Image Content Row -->
-					
+
 						<div class="row gy-5">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
@@ -155,7 +155,7 @@ else
 													<div class="card-body">
 
 														<div class="form-group row txtResult1" id="txtResult1">
-															
+
 																															<table class="table table-bordered materialtable" id="materialtable" width="100%" cellspacing="0">
 																		<thead>
 																			<th>Date Created</th>
@@ -169,20 +169,20 @@ else
 																	<tbody>
 																	<?php
 																	//$salesinquiryrow =  getTblNumRows('tbl_sales_inquiry',"salesinquiry_status = 'Added'");
-																
+
 																	//$salesinquirydata =  getRecord('product_id','tbl_sales_inquiry',"salesinquiry_status = 'Added'");
 
 																	$resultlist = getsalesinquiry();
 																	//echo $memberid;
 																	while($row=mysqli_fetch_array($resultlist,MYSQLI_ASSOC)) {
-																		
+
 																		$salesinquirydatacustomer = getRecord('customer_company_name','tbl_customer','customer_id ='.$row['customer_id'].'');
 																		$salesinquirydataproduct = getRecord('product_name','tbl_product','product_id ='.$row['product_id'].'');
 																		$status = $row['salesinquiry_status'];
 																		$firstapprover = $row['approver'];
 																		$secondapprover = $row['secondapprover'];
-																		
-																		
+
+
 																		if($row['salesinquiry_status'] == "Approved")
 																		{
 																			if($type =="Sales Inquiry Approver 1" AND $row['approver'] == $memberid)
@@ -193,8 +193,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -210,7 +210,7 @@ else
 
 																				echo '</tr>';
 																			}
-																			else if($type =="Sales Inquiry Approver 2" AND $row['secondapprover'] == $memberid)
+																			else if($type =="Approver 2" AND $row['secondapprover'] == $memberid)
 																			{
 																				echo '<tr>';
 																				echo '<td>'. $row['product_added_date'] . '</td>';
@@ -218,8 +218,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -243,8 +243,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -260,11 +260,11 @@ else
 
 																				echo '</tr>';
 																			}
-																		
+
 																		}
 																		if($row['salesinquiry_status'] == "Added")
 																		{
-																			if($type =="Sales Inquiry Approver 1" AND $row['approver'] == $memberid)
+																			if($type =="Approver 1" AND $row['approver'] == $memberid)
 																			{
 																				echo '<tr>';
 																				echo '<td>'. $row['product_added_date'] . '</td>';
@@ -272,8 +272,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -289,7 +289,7 @@ else
 
 																				echo '</tr>';
 																			}
-																			else if($type =="Sales Inquiry Approver 2" AND $row['secondapprover'] == $memberid)
+																			else if($type =="Approver 2" AND $row['secondapprover'] == $memberid)
 																			{
 																				echo '<tr>';
 																				echo '<td>'. $row['product_added_date'] . '</td>';
@@ -297,8 +297,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -322,8 +322,8 @@ else
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -336,34 +336,34 @@ else
 																						echo '<td>
 																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
 																						';
-																						
+
 																						echo '
 																								<a href="salesinquiryedit.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-edit"></i></a> ';
-																						echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> '; 
+																						echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> ';
 
 																				echo '</tr>';
 																			}
-																		
+
 																		}
-                                                                        else if($row['salesinquiry_status'] == "Pending Approval Level 2")
+                                    else if($row['salesinquiry_status'] == "Pending Approval Level 2")
 																		{
-																			
-																			
-																			if($type =="Sales Inquiry Approver 1" AND $row['approver'] == $memberid)
+
+
+																			if($type =="Approver 1" AND $row['approver'] == $memberid)
 																			{
-																				
-																				
-																			
-																			
-																			
+
+
+
+
+
 																				echo '<tr>';
 																				echo '<td>'. $row['product_added_date'] . '</td>';
 																				echo '<td>'. $row['sales_inquiry_id'] . '</td>';
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -376,12 +376,12 @@ else
 																				echo '<td>
 																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
 																						';
-																						
-																																							
-																					
+
+
+
 																						if($row['assignedto'] == $memberid  OR $row['assignedto'] == "Unassigned")
 																						{
-																						
+
 																							if($type == "Sales Associate")
 																							{
 																								echo '
@@ -389,29 +389,29 @@ else
 																							}
 																							else
 																							{
-																								
-																								echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> '; 
-																							}																					
-																						
+
+																								echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> ';
+																							}
+
 																						}
-																					
-																				
-																				
-																				
-																					
+
+
+
+
+
 																					echo '</tr>';
 																				}
-																				else if($type =="Sales Inquiry Approver 2" AND $row['assignedto'] == $memberid)
+																				else if($type =="Approver 2" AND $row['assignedto'] == $memberid)
 																				{
-	
+
 																					echo '<tr>';
 																					echo '<td>'. $row['product_added_date'] . '</td>';
 																					echo '<td>'. $row['sales_inquiry_id'] . '</td>';
 																					echo '<td>'. $salesinquirydatacustomer . '</td>';
 																					echo '<td>'. $salesinquirydataproduct . '</td>';
 																					echo '<td>'. $status . '</td>';
-																					 
-																				   
+
+
 																					if($row['assignedto'] == "Unassigned")
 																					{
 																						echo '<td>'. $row['assignedto']. '</td>';
@@ -424,12 +424,12 @@ else
 																					echo '<td>
 																							<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
 																							';
-																							
-																																								
-																						
+
+
+
 																							if($row['assignedto'] == $memberid  OR $row['assignedto'] == "Unassigned")
 																							{
-																							
+
 																								if($type == "Sales Associate")
 																								{
 																									echo '
@@ -437,39 +437,35 @@ else
 																								}
 																								else
 																								{
-																									
-																									echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> '; 
-																								}																					
-																							
+
+																									echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> ';
+																								}
+
 																							}
-																						
-																					
-																					
-																					
-																						
+
+
+
+
+
 																						echo '</tr>';
 																				}
-																		
+
 																		}
 																		else if($row['salesinquiry_status'] == "Pending Approval Level 1")
 																		{
-																			
-																			
-																			if($type =="Sales Inquiry Approver 1" AND $row['assignedto'] == $memberid)
+
+
+																			if($type =="Approver 1" AND $row['assignedto'] == $memberid)
 																			{
-																				
-																				
-																			
-																			
-																			
+
 																				echo '<tr>';
 																				echo '<td>'. $row['product_added_date'] . '</td>';
 																				echo '<td>'. $row['sales_inquiry_id'] . '</td>';
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				 
-																			   
+
+
 																				if($row['assignedto'] == "Unassigned")
 																				{
 																					echo '<td>'. $row['assignedto']. '</td>';
@@ -482,12 +478,12 @@ else
 																				echo '<td>
 																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
 																						';
-																						
-																																							
-																					
+
+
+
 																						if($row['assignedto'] == $memberid  OR $row['assignedto'] == "Unassigned")
 																						{
-																						
+
 																							if($type == "Sales Associate")
 																							{
 																								echo '
@@ -495,39 +491,89 @@ else
 																							}
 																							else
 																							{
-																								
-																								echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> '; 
-																							}																					
-																						
+
+																								echo '<a href="salesinquirydetails.php?action=approve&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"  class="btn btn-sm btn-primary shadow-sm" onclick=""><i class="far fa-thumbs-up"></i></a> ';
+																							}
+
 																						}
-																					
-																				
-																				
-																				
-																					
+
+
+
+
+
 																					echo '</tr>';
 																				}
-																		
-																		}				
-																		
-																	
-																	
+                                        else if($type =="Approver 1")
+                                        {
+                                          echo '<tr>';
+  																				echo '<td>'. $row['product_added_date'] . '</td>';
+  																				echo '<td>'. $row['sales_inquiry_id'] . '</td>';
+  																				echo '<td>'. $salesinquirydatacustomer . '</td>';
+  																				echo '<td>'. $salesinquirydataproduct . '</td>';
+  																				echo '<td>'. $status . '</td>';
+
+
+  																				if($row['assignedto'] == "Unassigned")
+  																				{
+  																					echo '<td>'. $row['assignedto']. '</td>';
+  																				}
+  																				else
+  																				{
+  																					$user = getUser($row['assignedto']);
+  																					echo '<td>'. $user. '</td>';
+  																				}
+  																				echo '<td>
+  																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
+  																						';
+
+  																				echo '</tr>';
+                                        }
+                                        else if($type =="Sales Associate")
+                                        {
+                                          echo '<tr>';
+  																				echo '<td>'. $row['product_added_date'] . '</td>';
+  																				echo '<td>'. $row['sales_inquiry_id'] . '</td>';
+  																				echo '<td>'. $salesinquirydatacustomer . '</td>';
+  																				echo '<td>'. $salesinquirydataproduct . '</td>';
+  																				echo '<td>'. $status . '</td>';
+
+
+  																				if($row['assignedto'] == "Unassigned")
+  																				{
+  																					echo '<td>'. $row['assignedto']. '</td>';
+  																				}
+  																				else
+  																				{
+  																					$user = getUser($row['assignedto']);
+  																					echo '<td>'. $user. '</td>';
+  																				}
+  																				echo '<td>
+  																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesinquirydetails.php?action=edit&custid='.$row['customer_id'] . '&sid='. $row['sales_inquiry_id'] .'"><i class="far fa-eye"></i></a>
+  																						';
+
+  																				echo '</tr>';
+                                        }
+
+																		}
+
+
+
 																	}
 																	?>
-																
-																
-																
-																	
+
+
+
+
 																	</tbody>
-																	
-																   
-																 
+
+
+
 																</table>
-																
+
 														</div>
-													
-																								
-														
+
+
+
 													</div>
 												</div>
 											</div>
@@ -536,13 +582,13 @@ else
 								</div>
 							</div>
 					</div>
-					
-					
-				
-				
-					
+
+
+
+
+
                 <!-- /.container-fluid -->
-					
+
             </div>
             <!-- End of Main Content -->
 
@@ -586,15 +632,15 @@ else
             </div>
         </div>
     </div>
-	
-	
 
 
 
 
 
-    
-   
-    
+
+
+
+
+
   </body>
 </html>

@@ -12,13 +12,13 @@ $prodTolerance =$_POST['prodtolerance'];
 $prodDeliveryTerms =$_POST['deliveryterms'];
 $prodDeliverySched =$_POST['deliveryschedule'];
 $sales_inquiry_id = $_POST['salesinquiryID'];
-
+echo $sales_inquiry_id;
 $final_date= date("Y-m-d H:i:s");
 
 $insert_sql = "INSERT INTO tbl_quotation
 			(sales_inquiry_id_for_quote,quotation_price, quotation_prod_construction,quotation_prod_color,
 			quotation_prod_tolerance,quotation_delivery_terms,quotation_delivery_schedule,quotation_date_created)
-			VALUES('". $sales_inquiry_id ."','".$prodPrice."', 
+			VALUES('". $sales_inquiry_id ."','".$prodPrice."',
 			'".$prodConstruction."','".$prodColor."','".$prodTolerance."','".$prodDeliveryTerms."', '".$prodDeliverySched."','". $final_date ."')";
 		if(mysqli_query($con, $insert_sql) or die("database error: ". mysqli_error($con)))
 		{
@@ -39,11 +39,10 @@ $insert_task_sql = "INSERT INTO tbl_tasklist
 		else
 		{
 			echo 0;
-		}	
-		
+		}
+
 ?>
 <script type="text/javascript">
 			alert("You've Successfully completed the quotation");
 			window.location = "quotationlist.php";
 		</script>
-

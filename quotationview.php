@@ -31,21 +31,21 @@ else
   $firstname = $_SESSION['FIRST_NAME'];
   $dept = $_SESSION['DEPT'];
   $accesstype = $_SESSION['ACCESS_TYPE'];
-  
+
 }
 $pieces4 = explode(",", $accesstype);
 					$checker=0;
-					$ctr = count($accesstype);
-					
-					
-					
+					$ctr = count(array($accesstype));
+
+
+
 																		for ($c=0;$c<=$ctr;$c++)
 																		{
-																			
-																			
+
+
 																			if($pieces4[$c]=="Quotation")
 																			{
-																				
+
 																				$checker=1;
 																			}
 																		}
@@ -53,34 +53,34 @@ $pieces4 = explode(",", $accesstype);
 if(empty($_GET['sid']))
 {
 
-	
+
 }
 else
 {
 	$sales_inquiry_id = $_GET['sid'];
-	
+
 }
 
 if(empty($_GET['qid']))
 {
 
-	
+
 }
 else
 {
 	$qid = $_GET['qid'];
-	
+
 }
 
 if(empty( $_GET['action']))
 {
 
-	
+
 }
 else
 {
 	$action =  $_GET['action'];
-	
+
 }
 
 $sales_inquiry_id = isset($sales_inquiry_id)?$sales_inquiry_id:'';
@@ -91,16 +91,16 @@ $action = isset($action)?$action:'';
 
 
 //before we store information of our member, we need to start first the session
-	
+
 
 	//create a new function to check if the session variable member_id is on set
 	function logged_in() {
 		return isset($_SESSION['MEMBER_ID']);
-        
+
 	}
 	//this function if session member is not set then it will be redirected to index.php
 	function confirm_logged_in() {
-		if (!logged_in()) { 	
+		if (!logged_in()) {
 
 ?>
 			<script type="text/javascript">
@@ -110,7 +110,7 @@ $action = isset($action)?$action:'';
 		}
 	}
 	confirm_logged_in();
-	
+
 ?>
 <script>
 $(document).ready(function(){
@@ -187,8 +187,8 @@ $(document).ready(function(){
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                  
-                     
+
+
 
                         <!-- Nav Item - User Information -->
                      <!--   <li class="nav-item dropdown no-arrow">
@@ -198,7 +198,7 @@ $(document).ready(function(){
                                 <img class="img-profile rounded-circle"
                                     src="pic/undraw_profile.svg">
                             </a>
-                            
+
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -217,7 +217,7 @@ $(document).ready(function(){
                             </div>
                         </li> -->
 						<?php echo logindetails(); ?>
-						
+
 
                     </ul>
 
@@ -230,7 +230,7 @@ $(document).ready(function(){
 
                     <!-- Content Row -->
                     <div class="row gy-5">
- 
+
 
                         <!-- Customer Div -->
                         <div class="col-sm-12 hidden">
@@ -240,8 +240,8 @@ $(document).ready(function(){
                                         <div class="col mr-2">
                                             <div class="text-sm font-weight-bold text-info text-uppercase mb-4">Generate Quotation</div>
                                             <div class="row  align-items-center">
-                                                <div class="col-auto">												
-                                                    <form class="user">													
+                                                <div class="col-auto">
+                                                    <form class="user">
 														<div class="form-group row">
 														<div class="col-auto">
 														<!--	<a href="#" data-toggle="modal" data-target="#createcustomerModal" class="d-none createcust d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -250,23 +250,23 @@ $(document).ready(function(){
 														</div>
 															<div class="col-auto">
 																<select class="form-control form-select salesinquiry" name="salesinquiry" aria-label="Default select example">
-																   <option selected value="none">Select sales inquiry</option> 
-																    <?php 
-               
+																   <option selected value="none">Select sales inquiry</option>
+																    <?php
+
 																	echo getDropdownselect('tbl_sales_inquiry',"salesinquiry_status = 'Approved' AND sales_inquiry_id ='".$sales_inquiry_id."'",'sales_inquiry_id',"sales_inquiry_id");
-             
+
 																	?>
 																</select>
-																
-																
+
+
 															</div>
-														</div>	
-													</form>		
-																<div class="row gy-5"></div>													
-														
-														
-														
-													
+														</div>
+													</form>
+																<div class="row gy-5"></div>
+
+
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -275,10 +275,10 @@ $(document).ready(function(){
                             </div>
                         </div>
 
-                       
 
 
-           
+
+
 					</div>
 				<!-- Product and Image Content Row -->
 					<div class="row gy-5">
@@ -290,55 +290,55 @@ $(document).ready(function(){
 												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Quotation Details</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
-												
+
 														<div class="row">
-														
+
 														<div class="row  align-items-center">
 
 											<div class="col sm-12">
 											<?php if($dept=="Purchasing" AND $action=="assign" AND $type =="Sales Associate")
 												{?>
 
-												
+
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
-											
-											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND ($checker == 1 )) { ?>	
-											
+
+											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND ($checker == 1 )) { ?>
+
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
-												
+
 												<a href="#" data-toggle="modal" data-target="#approveModal" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Approve </a>
-												
+
 												<a href="#" data-toggle="modal" data-target="#rejectModal" class="d-none d-sm-inline-block btn btn-lg btn-danger shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Reject </a>
-											
-											
+
+
 											<?php }  ?>
-											
-							
-											
-											
-											<?php $custid = $_GET['custid']; 
+
+
+
+
+											<?php $custid = $_GET['custid'];
 												  $qid = $_GET['qid'];?>
-											
-											
+
+
 
 										<a href="#" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg" onclick="quotationprint('<?php echo $custid; ?>','<?php echo $sales_inquiry_id; ?>','<?php echo $qid; ?>');"><i class="fas fa-print fa-sm text-white-50"></i></i> Print </a>
-											
-											
+
+
 												<a href="javascript:history.back();" class="d-none d-sm-inline-block btn btn-lg btn-warning shadow-lg"><i class="fas fa-arrow-left fa-sm text-white-50"></i> Back </a>
 											</div>
-											
+
 
 											</div>
 																<div class="row gy-5"></div>
-																<div class="container salesinquirydata hidden" id="salesinquirydata">		
-													
-															
+																<div class="container salesinquirydata hidden" id="salesinquirydata">
+
+
 																</div>
-																
-																
-																
-															
-														</div>				
+
+
+
+
+														</div>
 													</div>
 												</div>
 											</div>
@@ -347,7 +347,7 @@ $(document).ready(function(){
 								</div>
 							</div>
 					</div>
-					
+
 					<div class="row gy-5">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
@@ -365,54 +365,54 @@ $(document).ready(function(){
 																	</div>
 																	<div class="col-sm-3">
 																		<p class="h5 custrep">
-																		
-																		<?php 
-																		
+
+																		<?php
+
 																		$prodprice = getRecord('quotation_price','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $prodprice;
-																		
+
 																		?>
-																			
+
 																			</p>
 																	</div>
-																	
-																	
+
+
 																	<div class="col-sm-3">
 																		<p><b>Product Color:</b></p>
 																	</div>
 																	<div class="col-sm-3	">
 																		<p class="h5 custemail">
-																		<?php 
-																		
+																		<?php
+
 																		$prodcolor = getRecord('quotation_prod_color','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $prodcolor;
-																		
+
 																		?>
 																		</p>
 																	</div>
-																	
-																	
+
+
 																	<div class="col-sm-3">
 																		<p><b>Product Construction:</b></p>
 																	</div>
 																	<div class="col-sm-3">
 																		<p class="h5 custcontact">
-																		<?php 
-																		
+																		<?php
+
 																		$prodconstruct = getRecord('quotation_prod_construction','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $prodconstruct;
-																		
+
 																		?>
 																		</p>
 																	</div>
 														<!--	</div>
-															
+
 															<div class="form-group row"> -->
-																	
-																	
-																	
-																	
-															
+
+
+
+
+
 															</div>
 															<div class="form-group row ">
 																	<div class="col-sm-6">
@@ -420,11 +420,11 @@ $(document).ready(function(){
 																	</div>
 																	<div class="col-sm-8">
 																		<p class="h5 custrep">
-																		<?php 
-																		
+																		<?php
+
 																		$prodtolerance = getRecord('quotation_prod_tolerance','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $prodtolerance;
-																		
+
 																		?>
 																		</p>
 																	</div>
@@ -433,11 +433,11 @@ $(document).ready(function(){
 																	</div>
 																	<div class="col-sm-8">
 																		<p class="h5 custrep">
-																		<?php 
-																		
+																		<?php
+
 																		$deliveryterms = getRecord('quotation_delivery_terms','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $deliveryterms;
-																		
+
 																		?>
 																		</p>
 																	</div>
@@ -446,11 +446,11 @@ $(document).ready(function(){
 																	</div>
 																	<div class="col-sm-8">
 																		<p class="h5 custrep">
-																		<?php 
-																		
+																		<?php
+
 																		$deliverysched = getRecord('quotation_delivery_schedule','tbl_quotation','quotation_id ='.$qid.'');
 																		echo $deliverysched;
-																		
+
 																		?>
 																		</p>
 																	</div>
@@ -463,30 +463,30 @@ $(document).ready(function(){
 								</div>
 							</div>
 					</div>
-					
-					
-					
-					
+
+
+
+
 					<div class="row gy-5 align-items-center">
-					
+
 						<div class="col-lg-3">
-						  
+
 						</div>
 						<!-- <div class="col-lg-6">
 						<button type="button" class="btn btn-success btn-lg btn-block submitquotation">Submit</button>
 						</div> -->
 						<div class="col-lg-3">
-						 
+
 						</div>
-						
+
 					</div>
-					
+
 					</br></br>
 					<div class="row gy-5 align-items-center">
 					</div>
-					
+
                 <!-- /.container-fluid -->
-					
+
             </div>
             <!-- End of Main Content -->
 
@@ -545,28 +545,28 @@ $(document).ready(function(){
                 </div>
                 <div class="modal-body">Assign Quotation Approver</div>
                 <div class="modal-footer">
-				<?php 
+				<?php
 				?>
 					<select class="form-control form-select assignperson" name="assignperson" aria-label="Default select example">
 																   <option selected value="none">Select employee</option>
-																  
+
 			<?php
 																	echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2' AND ACCESS_TYPE LIKE '%Quotation%'",'id',"FIRST_NAME",$memberid);
-																	
-																	
-	
+
+
+
              ?>
-					<option  value="Unassigned">Unassigned</option>												
+					<option  value="Unassigned">Unassigned</option>
 					</select>
 					<input class="qid" type="hidden" id="qid" name="qid" value="<?php echo $qid; ?>">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    
+
 					<button class="btn btn-primary quotassign" href="#" >Assign</button>
                 </div>
             </div>
         </div>
     </div>
-    
+
  	<!-- Approve Modal-->
    <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -578,19 +578,19 @@ $(document).ready(function(){
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body"> 
+                <div class="modal-body">
 				Are you sure about this action? </div>
                 <div class="modal-footer">
 					<input class="qidas" type="hidden" id="qidas" name="qidas" value="<?php echo $qid; ?>">
 					<input class="assignperson" type="hidden" id="assignperson" name="assignperson" value="<?php echo $memberid; ?>">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-primary approvequotation" href="#" >Approve</button>
-				
+
                 </div>
             </div>
         </div>
-    </div>  
-  
+    </div>
+
 
 	<!-- Reject Modal-->
    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -608,12 +608,12 @@ $(document).ready(function(){
 			<!-- 	<form class="user rejectdata" name="rejectdata"  id="rejectdata"> -->
 					<textarea class="form-control reason" id="reason" rows="3"></textarea>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					 <input class="qidr" type="hidden" id="qidr" name="qidr" value="<?php echo $qid; ?>">				 
+					 <input class="qidr" type="hidden" id="qidr" name="qidr" value="<?php echo $qid; ?>">
                     <button type="button" class="btn btn-primary rejectdataquotation" href="#" >Reject</button>
-				
+
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
   </body>
 </html
