@@ -47,7 +47,8 @@ $pieces4 = explode(",", $accesstype);
 																				
 																				$checker=1;
 																			}
-																		} 
+																		}
+																		 
 
 if(empty($_GET['sid']))
 {
@@ -314,7 +315,7 @@ $(document).ready(function(){
 												
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
 											
-											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND ($checker == 1 )) { ?>	
+											<?php } else if($dept=="Purchasing" AND $action=="approve" AND $action=="approve" AND (str_contains($accesstype,"Sales Order"))) { ?>	
 											
 												<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>
 												

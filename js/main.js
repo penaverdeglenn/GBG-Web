@@ -322,7 +322,7 @@ $(document).ready(function() {
 		 var qid = $('.qid').val();
 		 var assignperson = $('.assignpersonapprove').val();
 		 var datastring = "";
-		 alert("test");
+		// alert("test");
 		 if (assignperson!="none")
 		{
 		 datastring = datastring + "qid="+qid;
@@ -334,7 +334,7 @@ $(document).ready(function() {
 									   cache: false,
 									   success: function(result)
 									   {
-											 alert(result);
+											// alert(result);
 											 if(result == 1)
 											 {
 

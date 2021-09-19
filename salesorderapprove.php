@@ -863,7 +863,7 @@ $(document).ready(function(){
 																   <option selected value="none">Select employee</option>
 																  
 			<?php
-																	echo getDropdownuserassign('users',"USER_TYPE = 'Sales Order Approver 1' AND ACCESS_TYPE LIKE '%SalesOrder%'",'id',"FIRST_NAME",$memberid);
+																	echo getDropdownuserassign('users',"USER_TYPE = 'Approver 1' AND ACCESS_TYPE LIKE '%Sales Order%'",'id',"FIRST_NAME",$memberid);
 																	
 																	
 	
@@ -898,7 +898,7 @@ $(document).ready(function(){
 																   <option selected value="none">Select employee</option>
 																  
 			<?php
-			echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2'",'id',"FIRST_NAME",$memberid); // need to add access type
+			echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2' AND ACCESS_TYPE LIKE '%Sales Order%'",'id',"FIRST_NAME",$memberid); // need to add access type
 			 ?>
 					<option  value="Unassigned">Unassigned</option>												
 					</select>
