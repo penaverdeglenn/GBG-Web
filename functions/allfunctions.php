@@ -229,19 +229,25 @@ function logindetails(){
 
 
 function sidebar(){
-	if(empty($_SESSION["MEMBER_ID"]) && empty($_SESSION["TYPE"]) && empty($_SESSION["FIRST_NAME"]))
-	{
-	   $itemarray = array();
-	   $memberid = "";
-	  $type = "";
-	  $fname = "";
-	}
-	else
-	{
-	  $memberid = $_SESSION['MEMBER_ID'];
-	  $type = $_SESSION['TYPE'];
-	  $fname = $_SESSION['FIRST_NAME'];
-	}
+  if(empty($_SESSION["MEMBER_ID"]) && empty($_SESSION["TYPE"]) && empty($_SESSION["DEPT"]) && empty($_SESSION["FIRST_NAME"]) && empty($_SESSION["ACCESS_TYPE"]))
+  {
+    $itemarray = array();
+    $memberid = "";
+    $type = "";
+    $firstname = "";
+    $dept = "";
+    $accesstype = "";
+  }
+  else
+  {
+    $memberid = $_SESSION['MEMBER_ID'];
+    $type = $_SESSION['TYPE'];
+    $firstname = $_SESSION['FIRST_NAME'];
+    $dept = $_SESSION['DEPT'];
+    $accesstype2 = $_SESSION['ACCESS_TYPE'];
+
+  }
+  
 	$result = "";
 
 	$result .=  '            <!-- Divider -->';
@@ -289,22 +295,56 @@ function sidebar(){
     $result .=  '            </div>';
     $result .=  '            </div>';
 	$result .=  '			</li>';
-if($type =="Admin")
-{
-  $result .=  '<li class="nav-item">';
-    $result .=  '            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFour">';
-    $result .=  '            <i class="fas fa-fw fa-cog"></i>';
-    $result .=  '            <span>Settings</span>';
-    $result .=  '            </a>';
-    $result .=  '            <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">';
-    $result .=  '            <div class="bg-white py-2 collapse-inner rounded">';
-    $result .=  '            <h6 class="collapse-header">Components:</h6>';
-    $result .=  '            <a class="collapse-item" href="user.php">Users</a>';
-    $result .=  '           <a class="collapse-item" href="userlist.php">Users List</a>';
-    $result .=  '            </div>';
-    $result .=  '            </div>';
-  $result .=  '			</li>';
-}
+
+  if($type =="Admin")
+  {
+$result .=  '            <!-- Divider -->';
+  $result .=  '        <hr class="sidebar-divider">';
+  $result .=  '        <!-- Heading -->';
+$result .=  '		<div class="sidebar-heading">';
+  $result .=  '            System';
+  $result .=  '        </div>';
+
+
+    $result .=  '<li class="nav-item">';
+      $result .=  '            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFour">';
+      $result .=  '            <i class="fas fa-fw fa-cog"></i>';
+      $result .=  '            <span>Settings</span>';
+      $result .=  '            </a>';
+      $result .=  '            <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">';
+      $result .=  '            <div class="bg-white py-2 collapse-inner rounded">';
+      $result .=  '            <h6 class="collapse-header">Components:</h6>';
+      $result .=  '            <a class="collapse-item" href="user.php">Users</a>';
+      $result .=  '           <a class="collapse-item" href="userlist.php">Users List</a>';
+      $result .=  '            </div>';
+      $result .=  '            </div>';
+    $result .=  '			</li>';
+  }
+
+
+
+  $result .=  '            <!-- Divider -->';
+    $result .=  '        <hr class="sidebar-divider">';
+    $result .=  '        <!-- Heading -->';
+  $result .=  '		<div class="sidebar-heading">';
+    $result .=  '            Manufacturing';
+    $result .=  '        </div>';
+
+
+      $result .=  '<li class="nav-item">';
+        $result .=  '            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseFour">';
+        $result .=  '            <i class="fas fa-fw fa-cog"></i>';
+        $result .=  '            <span>Job Order</span>';
+        $result .=  '            </a>';
+        $result .=  '            <div id="collapseSix" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">';
+        $result .=  '            <div class="bg-white py-2 collapse-inner rounded">';
+        $result .=  '            <h6 class="collapse-header">Components:</h6>';
+        $result .=  '            <a class="collapse-item" href="joborderdashboard.php">Job Order</a>';
+        $result .=  '            </div>';
+        $result .=  '            </div>';
+      $result .=  '			</li>';
+
+
 
     return $result;
 }

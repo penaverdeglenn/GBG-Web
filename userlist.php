@@ -195,7 +195,7 @@ if($type != "Admin")
 
 														<div class="form-group row txtResult1" id="txtResult1">
 
-																															<table class="table table-bordered materialtable" id="materialtable" width="100%" cellspacing="0">
+																															<table class="table table-bordered userDataTable" id="userDataTable" width="100%" cellspacing="0">
 																		<thead>
 																			<th>Username</th>
 																			<th>Full Name</th>
@@ -203,6 +203,7 @@ if($type != "Admin")
 																			<th>Department</th>
 																			<th>User Type</th>
 																			<th>Access Type</th>
+                                      <th>Status</th>
 																			<th>Actions</th>
 																		</thead>
 																	<tbody>
@@ -236,6 +237,7 @@ if($type != "Admin")
 																				echo '<td>'. $row['DEPARTMENT'] . '</td>';
                                         echo '<td>'. $row['USER_TYPE'] . '</td>';
                                         echo '<td>'. $row['ACCESS_TYPE'] . '</td>';
+                                        echo '<td>'. $row['STATUS'] . '</td>';
 
 
 																			   echo '<td>
@@ -245,6 +247,11 @@ if($type != "Admin")
 																				echo '
 																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="useredit.php?action=edit&id='.$row['id'] . '"><i class="far fa-edit"></i></a>
 																						';
+
+                                            echo '
+                                            <a href="#" data-toggle="modal" data-target="#DisableAccModal" data-userid="'.$row['id'] . '" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-times "></i></a>
+    																						';
+
 
 																				// echo '
 																				//		<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=approve&id='.$row['id'] . '"><i class="fas fa-people-arrows"></i></a>
@@ -276,7 +283,6 @@ if($type != "Admin")
 								</div>
 							</div>
 					</div>
-
 
 
 
@@ -330,10 +336,41 @@ if($type != "Admin")
 
 
 
+    <div class="modal fade" id="DisableAccModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
+                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">×</span>
+                     </button>
+                 </div>
+                 <div class="modal-body">Are you sure you want to deactivate this account?</div>
+                 <div class="modal-footer">
+ 			<!-- 	<form class="user rejectdata" name="rejectdata"  id="rejectdata"> -->
+ 			<!--			<textarea class="form-control reason" id="reason" rows="3"></textarea> -->
+ 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+ 					 <input class="useridval" type="hidden" id="useridval" name="useridval" value="<?php echo $qid; ?>">
+                     <button type="button" class="btn btn-primary deactivateuseracc" href="#" >Deactivate</button>
+
+                 </div>
+             </div>
+         </div>
+     </div>
+<script>
+$('#DisableAccModal').on('show.bs.modal', function(e) {
+    var userid = $(e.relatedTarget).data('userid');
+    $(e.currentTarget).find('input[name="useridval"]').val(userid);
+});
+</script>
 
 
-
-
+<script>
+$(document).ready(function() {
+     $('#userDataTable').DataTable();
+} );
+</script>
 
 
   </body>

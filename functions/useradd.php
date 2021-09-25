@@ -32,13 +32,13 @@ $usertype = $_POST['usertype'];
 $dateToday = date('Y-m-d');
 $useraccess = $_POST['useraccess'];
 
+$date = date('m/d/Y h:i:s a', time());
 
 
 
 
-
-	$insert_sql = "INSERT INTO users(id,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,DEPARTMENT,USER_TYPE,ACCESS_TYPE,GENDER)
-	VALUES(NULL,'".$username."', '".$password."','".$fname."','".$lname."','".$dept."','".$usertype."', '".$useraccess."', '".$gender."')";
+	$insert_sql = "INSERT INTO users(id,USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,DEPARTMENT,USER_TYPE,ACCESS_TYPE,GENDER,STATUS,DATECREATED)
+	VALUES(NULL,'".$username."', '".$password."','".$fname."','".$lname."','".$dept."','".$usertype."', '".$useraccess."', '".$gender."', 'Active', '".$date."')";
 
 
 

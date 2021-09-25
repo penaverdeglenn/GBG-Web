@@ -32,13 +32,14 @@ $dept = $_POST['dept'];
 $usertype = $_POST['usertype'];
 $dateToday = date('Y-m-d');
 $useraccess = $_POST['useraccess'];
-
+$password = $_POST['password'];
 
 
 $insert_sql = "UPDATE users SET
 DEPARTMENT='".$dept."'
 ,USER_TYPE='".$usertype."'
 ,ACCESS_TYPE='".$useraccess."'
+,PASSWORD='".$password."'
  WHERE id=".$id;
 
 

@@ -234,6 +234,15 @@ else
 
 																	</div>
 
+                                  <div class="col-sm-2 row">
+																		<p>Password:</p>
+																	</div>
+
+																	<div class="col-sm-3 row">
+																		<input type="password" class="form-control password"  name="password" value="<?php echo $row['PASSWORD']; ?>" required  placeholder="Enter Password" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
+
+																	</div>
+
 
 
 															</div>

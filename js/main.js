@@ -3,6 +3,52 @@
 $(document).ready(function() {
 
 
+	//$('.rejectdata').submit(function() {
+	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
+		  $('.deactivateuseracc').click(function() {
+		 var useridval = $('.useridval').val();
+		 //var reason = $('.reason').val();
+		 //var reason = $.trim($('#reason').val());
+		 var datastring = "";
+		 datastring = datastring + "useridval="+useridval;
+		 //datastring = datastring + "&reason="+reason;
+		 //alert(datastring);
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/userdisable.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   {
+											 //alert(result);
+											 if(result == 1)
+											 {
+
+												 alert("User Account Deactivated");
+												 window.location = "userlist.php";
+
+											 }
+											 else if(result == 0)
+											 {
+												 alert("Failed to deactivate User");
+												 window.location = "userlist.php";
+
+											 }
+									   }
+		  });
+
+
+
+		});
+
+
+  });
+
+
+
+$(document).ready(function() {
+
+
   //$('.rejectdata').submit(function() {
    //$(document).on('click', '.rejectdatasalesinquiry', function(){
       $('.submituseraccount').click(function() {
@@ -630,7 +676,7 @@ $(document).ready(function() {
 												  cache: false,
 												  success: function(result)
 												  {
-														alert(result);
+														//alert(result);
 														if(result == 1)
 														{
 
@@ -1061,7 +1107,7 @@ $(document).ready(function() {
                                       cache: false,
                                       success: function(result)
                                       {
-											alert(result);
+											//alert(result);
 											if(result == 1)
 											{
 
@@ -1769,7 +1815,7 @@ $(document).ready(function() {
 	 //alert("Test");
 	 var chker = 0
 	 //var username = $('.username').val();
-	// var password = $('.password').val();
+  var password = $('.password').val();
 	// var fname = $('.fname').val();
 	// var lname = $('.lname').val();
 	// var gender = $('.gender').val();
@@ -1794,7 +1840,14 @@ $(document).ready(function() {
 	 datastring = datastring + "&dept="+dept;
 	 datastring = datastring + "&usertype="+usertype;
 	 datastring = datastring + "&useraccess="+useraccess;
-
+   datastring = datastring + "&password="+password;
+   if (password.length == 0) {
+     chker = chker + 1
+  }
+  else
+  {
+    chker = chker + 0
+  }
 
 	 if(dept=="none")
 	 {
@@ -1826,7 +1879,7 @@ $(document).ready(function() {
 	   chker = chker + 0
 	 }
 
-	//  alert(chker);
+	  //alert(chker);
 
 	   if(chker == 0)
 	   {
@@ -1840,7 +1893,7 @@ $(document).ready(function() {
 						   cache: false,
 						   success: function(result)
 						   {
-							// alert(result);
+							 alert(result);
 							 if(result == 1)
 							 {
 
