@@ -60,6 +60,22 @@ function gettaskcount($user,$type)
     return $numRows;
 }
 
+function getSalesOrderForJO()
+{
+    $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+    
+    $strSQL = "SELECT id,POdate,POnumber,custT.customer_company_name,prodT.product_name,status
+                FROM tbl_salesorder as mainT inner JOIN tbl_product prodT
+                ON mainT.productID = prodT.product_id
+                inner join tbl_customer as custT
+                ON custT.customer_id = prodT.customer_id
+                GROUP BY mainT.productID";
+
+    $rs = mysqli_query($con,$strSQL) or die(mysqli_error($con));
+    mysqli_close($con);
+    
+    return $rs;
+}
 
 function MaterialListDetails($id)
 {

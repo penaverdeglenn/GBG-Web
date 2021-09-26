@@ -341,7 +341,7 @@ if($checker == 0)
 
 
                       <div border class="col sm-6">
-                      <a href="#" data-toggle="modal" data-target="#AddJobOrderModal" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Job Order </a>
+                      
                         </div>
                     </div>
                   </div>
@@ -350,23 +350,48 @@ if($checker == 0)
                           <table class="table table-bordered dataTable1" id="dataTable1" width="100%" cellspacing="0">
                               <thead>
                                   <tr>
-                                      <th>Name</th>
-                                      <th>Position</th>
-                                      <th>Office</th>
-                                      <th>Age</th>
-                                      <th>Start date</th>
-                                      <th>Salary</th>
+                                      <th align="center">Sales Order ID</th>
+                                      <th align="center">PO Number</th>
+                                      <th align="center">PO Date</th>
+                                      <th align="center">Company Name</th>
+                                      <th align="center">Product Name</th>
+                                      <th align="center">Sales Order Status</th>
+                                      <th align="center">Actions</th>
+                                      
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>Donna Snider</td>
-                                      <td>Customer Support</td>
-                                      <td>New York</td>
-                                      <td>27</td>
-                                      <td>2011/01/25</td>
-                                      <td>$112,000</td>
-                                  </tr>
+                              <?php
+                                //$salesinquiryrow =  getTblNumRows('tbl_sales_inquiry',"salesinquiry_status = 'Added'");
+
+                                //$salesinquirydata =  getRecord('product_id','tbl_sales_inquiry',"salesinquiry_status = 'Added'");
+
+                                $resultlist = getSalesOrderForJO();
+                                //echo $memberid;
+                                while($row=mysqli_fetch_array($resultlist,MYSQLI_ASSOC)) {
+
+
+
+                                   
+                                    //$firstapprover = $row['approver'];
+                                    //$secondapprover = $row['secondapprover'];
+
+
+
+                                            echo '<tr>';
+                                            echo '<td>' . $row['id'] . '</td>';
+                                            echo '<td>' . $row['POdate'] . '</td>';
+                                            echo '<td>' . $row['POnumber'] . '</td>';
+                                            echo '<td>' . $row['customer_company_name'] . '</td>';
+                                            echo '<td>' . $row['product_name'] . '</td>';
+                                            echo '<td>' . $row['status'] . '</td>';
+                                            echo '  <td>
+                                                        <a href="#" data-toggle="modal" data-target="#AddJobOrderModal" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add to Job Order </a>
+                                                        <a href="#" data-toggle="modal" data-target="#RejectJobOrderModal" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-minus fa-sm text-white-50"></i> Reject to Job Order </a>
+                                                    </td>';
+                                            echo '</tr>';
+                                }
+                                ?>
                               </tbody>
                           </table>
                       </div>
@@ -426,7 +451,7 @@ if($checker == 0)
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
+                     <h5 class="modal-title" id="exampleModalLabel">Material List</h5>
                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true">×</span>
                      </button>
