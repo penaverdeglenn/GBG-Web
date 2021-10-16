@@ -377,7 +377,7 @@ $result .=  '		<div class="sidebar-heading">';
   }
 
 
-
+/*
   $result .=  '            <!-- Divider -->';
     $result .=  '        <hr class="sidebar-divider">';
     $result .=  '        <!-- Heading -->';
@@ -399,7 +399,7 @@ $result .=  '		<div class="sidebar-heading">';
         $result .=  '            </div>';
       $result .=  '			</li>';
 
-
+*/
 
     return $result;
 }
@@ -616,7 +616,7 @@ function generateCode(){
           //$query = mysqli_query($con,SELECT * FROM  tbl_joborder WHERE jobordernum = '".$str."' and userstatus = '1') or die(mysqli_error($con));
         //  $query = mysqli_query($con,"SELECT * FROM  tbl_joborder WHERE jobordernum = '".$str."') or die(mysqli_error($con));
           $query = mysqli_query($con,"select * FROM tbl_joborder WHERE jobordernum=".$str." ") or die(mysqli_error($con));
-        
+
           $existingCode = mysqli_num_rows($query);
           if (!$existingCode){
              $unique = TRUE;

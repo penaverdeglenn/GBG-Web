@@ -1,5 +1,363 @@
 
 
+
+$(document).ready(function() {
+
+
+  //$('.rejectdata').submit(function() {
+   //$(document).on('click', '.rejectdatasalesinquiry', function(){
+      $('.submitjoborder').click(function() {
+   //alert("Test");
+   var chker = 0
+
+	 var joborderIDNUM = $('.IDJO').val();
+   var salesorderid = $('select[name=salesorderID] option').filter(':selected').val();
+	 alert(salesorderid);
+   var productid = $('.SI_product_id').val();
+   var sid = $('.sid').val();
+   var ponumber = $('.joborderponum').val();
+   var sodate = $('.sodate').val();
+	 var jodate = $('.jodate').val();
+	 var jodeadline = $('.jodeadline').val();
+	 var qtytype = $('.qtytype').val();
+   var joborderqty = $('.joborderqty').val();
+   var joborderremarks = $('.joborderremarks').val();
+
+   var extrusionsubstratesize = $('.extrusionsubstratesize').val();
+   var extrutionqty = $('.extrutionqty').val();
+   var extrutionmaterialblend = $('.extrutionmaterialblend').val();
+	 var extrusionremarks = $('.extrusionremarks').val();
+   var favorite2 = [];
+   var atLeastOneIsChecked2 = $('input[name="chkextrusion[]"]:checked').length > 0;
+   var chkextrusion = [];
+           $.each($("input[name='chkextrusion[]']:checked"), function(){
+               favorite2.push($(this).val());
+           });
+     chkextrusion =  favorite2.join(",");
+
+
+		 var printingsubstratesize = $('.printingsubstratesize').val();
+	   var printingqty = $('.printingqty').val();
+	   var printingwindingdirection = $('.printingwindingdirection').val();
+		 var favorite3 = [];
+		 var atLeastOneIsChecked3 = $('input[name="chkprint[]"]:checked').length > 0;
+		 var chkprint = [];
+						 $.each($("input[name='chkprint[]']:checked"), function(){
+								 favorite3.push($(this).val());
+						 });
+			 chkprint =  favorite3.join(",");
+
+
+			 var laminationsubstratesize = $('.laminationsubstratesize').val();
+		   var laminationadhesive = $('.laminationadhesive').val();
+		   var laminationkg = $('.laminationkg').val();
+		   var laminationremarks = $('.laminationremarks').val();
+			 var favorite4 = [];
+			 var atLeastOneIsChecked4 = $('input[name="chklaminate[]"]:checked').length > 0;
+			 var chklaminate = [];
+							 $.each($("input[name='chklaminate[]']:checked"), function(){
+									 favorite4.push($(this).val());
+							 });
+				 chklaminate =  favorite4.join(",");
+
+				 var slittingsubstratesize = $('.slittingsubstratesize').val();
+			   var slittingqty = $('.slittingqty').val();
+			   var slittingnoofouts = $('.slittingnoofouts').val();
+			   var slittingwidth = $('.slittingwidth').val();
+				 var slittingrepeatlength = $('.slittingrepeatlength').val();
+			   var slittingwindingdirection = $('.slittingwindingdirection').val();
+			   var slittingmaxnumofsplices = $('.slittingmaxnumofsplices').val();
+				 var slittingtapestouse = $('.slittingtapestouse').val();
+			   var slittingremarks = $('.slittingremarks').val();
+
+
+				 var cutandbagsubstratesize = $('.cutandbagsubstratesize').val();
+				 var cutandbagqty = $('.cutandbagqty').val();
+				 var cutandbagwidth = $('.cutandbagwidth').val();
+				 var cutandbaglength = $('.cutandbaglength').val();
+				 var cutandbaggusset = $('.cutandbaggusset').val();
+				 var cutandbagsealposition = $('.cutandbagsealposition').val();
+				 var cutandbagpcsbundles = $('.cutandbagpcsbundles').val();
+				 var cutandbagothers = $('.cutandbagothers').val();
+				 var cutandbagremarks = $('.cutandbagremarks').val();
+
+
+   var datastring = "";
+
+   datastring = datastring + "salesorderID="+salesorderid;
+   datastring = datastring + "&productid="+productid;
+	 datastring = datastring + "&IDJO="+joborderIDNUM;
+   datastring = datastring + "&sid="+sid;
+   datastring = datastring + "&ponumber="+ponumber;
+   datastring = datastring + "&sodate="+sodate;
+   datastring = datastring + "&jodate="+jodate;
+   datastring = datastring + "&jodeadline="+jodeadline;
+   datastring = datastring + "&qtytype="+qtytype;
+	 datastring = datastring + "&joborderqty="+joborderqty;
+   datastring = datastring + "&joborderremarks="+joborderremarks;
+
+	 datastring = datastring + "&extrusionsubstratesize="+extrusionsubstratesize;
+   datastring = datastring + "&extrutionqty="+extrutionqty;
+   datastring = datastring + "&extrutionmaterialblend="+extrutionmaterialblend;
+	 datastring = datastring + "&extrusionremarks="+extrusionremarks;
+   datastring = datastring + "&chkextrusion="+chkextrusion;
+
+	 datastring = datastring + "&printingsubstratesize="+printingsubstratesize;
+   datastring = datastring + "&printingqty="+printingqty;
+   datastring = datastring + "&printingwindingdirection="+printingwindingdirection;
+	 datastring = datastring + "&chkprint="+chkprint;
+
+	 datastring = datastring + "&laminationsubstratesize="+laminationsubstratesize;
+   datastring = datastring + "&laminationadhesive="+laminationadhesive;
+   datastring = datastring + "&laminationkg="+laminationkg;
+	 datastring = datastring + "&laminationremarks="+laminationremarks;
+	 datastring = datastring + "&chklaminate="+chklaminate;
+
+	 datastring = datastring + "&slittingsubstratesize="+slittingsubstratesize;
+   datastring = datastring + "&slittingqty="+slittingqty;
+   datastring = datastring + "&slittingnoofouts="+slittingnoofouts;
+	 datastring = datastring + "&slittingwidth="+slittingwidth;
+	 datastring = datastring + "&slittingrepeatlength="+slittingrepeatlength;
+	 datastring = datastring + "&slittingwindingdirection="+slittingwindingdirection;
+   datastring = datastring + "&slittingmaxnumofsplices="+slittingmaxnumofsplices;
+	 datastring = datastring + "&slittingtapestouse="+slittingtapestouse;
+	 datastring = datastring + "&slittingremarks="+slittingremarks;
+
+	 datastring = datastring + "&cutandbagsubstratesize="+cutandbagsubstratesize;
+	 datastring = datastring + "&cutandbagqty="+cutandbagqty;
+	 datastring = datastring + "&cutandbagwidth="+cutandbagwidth;
+	 datastring = datastring + "&cutandbaglength="+cutandbaglength;
+	 datastring = datastring + "&cutandbaggusset="+cutandbaggusset;
+	 datastring = datastring + "&cutandbagsealposition="+cutandbagsealposition;
+	 datastring = datastring + "&cutandbagpcsbundles="+cutandbagpcsbundles;
+	 datastring = datastring + "&cutandbagothers="+cutandbagothers;
+	 datastring = datastring + "&cutandbagremarks="+cutandbagremarks;
+
+
+   if(salesorderid=="")
+   {
+     alert("Please select sales order.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(ponumber=="")
+   {
+     alert("Please select sales order.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(productid =="")
+   {
+     alert("Please select sales order.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(sid=="")
+   {
+     alert("Please select sales order.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(sodate=="")
+   {
+     alert("Please select sales order.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(jodate=="")
+   {
+     alert("Please select Job Order Date.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+   if(jodeadline =="")
+   {
+     alert("Please select Job Order Deadline.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+	 if(joborderqty  =="")
+   {
+     alert("Please enter Quantity.");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+
+	 if(qtytype   =="")
+		{
+			alert("Please select Quantity type.");
+			chker = chker + 1
+		}
+		else
+		{
+			chker = chker + 0
+		}
+
+  /* if(atLeastOneIsChecked2==false)
+   {
+     alert("Please check a user access");
+     chker = chker + 1
+   }
+   else
+   {
+     chker = chker + 0
+   }
+*/
+  //  alert(chker);
+
+     if(chker == 0)
+     {
+         alert(datastring);
+
+
+         $.ajax({
+                         type: "POST",
+                         url: "functions/joborderadd.php",
+                         data: datastring,
+                         cache: false,
+                         success: function(result)
+                         {
+                           alert(result);
+                           if(result == 1)
+                           {
+
+                             alert("Job Order Created");
+                             window.location = "joborderlist.php";
+
+                           }
+                           else if(result == 0)
+                           {
+														 alert("Failed to create job order");
+														window.location = "joborderlist.php";
+
+                           }
+                         }
+          });
+
+
+
+     }
+
+      });
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+
+
+	$('select[name="salesorderID"]').on('change', function() {
+		var quotation_id = $(this).val();
+	//	alert("Tesst");
+		//alert(salesinquiryid);
+		$("#quotID").val(quotation_id);
+		//$('input[name="salesinquiryID"]').val(salesinquiryid);
+		if (quotation_id!="none")
+	   {
+			 $.ajax({
+				type: "GET",
+				url: "functions/getsalesorder.php",
+				data: {qid : quotation_id },
+				success: function (data) {
+					//	alert(data);
+						$('.joborderdata').removeClass('hidden');
+						//$(".customeradd").addClass('hidden');
+						$(".joborderdata").html(data);
+						$("#joborderdata").show();
+						//alert(data);
+
+
+				}
+			});
+
+			$.ajax({
+			 type: "GET",
+			 url: "functions/getsalesorderponum.php",
+			 data: {qid : quotation_id },
+			 success: function (data) {
+				 //	alert(data);
+					 //$(".customeradd").addClass('hidden');
+					 $(".joborderponum").val(data);
+					 //alert(data);
+
+
+			 }
+		 });
+
+		 $.ajax({
+			type: "GET",
+			url: "functions/getsalesorderdate.php",
+			data: {qid : quotation_id },
+			success: function (data) {
+				//	alert(data);
+					//$(".customeradd").addClass('hidden');
+					$(".sodate").val(data);
+					//alert(data);
+
+
+			}
+		});
+
+
+		}
+		else
+		{
+			alert("ERROR: Please select sales order.");
+			$("#quotationdata").hide();
+
+		}
+	});
+
+
+
+});
+
+
+
 $(document).ready(function() {
 
 
@@ -713,6 +1071,24 @@ $('.podate').datepicker({
           format: "yyyy-mm-dd"
 
       });
+
+$('.sodate').datepicker({
+				autoHide: true,
+			     format: "yyyy-mm-dd"
+
+			 });
+
+ $('.jodate').datepicker({
+			 	autoHide: true,
+			 		format: "yyyy-mm-dd"
+});
+
+$('.jodeadline').datepicker({
+			 autoHide: true,
+				 format: "yyyy-mm-dd"
+});
+
+
 
  });
 
@@ -1792,6 +2168,44 @@ function addMaterial()
 
 }
 
+function addMaterialjo()
+{
+  var inv = document.getElementById('inv').value; inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
+  //var invname =	$('#inv option:selected').text();
+
+  var checker=1;
+  if (inv == "")
+  {
+        document.getElementById("inv").style.border='1px solid red';
+		checker=3;
+  }
+  else
+  {
+        document.getElementById("inv").style.border='1px solid #c8c8c8';
+  }
+
+
+
+
+  document.getElementById('inv').value = "";
+
+
+  if (checker==1)
+  {
+
+		$.get('functions/addmaterialjo.php?inv='+inv, function(data) {
+			//alert(data);
+			$(".txtResult2").html(data);
+
+	     });
+  }
+  else
+  {
+     alert("ERROR: Item already added.");
+  }
+
+}
+
 
 function deleteMaterial(num)
 {
@@ -1801,6 +2215,19 @@ function deleteMaterial(num)
     $.get('functions/deletematerial.php?num='+num, function(data) {
 
 			$(".txtResult1").html(data);
+
+	});
+
+}
+
+function deleteMaterialjo(num)
+{
+
+
+
+    $.get('functions/deletematerialjo.php?num='+num, function(data) {
+
+			$(".txtResult2").html(data);
 
 	});
 
