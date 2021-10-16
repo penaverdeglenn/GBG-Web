@@ -323,6 +323,8 @@ $action = isset($action)?$action:'';
      																	<div class="col-sm-4">
      																		<p class="h5 custrep">
                                           <input type="text" class="form-control joborderID" value="JO-<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                          <input type="hidden" class="form-control IDJO" value="<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+
                                         </p>
      																	</div>
      															</div>
@@ -537,7 +539,7 @@ $action = isset($action)?$action:'';
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">1.Extrusion</div>
+												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Extrusion</div>
 												<div class="row  align-items-center">
 													<div class="col-12 customerdata" id="quotationdata">
 															 <div class="form-group col-12" >
@@ -633,7 +635,7 @@ $action = isset($action)?$action:'';
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">2.Printing</div>
+												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Printing</div>
 												<div class="row  align-items-center">
 													<div class="col-12 customerdata" id="quotationdata">
 															 <div class="form-group col-12" >
@@ -730,7 +732,7 @@ $action = isset($action)?$action:'';
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">3.Lamination</div>
+												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Lamination</div>
 												<div class="row  align-items-center">
 													<div class="col-12 customerdata" id="quotationdata">
 															 <div class="form-group col-12" >
@@ -823,7 +825,7 @@ $action = isset($action)?$action:'';
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-sm font-weight-bold text-info text-uppercase mb-4">4.Slitting</div>
+                        <div class="text-sm font-weight-bold text-info text-uppercase mb-4">Slitting</div>
                         <div class="row  align-items-center">
                           <div class="col-12 customerdata" id="quotationdata">
                                <div class="form-group col-12" >
@@ -940,7 +942,7 @@ $action = isset($action)?$action:'';
                         <div class="card-body">
                           <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                              <div class="text-sm font-weight-bold text-info text-uppercase mb-4">5.Cutting and Bagging</div>
+                              <div class="text-sm font-weight-bold text-info text-uppercase mb-4">Cutting and Bagging</div>
                               <div class="row  align-items-center">
                                 <div class="col-12 customerdata" id="quotationdata">
                                      <div class="form-group col-12" >

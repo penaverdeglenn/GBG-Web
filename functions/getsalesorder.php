@@ -52,7 +52,7 @@ require_once __DIR__."/allfunctions.php";
 
 																	<input type="hidden"  class="cust_id" name="cust_id" id ="cust_id" value="<?php echo $cust_id; ?>">
 																	<input type="hidden"  class="SI_product_id" name="SI_product_id" id ="SI_product_id" value="<?php echo $SI_product_id; ?>">
-																	<input type="hidden"  class="sid" name="sid" id ="sid" value="<?php echo $si_id; ?>">
+																	<input type="hidden"  class="sid" name="sid" id ="sid" value="<?php echo $sales_inquiry_id; ?>">
 
 																	<div class="col-sm-3">
 																		<p>Sales Inquiry ID:</p>
