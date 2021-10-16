@@ -10,14 +10,20 @@ require_once __DIR__."/allfunctions.php";
 	if(isset($_SESSION["joborderitemarrayinventory"]))
 	{
 	    $itemarrayjoborder = $_SESSION["joborderitemarrayinventory"];
+		$itemarrayquantity = $_SESSION["joborderitemqty"];
 	}
 	else
 	{
 	 $itemarrayjoborder = array();
+	 $itemarrayquantity = array(
+		 'quantity' => $_GET["jomaqtytxt"]
+	 );
 	}
 
 
 				$itemid=$_GET["inv"];
+				$itemqty=$_GET["jomaqtytxt"];
+				
 				$checkifdoble=1;
 				for($a=0;$a<count($itemarrayjoborder);$a++)
 				{
@@ -30,11 +36,15 @@ require_once __DIR__."/allfunctions.php";
 				{
 					if($itemid!="")
 					{
+						
 						array_push($itemarrayjoborder,$itemid);
+						$itemarrayquantity=array($itemqty);
+						
 					}
 				}
 
 																	$_SESSION["joborderitemarrayinventory"]=$itemarrayjoborder;
+																	$_SESSION["joborderitemqty"]=$itemarrayquantity;
 
 ?>
 
@@ -47,6 +57,7 @@ require_once __DIR__."/allfunctions.php";
 																		</thead>
 																	<tbody>
 																	<?php
+																	
 																	for($a=0;$a<count($itemarrayjoborder);$a++)
 																	{
 																		$MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
@@ -54,19 +65,21 @@ require_once __DIR__."/allfunctions.php";
 
 																		if($MaterialListDetails["material_id"]!="")
 																		{
+																			echo $_SESSION["joborderitemqty"];
+																			echo '<tr>';
+																			echo '<td>' . $itemarrayjoborder[$a] . '</td>';
+																			echo '<td>' . strtoupper($MaterialListDetails["material_name"]) . '</td>';
+																			echo '<td>' . $itemarrayquantity[0] . '</td>';
+																			echo '<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo('. $a . '); 
+																			return false"><i class="far fa-trash-alt"></i></a></td>';
+																			echo '</tr>';
+																			
+
+																		}
+																	}
+																	
 																	?>
-																			<tr>
-																	<td><?php echo $itemarrayjoborder[$a]; ?> </td>
-																	<td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-																	<td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-																	<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
-																			</tr>
-
-
-																	<?php     }
-																	}?>
-
-
+																	
 																	</tbody>
 
 
