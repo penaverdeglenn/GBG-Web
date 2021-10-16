@@ -63,7 +63,7 @@ function gettaskcount($user,$type)
 function getSalesOrderForJO()
 {
     $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
-    
+
     $strSQL = "SELECT id,POdate,POnumber,custT.customer_company_name,prodT.product_name,status
                 FROM tbl_salesorder as mainT inner JOIN tbl_product prodT
                 ON mainT.productID = prodT.product_id
@@ -73,7 +73,7 @@ function getSalesOrderForJO()
 
     $rs = mysqli_query($con,$strSQL) or die(mysqli_error($con));
     mysqli_close($con);
-    
+
     return $rs;
 }
 
@@ -144,6 +144,31 @@ function getDropdownExist($tbl,$cond,$param,$select){
 }
 
 
+
+function getDropdownExistJO($tbl,$cond,$param,$select){
+
+                $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+                $result = "";
+                $query = mysqli_query($con,"select * FROM ".$tbl." WHERE ".$cond. " ");
+
+                mysqli_close($con);
+
+                while($row = mysqli_fetch_array($query ,MYSQLI_ASSOC)) {
+
+				$numRows = getTblNumRows('tbl_joborder','salesorderID = '.$row['salesorderID'].'');
+					if($numRows != 1)
+					{
+					$result .=  "<option ";
+					$result .= " value='".$row[$param]."'>".$row[$select]."</option>";
+					}
+                }
+
+                return $result;
+}
+
+
+
+
 function getDropdownselect($tbl,$cond,$param,$select){
 
                 $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
@@ -152,7 +177,7 @@ function getDropdownselect($tbl,$cond,$param,$select){
                 mysqli_close($con);
 
                 while($row = mysqli_fetch_array($query ,MYSQLI_ASSOC)) {
-                $result .=  "<option selected";
+                $result .=  "<option ";
                 $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                 }
 
@@ -263,7 +288,7 @@ function sidebar(){
     $accesstype2 = $_SESSION['ACCESS_TYPE'];
 
   }
-  
+
 	$result = "";
 
 	$result .=  '            <!-- Divider -->';
@@ -311,6 +336,19 @@ function sidebar(){
     $result .=  '            </div>';
     $result .=  '            </div>';
 	$result .=  '			</li>';
+  $result .=  '<li class="nav-item">';
+    $result .=  '            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseFour">';
+    $result .=  '            <i class="fas fa-fw fa-cog"></i>';
+    $result .=  '            <span>Job Order</span>';
+    $result .=  '            </a>';
+    $result .=  '            <div id="collapseSeven" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">';
+    $result .=  '            <div class="bg-white py-2 collapse-inner rounded">';
+    $result .=  '            <h6 class="collapse-header">Components:</h6>';
+    $result .=  '            <a class="collapse-item" href="joborder.php">Job Order</a>';
+    $result .=  '           <a class="collapse-item" href="joborderlist.php">Job Order History</a>';
+    $result .=  '            </div>';
+    $result .=  '            </div>';
+  $result .=  '			</li>';
 
   if($type =="Admin")
   {
