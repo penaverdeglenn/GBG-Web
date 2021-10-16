@@ -15,6 +15,28 @@ else
   $itemarray = $_SESSION["itemarrayinventory"];
 }
 
+
+/*
+if(empty($_SESSION["joborderitemarrayinventory"]))
+{
+    $itemarrayjoborder = array();
+}
+else
+{
+  $itemarrayjoborder = $_SESSION["joborderitemarrayinventory"];
+}
+*/
+
+
+if(isset($_SESSION["joborderitemarrayinventory"]))
+{
+    $itemarrayjoborder = $_SESSION["joborderitemarrayinventory"];
+}
+else
+{
+ $itemarrayjoborder = array();
+}
+
 if(empty($_SESSION["MEMBER_ID"]) && empty($_SESSION["TYPE"]))
 {
     $itemarray = array();
@@ -77,6 +99,10 @@ $action = isset($action)?$action:'';
 		}
 	}
 	confirm_logged_in();
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -250,7 +276,7 @@ $action = isset($action)?$action:'';
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Details</div>
+												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Product</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
 
@@ -274,7 +300,238 @@ $action = isset($action)?$action:'';
 							</div>
 					</div>
 					<form action="insert_quotation.php" method="post">
-					<div class="row gy-5">
+
+
+
+
+            <div class="row gy-5">
+  							<div class="col-lg-12">
+  								<div class="card border-left-info shadow h-100 py-2">
+  									<div class="card-body">
+  										<div class="row no-gutters align-items-center">
+  											<div class="col mr-2">
+  												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Details</div>
+  												<div class="row  align-items-center">
+  													<div class="col-12 customerdata" id="quotationdata">
+  															 <div class="form-group col-12" >
+
+                                   <?php $joborder = generateCode(); ?>
+                                   <div class="form-group row">
+     																	<div class="col-sm-2">
+     																			<p>Job Order Number</p>
+     																	</div>
+     																	<div class="col-sm-4">
+     																		<p class="h5 custrep">
+                                          <input type="text" class="form-control joborderID" value="JO-<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                        </p>
+     																	</div>
+     															</div>
+
+
+
+                                   <div class="form-group row">
+     																	<div class="col-sm-2">
+     																			<p>Sales Order Date:</p>
+     																	</div>
+     																	<div class="col-sm-4">
+     																		<p class="h5 custrep">
+                                          <input type="text" class="form-control sodate" readonly="readonly" disabled name="sodate" required  placeholder="Enter Sales Order Date" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
+                                        		</p>
+     																	</div>
+
+                                      <div class="col-sm-2">
+                                          <p>PO Number:</p>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <p class="h5 custrep">
+                                           <input type="text" class="form-control joborderponum" name="joborderponum" readonly="readonly" required  placeholder="Enter PONumber" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                          </p>
+                                      </div>
+     															</div>
+
+
+                                  <div class="form-group row">
+                                     <div class="col-sm-2">
+                                         <p>Job Order Date:</p>
+                                     </div>
+                                     <div class="col-sm-4">
+                                       <p class="h5 custrep">
+                                         <input type="text" class="form-control jodate" readonly="readonly" name="jodate" required  placeholder="Enter Job Order Date" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
+                                          </p>
+                                     </div>
+
+                                     <div class="col-sm-2">
+                                         <p>Job Order Deadline:</p>
+                                     </div>
+                                     <div class="col-sm-4">
+                                       <p class="h5 custrep">
+                                         <input type="text" class="form-control jodeadline" readonly="readonly" name="jodeadline" required  placeholder="Enter Job Order Deadline" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
+                                            </p>
+                                     </div>
+                                 </div>
+
+
+  															<div class="form-group row">
+  																	<div class="col-sm-2">
+  																			<p>Quantity:</p>
+  																	</div>
+  																	<div class="col-sm-4">
+  																		<p class="h5 custrep">
+                                        <input type="text" class="form-control joborderqty" name="joborderqty" required  placeholder="Enter Quantity" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+    																		</p>
+  																	</div>
+  																	<div class="col-sm-2">
+                                      <select class="form-control form-select qtytype" name="qtytype" id = "qtytype" aria-label="Default select example">
+      																   <option selected value="none">Select Quantity Type</option>
+      																  <option selected value="Pcs">PCS</option>
+                                        <option selected value="Meters">Meters</option>
+                                        <option selected value="Kgs">KG</option>
+      																</select>
+  																	</div>
+
+  															</div>
+
+                                <div class="form-group row">
+                                  <div class="col-sm-6">
+                                    <p>Remarks</p>
+                                  </div>
+                                  <div class="col-sm-8">
+                                    <textarea class="form-control joborderremarks" name="joborderremarks" required="" placeholder="Enter remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+                                  </div>
+
+                              </div>
+
+
+
+  																</div>
+  																<!-- END OF ROLL FORM -->
+  															</div>
+  												</div>
+  											</div>
+  										</div>
+  									</div>
+  								</div>
+  							</div>
+  					</div>
+
+
+
+                        <div class="row gy-5">
+              							<div class="col-lg-12">
+              								<div class="card border-left-info shadow h-100 py-2">
+              									<div class="card-body">
+              										<div class="row no-gutters align-items-center">
+              											<div class="col mr-2">
+              												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Materials</div>
+              												<div class="row  align-items-center">
+              													<div class="col-12 customerdata" id="quotationdata">
+              															 <div class="form-group col-12" >
+
+
+
+                                               <div class="form-group row ">
+
+
+
+                                             <!--		<select class="selectpicker form-control materialdata" multiple data-live-search="true"   >
+                                                  <?php
+
+                                                  //     echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
+
+                                                       ?>
+                                                 </select> -->
+                                                  <div class="col-lg-1">
+                                                    <p>Material</p>
+                                                  </div>
+
+                                                 <div class="col-lg-3">
+                                                   <select class="form-control selecttable"	id="inv" >
+                                                    <?php
+
+                                                         echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
+
+                                                         ?>
+                                                   </select>
+                                                 </div>
+
+                                                 <div class="col-lg-1">
+                                                   <p>Quantity:</p>
+                                                 </div>
+                                                 <div class="col-lg-3">
+                                                   <input type="number" class="form-control jomatqty" name="jomatqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                                 </div>
+
+
+                                                 <div class="col-lg-2">
+                                                   <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="addMaterialjo(); return false"><i class="far fa-plus-square"></i> Add Item</a>
+                                                 </div>
+
+
+                                                 <div class="row gy-5"></div>
+                                                  <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                   {
+
+                                                     echo $itemarrayjoborder[$a];
+                                                   }
+                                                     ?>
+
+                                             <!--	<button class="btn btn-primary test"  type="button" >Submit</button>			-->
+
+                                               </div>
+                                               <div class="form-group row txtResult2" id="txtResult2">
+
+                                                                                 <table class="table table-bordered jomaterialtable" id="jomaterialtable" width="100%" cellspacing="0">
+                                                       <thead>
+                                                         <th>ID</th>
+                                                         <th>Material Name</th>
+                                                         <th>Quantity</th>
+                                                         <th></th>
+                                                       </thead>
+                                                     <tbody>
+                                                     <?php
+                                                     for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                     {
+                                                       $MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
+
+
+                                                       if($MaterialListDetails["material_id"]!="")
+                                                       {
+                                                     ?>
+                                                         <tr>
+                                                     <td><?php echo $itemarrayjoborder[$a]; ?> </td>
+                                                     <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
+                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
+                                                     <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
+                                                         </tr>
+
+
+                                                     <?php     }
+                                                     }?>
+
+
+                                                     </tbody>
+
+
+
+                                                   </table>
+
+                                               </div>
+
+
+
+              																</div>
+              																<!-- END OF ROLL FORM -->
+              															</div>
+              												</div>
+              											</div>
+              										</div>
+              									</div>
+              								</div>
+              							</div>
+              					</div>
+
+
+          <div class="row gy-5">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -290,25 +547,64 @@ $action = isset($action)?$action:'';
 
 
 															<div class="form-group row">
-																	<div class="col-sm-2">
-																			<p>Substrate and Size:</p>
-																	</div>
-																	<div class="col-sm-4">
-																		<p class="h5 custrep">
-                                      <input type="text" class="form-control extrusionsubstratesize" name="extrusionsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-  																		</p>
-																	</div>
-																	<div class="col-sm-2">
-																		<p>Quantity</p>
-																	</div>
-																	<div class="col-sm-4">
-                                    <input type="text" class="form-control extrutionqty" name="extrutionqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+  																	<div class="col-sm-2">
+  																			<p>Substrate and Size:</p>
+  																	</div>
+  																	<div class="col-sm-4">
+  																		<p class="h5 custrep">
+                                        <input type="text" class="form-control extrusionsubstratesize" name="extrusionsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+    																		</p>
+  																	</div>
+  																	<div class="col-sm-2">
+  																		<p>Quantity</p>
+  																	</div>
+  																	<div class="col-sm-4">
+                                      <input type="text" class="form-control extrutionqty" name="extrutionqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                  </div>
                                 </div>
+
+
+                                <div class="form-group row">
+                                  <div class="col-sm-2">
+                                    <p>Material Blending</p>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <input type="text" class="form-control extrutionmaterialblend" name="extrutionmaterialblend" required  placeholder="Enter Material Blending" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                </div>
+
+                              </div>
+
+
+                              <div class="col-sm-12">
+
+                               <div class="card-body">
+
+
+                                 <div class="form-check">
+                                   <input class="form-check-input" type="checkbox" value="onesideprinting" name="chkextrusion[]" id="onesideprinting">
+                                   <label class="form-check-label" for="flexCheckDefault">
+                                   One Side Printing
+                                   </label>
+                                 </div>
+
+                                 <div class="form-check">
+                                   <input class="form-check-input" type="checkbox" value="bothsideprinting" name="chkextrusion[]" id="bothsideprinting">
+                                   <label class="form-check-label" for="flexCheckDefault">
+                                   Both Side Printing
+                                   </label>
+                                 </div>
+
+
+                             </div>
+
+                         </div>
+
+                                <div class="form-group row">
 																	<div class="col-sm-6">
-																		<p>Special Instruction</p>
+																		<p>Remarks</p>
 																	</div>
 																	<div class="col-sm-8">
-																		<textarea class="form-control bagspecinstruction" name="bagspecinstruction" required="" placeholder="Enter Special Instructions" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+																		<textarea class="form-control extrusionremarks" name="extrusionremarks" required="" placeholder="Enter remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
 																	</div>
 
 															</div>
@@ -461,14 +757,14 @@ $action = isset($action)?$action:'';
 
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="gplamination" name="chkprint[]" id="GP">
+                                        <input class="form-check-input" type="checkbox" value="gplamination" name="chklaminate[]" id="GP">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         GP
                                         </label>
                                       </div>
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="mplamination" name="chkprint[]" id="MP">
+                                        <input class="form-check-input" type="checkbox" value="mplamination" name="chklaminate[]" id="MP">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         MP
                                         </label>
@@ -704,7 +1000,7 @@ $action = isset($action)?$action:'';
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <p>Seal Positionn:</p>
+                                                <p>Seal Position:</p>
                                             </div>
                                             <div class="col-sm-4">
                                               <p class="h5 custrep">

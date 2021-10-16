@@ -3,6 +3,7 @@
 
 //require_once __DIR__."/dbconfig.php";
 //require_once "includes/dbconfig.php";
+error_reporting(0);
 require_once __DIR__."/../includes/dbconfig.php";
 function callDbCon()
 {
@@ -591,7 +592,7 @@ function getRecord($col,$tbl,$cond){
 function generateCode(){
 
     $unique =   FALSE;
-    $length =   8;
+    $length =   5;
    // $chrDb  =   array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
     $chrDb  =   array('0','1','2','3','4','5','6','7','8','9');
     while (!$unique){
@@ -611,18 +612,47 @@ function generateCode(){
           }
           //$str .= "E".$chr;
           /* check if unique */
-          callDbCon();
-          $strSQL = "SELECT * FROM 00_users WHERE userscode = '".$str."' and userstatus = '1'";
-          $sqlQuery = mysql_query($strSQL);
-          $existingCode = mysql_num_rows($sqlQuery);
-          mysql_close();
+          $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+          //$query = mysqli_query($con,SELECT * FROM  tbl_joborder WHERE jobordernum = '".$str."' and userstatus = '1') or die(mysqli_error($con));
+        //  $query = mysqli_query($con,"SELECT * FROM  tbl_joborder WHERE jobordernum = '".$str."') or die(mysqli_error($con));
+          $query = mysqli_query($con,"select * FROM tbl_joborder WHERE jobordernum=".$str." ") or die(mysqli_error($con));
+        
+          $existingCode = mysqli_num_rows($query);
           if (!$existingCode){
              $unique = TRUE;
           }
     }
+    mysqli_close($con);
     return $str;
 }
 
+
+function generateCode2(){
+
+    $unique =   FALSE;
+    $length =   8;
+   // $chrDb  =   array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
+    $chrDb  =   array('0','1','2','3','4','5','6','7','8','9');
+
+
+          $str = '';
+          for ($count = 0; $count < $length; $count++){
+
+              $chr = $chrDb[rand(0,count($chrDb)-1)];
+
+              if (rand(0,1) == 0){
+                 $chr = strtolower($chr);
+              }
+           //   if (3 == $count){
+           //      $str .= '-';
+           //   }
+              $str .= $chr;
+          }
+          //$str .= "E".$chr;
+          /* check if unique */
+
+    return $str;
+}
 
 function generatePassword(){
 
