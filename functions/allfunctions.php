@@ -3,7 +3,8 @@
 
 //require_once __DIR__."/dbconfig.php";
 //require_once "includes/dbconfig.php";
-error_reporting(0);
+//error_reporting(0);
+
 require_once __DIR__."/../includes/dbconfig.php";
 function callDbCon()
 {
@@ -155,8 +156,9 @@ function getDropdownExistJO($tbl,$cond,$param,$select){
                 mysqli_close($con);
 
                 while($row = mysqli_fetch_array($query ,MYSQLI_ASSOC)) {
-
-				$numRows = getTblNumRows('tbl_joborder','salesorderID = '.$row['salesorderID'].'');
+                  //  $numRows = getTblNumRows('tbl_joborder','salesorder =  '.$row['salesorderID'].'');
+                  $soID = $row['id'];
+				        $numRows = getTblNumRows('tbl_joborder','salesorder = "'.$soID.'"');
 					if($numRows != 1)
 					{
 					$result .=  "<option ";
@@ -376,8 +378,8 @@ $result .=  '		<div class="sidebar-heading">';
     $result .=  '			</li>';
   }
 
-
 /*
+
   $result .=  '            <!-- Divider -->';
     $result .=  '        <hr class="sidebar-divider">';
     $result .=  '        <!-- Heading -->';

@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 	 var joborderIDNUM = $('.IDJO').val();
    var salesorderid = $('select[name=salesorderID] option').filter(':selected').val();
-	 alert(salesorderid);
+	 //alert(salesorderid);
    var productid = $('.SI_product_id').val();
    var sid = $('.sid').val();
    var ponumber = $('.joborderponum').val();
@@ -238,7 +238,7 @@ $(document).ready(function() {
 
      if(chker == 0)
      {
-         alert(datastring);
+        // alert(datastring);
 
 
          $.ajax({
@@ -248,7 +248,7 @@ $(document).ready(function() {
                          cache: false,
                          success: function(result)
                          {
-                           alert(result);
+                           //alert(result);
                            if(result == 1)
                            {
 

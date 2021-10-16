@@ -101,8 +101,35 @@ $action = isset($action)?$action:'';
 	confirm_logged_in();
 
 
+//echo getDropdownExistJO('tbl_salesorder',"status = 'Approved'",'salesorderID','salesorderID');
+/*
+$tbl = "tbl_salesorder";
+$cond = "status = 'Approved'";
+$param  = 'salesorderID';
+$select = 'salesorderID';
 
+  $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+  $result = "";
+  $query = mysqli_query($con,"select * FROM ".$tbl." WHERE ".$cond. " ");
 
+  mysqli_close($con);
+
+  while($row = mysqli_fetch_array($query ,MYSQLI_ASSOC)) {
+    //echo $row['salesorderID'];
+    $soID = $row['id'];
+    $numRows = getTblNumRows('tbl_joborder','salesorder = "'.$soID.'"');
+    echo $numRows;
+///  $numRows = getTblNumRows('tbl_joborder','salesorder = '.$row['salesorderID'].'');
+
+if($numRows != 1)
+{
+$result .=  "<option ";
+$result .= " value='".$row[$param]."'>".$row[$select]."</option>";
+}
+  }
+
+  echo $result;
+*/
 
 ?>
 <!DOCTYPE html>
@@ -240,8 +267,8 @@ $action = isset($action)?$action:'';
 																   <option selected value="none">Select Sales Order</option>
 																    <?php
 
-																	//echo getDropdownExistJO('tbl_salesorder',"status = 'Approved'",'salesorderID','salesorderID');
-                                  echo getDropdownselect('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
+																	echo getDropdownExistJO('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
+                                  //echo getDropdownselect('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
 
 																	?>
 																</select>

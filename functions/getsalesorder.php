@@ -30,9 +30,9 @@ require_once __DIR__."/allfunctions.php";
 	if($qid!="")
     {
 	//$si_id = getRecord('sales_inquiry_id_for_quote','tbl_quotation','quotation_id ='.$qid);
-    $strSQL = "SELECT * FROM tbl_salesorder WHERE status='Approved' AND id=".$qid;
+    $strSQL = "SELECT * FROM tbl_salesorder WHERE status='Approved' AND id=".$qid. " ";
     $rs1 = mysqli_query($con,$strSQL) or die (mysqli_error($con));
-
+//echo $strSQL;
 
     $row1 = mysqli_fetch_array($rs1 ,MYSQLI_ASSOC);
 //	$cust_id = $row1["customer_id"];
