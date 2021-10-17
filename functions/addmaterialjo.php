@@ -23,7 +23,7 @@ require_once __DIR__."/allfunctions.php";
 
 				$itemid=$_GET["inv"];
 				$itemqty=$_GET["jomaqtytxt"];
-				
+
 				$checkifdoble=1;
 				for($a=0;$a<count($itemarrayjoborder);$a++)
 				{
@@ -36,10 +36,10 @@ require_once __DIR__."/allfunctions.php";
 				{
 					if($itemid!="")
 					{
-						
+
 						array_push($itemarrayjoborder,$itemid);
 						$itemarrayquantity=array($itemqty);
-						
+
 					}
 				}
 
@@ -57,7 +57,7 @@ require_once __DIR__."/allfunctions.php";
 																		</thead>
 																	<tbody>
 																	<?php
-																	
+
 																	for($a=0;$a<count($itemarrayjoborder);$a++)
 																	{
 																		$MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
@@ -65,21 +65,21 @@ require_once __DIR__."/allfunctions.php";
 
 																		if($MaterialListDetails["material_id"]!="")
 																		{
-																			echo $_SESSION["joborderitemqty"];
+																			//echo $_SESSION["joborderitemqty"];
 																			echo '<tr>';
 																			echo '<td>' . $itemarrayjoborder[$a] . '</td>';
 																			echo '<td>' . strtoupper($MaterialListDetails["material_name"]) . '</td>';
 																			echo '<td>' . $itemarrayquantity[0] . '</td>';
-																			echo '<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo('. $a . '); 
+																			echo '<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo('. $a . ');
 																			return false"><i class="far fa-trash-alt"></i></a></td>';
 																			echo '</tr>';
-																			
+
 
 																		}
 																	}
-																	
+
 																	?>
-																	
+
 																	</tbody>
 
 

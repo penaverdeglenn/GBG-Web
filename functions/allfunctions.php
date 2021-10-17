@@ -456,6 +456,22 @@ function getsalesorder()
     return $rs;
 }
 
+
+function getjoborder()
+{
+    $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+
+    //$strSQL = "SELECT distinct a.itemid AS itemid,b.itemname AS itemname, b.uomid AS uomid, b.catid AS catid ";
+    //$strSQL.= "FROM 10_bom a, 8_inventory b ";
+    //$strSQL.= "WHERE a.status=1 AND b.status=1 AND a.itemid=b.id ORDER BY itemname" ;
+    $strSQL = "SELECT * FROM tbl_joborder";
+
+    $rs = mysqli_query($con,$strSQL) or die(mysqli_error($con));
+    mysqli_close($con);
+
+    return $rs;
+}
+
 function getuserlist()
 {
     $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());

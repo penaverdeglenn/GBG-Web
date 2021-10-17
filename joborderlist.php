@@ -32,23 +32,23 @@ else
   $dept = $_SESSION['DEPT'];
   $accesstype = $_SESSION['ACCESS_TYPE'];
 
-  
+
 }
 
 
 					$pieces4 = explode(",", $accesstype);
 					$checker=0;
 					//$ctr = count($accesstype);
-					
-					
-					
+
+
+
 																	/*	for ($c=0;$c<=$ctr;$c++)
 																		{
-																			
-																			
+
+
 																			if($pieces4[$c]==" Quotation" OR $pieces4[$c]=="Quotation")
 																			{
-																				
+
 																				$checker=1;
 																			}
 																			else
@@ -56,19 +56,19 @@ else
 																				$checker=0;
 																			}
 																		}*/
-																		
+
 
 //before we store information of our member, we need to start first the session
-	
+
 
 	//create a new function to check if the session variable member_id is on set
 	function logged_in() {
 		return isset($_SESSION['MEMBER_ID']);
-        
+
 	}
 	//this function if session member is not set then it will be redirected to index.php
 	function confirm_logged_in() {
-		if (!logged_in()) { 	
+		if (!logged_in()) {
 
 ?>
 			<script type="text/javascript">
@@ -78,7 +78,7 @@ else
 		}
 	}
 	confirm_logged_in();
-	
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -152,8 +152,8 @@ else
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                  
-                     
+
+
 
                         <!-- Nav Item - User Information -->
                        <?php echo logindetails(); ?>
@@ -169,27 +169,27 @@ else
 
                     <!-- Content Row -->
                     <div class="row gy-5">
- 
 
-                      
+
+
 				<!--Image Content Row -->
-					
+
 						<div class="row gy-5">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Sales Order History</div>
+												<div class="text-sm font-weight-bold text-info text-uppercase mb-4">Job Order History</div>
 												<div class="row  align-items-center">
 													<div class="card-body">
 
 														<div class="form-group row txtResult1" id="txtResult1">
-															
+
 																															<table class="table table-bordered materialtable" id="materialtable" width="100%" cellspacing="0">
 																		<thead>
 																			<th>Date Created</th>
-																			<th>Sales Inquiry ID</th>
+																			<th>Job Order Number</th>
 																			<th>Customer Name</th>
 																			<th>Product  Name</th>
 																			<th>Status</th>
@@ -199,50 +199,50 @@ else
 																	<tbody>
 																	<?php
 																	//$salesinquiryrow =  getTblNumRows('tbl_sales_inquiry',"salesinquiry_status = 'Added'");
-																
+
 																	//$salesinquirydata =  getRecord('product_id','tbl_sales_inquiry',"salesinquiry_status = 'Added'");
-																	
-																	$resultlist = getsalesorder();
+
+																	$resultlist = getjoborder();
 																	//echo $memberid;
 																	while($row=mysqli_fetch_array($resultlist,MYSQLI_ASSOC)) {
-																		
-																		
-																		
-																		$salesinquirycustomer = getRecord('customer_id','tbl_sales_inquiry','sales_inquiry_id ='.$row['salesinquiryID'].'');
 
-																		
+
+
+																		$salesinquirycustomer = getRecord('customer_id','tbl_sales_inquiry','sales_inquiry_id ='.$row['saleinquiryid'].'');
+
+
 																		$salesinquirydatacustomer = getRecord('customer_company_name','tbl_customer','customer_id ='.$salesinquirycustomer.'');
-																		$salesinquirydataproduct = getRecord('product_name','tbl_product','product_id ='.$row['productID'].'');
-																		$status = $row['status'];
-																		$quotation_id = $row['quotationID'];
-																		$assigned_approver_id =$row['assigned_approver'];
-																		$first_approver_id = $row['1stapprover'];
-																		$first_approver_date = $row['1stapproverdate'];
-																		$reject_reason = $row['reject_reason'];
-																		$status = $row['status'];
+																		$salesinquirydataproduct = getRecord('product_name','tbl_product','product_id ='.$row['productid'].'');
+																		$status = $row['joborderstatus'];
+																		//$quotation_id = $row['quotationID'];
+																		$assigned_approver_id =1;
+																		$first_approver_id = 1;
+																		$first_approver_date =1;
+																		$reject_reason = 1;
+
 																		//$firstapprover = $row['approver'];
 																		//$secondapprover = $row['secondapprover'];
-																		
-																		
-																		
+
+
+
 																				echo '<tr>';
 																				echo '<td>'. $row['datecreated'] . '</td>';
-																				echo '<td>'. $row['salesinquiryID'] . '</td>';
+																				echo '<td> JO-'. $row['jobordernum'] . '</td>';
 																				echo '<td>'. $salesinquirydatacustomer . '</td>';
 																				echo '<td>'. $salesinquirydataproduct . '</td>';
 																				echo '<td>'. $status . '</td>';
-																				echo '<td>'. $row['POnumber'] . '</td>';
-																				
-																			   
+																				echo '<td>'. $row['ponumber'] . '</td>';
+
+
 																			   echo '<td>
-																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=view&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="far fa-eye"></i></a> 
-																						';	
-																				
+																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=view&custid='.$salesinquirycustomer . '&sid='. $row['saleinquiryid'] .'&id='. $row['id'] .'"><i class="far fa-eye"></i></a>
+																						';
+
 																				 /*echo '
-																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=approve&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a> 
+																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=approve&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>
 																						';
 																				 */
-																			  
+
 																			  if (!str_contains($type,"Approver"))
 																			  {
 																			  	if(empty($assigned_approver_id))
@@ -252,9 +252,9 @@ else
 																								';
 																			  	}
 																			  }
-																			  else 
+																			  else
 																			  {
-																			  
+
 																			  	if(str_contains($type,'Approver 1') and ($status =="Waiting for Approval"))
 																			  	{
 																			  		echo '
@@ -270,22 +270,22 @@ else
 																			  }
 																				echo '</td>';
 																				echo '</tr>';
-																	}	
+																	}
 																	?>
-																
-																
-																
-																	
+
+
+
+
 																	</tbody>
-																	
-																   
-																 
+
+
+
 																</table>
-																
+
 														</div>
-													
-																								
-														
+
+
+
 													</div>
 												</div>
 											</div>
@@ -294,13 +294,13 @@ else
 								</div>
 							</div>
 					</div>
-					
-					
-				
-				
-					
+
+
+
+
+
                 <!-- /.container-fluid -->
-					
+
             </div>
             <!-- End of Main Content -->
 
@@ -344,15 +344,15 @@ else
             </div>
         </div>
     </div>
-	
-	
 
 
 
 
 
-    
-   
-    
+
+
+
+
+
   </body>
 </html>

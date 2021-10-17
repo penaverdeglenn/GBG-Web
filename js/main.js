@@ -2171,7 +2171,7 @@ function addMaterial()
 function addMaterialjo()
 {
 	var jomaqtytxt = document.getElementById('jomatqty').value;
-	var inv = document.getElementById('inv').value; 
+	var inv = document.getElementById('inv').value;
 	inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
 	//var invname =	$('#inv option:selected').text();
 
@@ -2196,7 +2196,7 @@ function addMaterialjo()
 	{
 			//alert(jomaqtytxt);
 			$.get('functions/addmaterialjo.php?inv='+inv+'&jomaqtytxt='+jomaqtytxt, function(data) {
-				alert(data);
+				//alert(data);
 				$(".txtResult2").html(data);
 
 			});
