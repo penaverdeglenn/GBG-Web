@@ -56,15 +56,26 @@ else
 }
 
 
-
-if(empty($_GET['sid']))
+if(empty($_GET['soid']))
 {
-
+$soid = "";
 
 }
 else
 {
-	$sales_inquiry_id = $_GET['sid'];
+	$soid = $_GET['soid'];
+
+}
+
+
+if(empty($_GET['id']))
+{
+
+$joborderid = "";
+}
+else
+{
+	$joborderid = $_GET['id'];
 
 }
 
@@ -79,14 +90,82 @@ else
 
 }
 
-$sales_inquiry_id = isset($sales_inquiry_id)?$sales_inquiry_id:'';
+$joborderid = isset($joborderid)?$joborderid:'';
 $action = isset($action)?$action:'';
 
 
 
+$con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname());
+
+//$strSQL = "SELECT distinct a.itemid AS itemid,b.itemname AS itemname, b.uomid AS uomid, b.catid AS catid ";
+//$strSQL.= "FROM 10_bom a, 8_inventory b ";
+//$strSQL.= "WHERE a.status=1 AND b.status=1 AND a.itemid=b.id ORDER BY itemname" ;
+$strSQL = "SELECT * FROM tbl_joborder";
+
+$rs = mysqli_query($con,$strSQL) or die(mysqli_error($con));
+mysqli_close($con);
+
+while($row=mysqli_fetch_array($rs,MYSQLI_ASSOC)) {
 
 
 
+  $joborderIDNUM = $row['jobordernum'];
+  $salesorderID = $row['salesorder'];
+  $productid = $row['productid'];
+  $sid = $row['saleinquiryid'];
+  $ponumber = $row['ponumber'];
+  $sodate = $row['salesorderdate'];
+  $jodate = $row['joborderdate'];
+  $jodeadline = $row['joborderdeadline'];
+  $qtytype = $row['joborderqtytype'];
+  $joborderqty = $row['joborderqty'];
+  $joborderremarks = $row['joborderremarks'];
+
+
+  $extrusionsubstratesize = $row['extrusionsubsize'];
+  $extrutionqty = $row['extrusionqty'];
+  $extrutionmaterialblend = $row['extrusionmaterialblending'];
+  $extrusionremarks = $row['extrusionremarks'];
+  $chkextrusion = $row['extrusionprocess'];
+
+
+  $printingsubstratesize = $row['printingsubsize'];
+  $printingqty = $row['printingqty'];
+  $printingwindingdirection = $row['printingwindingdirection'];
+  $chkprint = $row['printingprocess'];
+
+
+  $laminationsubstratesize = $row['laminationsubsize'];
+  $laminationadhesive = $row['laminationadhesive'];
+  $laminationkg = $row['laminationkg'];
+  $laminationremarks = $row['laminationremarks'];
+  $chklaminate = $row['laminationprocess'];
+
+
+
+  $slittingsubstratesize = $row['slittingsubsize'];
+  $slittingqty = $row['slittingqty'];
+  $slittingnoofouts = $row['slittingnoofouts'];
+  $slittingwidth = $row['slittingwidth'];
+  $slittingrepeatlength = $row['slittingrepeatlength'];
+  $slittingwindingdirection = $row['slittingwindingdirection'];
+  $slittingmaxnumofsplices = $row['slittingmaxsplice'];
+  $slittingtapestouse = $row['slittingtapestouse'];
+  $slittingremarks = $row['slittingremarks'];
+
+
+  $cutandbagsubstratesize = $row['slittingremarks'];
+  $cutandbagqty = $row['cutbagqty'];
+  $cutandbagwidth = $row['cutbagwidth'];
+  $cutandbaglength = $row['cutbaglength'];
+  $cutandbaggusset = $row['cutbaggusset'];
+  $cutandbagsealposition = $row['cutbagsealposition'];
+  $cutandbagpcsbundles = $row['cutbagpcsbundle'];
+  $cutandbagothers = $row['cutbagothers'];
+  $cutandbagremarks = $row['cutbagremarks'];
+
+
+}
 //before we store information of our member, we need to start first the session
 
 
@@ -144,7 +223,12 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 <head>
     <title>GBG Enterprise - Dashboard</title>
 </head>
-
+<script>
+$(document).ready(function(){
+    $('select[name="salesorderID"]').val("<?php echo $soid;?>").change();
+    //alert("ready! "+ $('select[name="salesinquiry"]').val());
+});
+</script>
     <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -254,7 +338,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                     <div class="row gy-5">
 
                         <!-- Customer Div -->
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 hidden">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -275,7 +359,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 																   <option selected value="none">Select Sales Order</option>
 																    <?php
 
-																	echo getDropdownExistJO('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
+																	echo getDropdownselect('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
                                   //echo getDropdownselect('tbl_salesorder',"status = 'Approved'",'id','salesorderID');
 
 																	?>
@@ -357,9 +441,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
      																	</div>
      																	<div class="col-sm-4">
      																		<p class="h5 custrep">
-                                          <input type="text" class="form-control joborderID" value="JO-<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                          <input type="hidden" class="form-control IDJO" value="<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-
+                                            JO-<?php echo $joborderIDNUM; ?>
                                         </p>
      																	</div>
      															</div>
@@ -372,8 +454,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
      																	</div>
      																	<div class="col-sm-4">
      																		<p class="h5 custrep">
-                                          <input type="text" class="form-control sodate" readonly="readonly" disabled name="sodate" required  placeholder="Enter Sales Order Date" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
-                                        		</p>
+                                        <?php echo $sodate;  ?>
+                                      </p>
      																	</div>
 
                                       <div class="col-sm-2">
@@ -381,8 +463,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                       </div>
                                       <div class="col-sm-4">
                                         <p class="h5 custrep">
-                                           <input type="text" class="form-control joborderponum" name="joborderponum" readonly="readonly" required  placeholder="Enter PONumber" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                          </p>
+                                           <?php echo $ponumber;  ?>
+                                           </p>
                                       </div>
      															</div>
 
@@ -393,8 +475,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                      </div>
                                      <div class="col-sm-4">
                                        <p class="h5 custrep">
-                                         <input type="text" class="form-control jodate" readonly="readonly" name="jodate" required  placeholder="Enter Job Order Date" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
-                                          </p>
+                                        <?php echo $jodate;  ?>  </p>
                                      </div>
 
                                      <div class="col-sm-2">
@@ -402,8 +483,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                      </div>
                                      <div class="col-sm-4">
                                        <p class="h5 custrep">
-                                         <input type="text" class="form-control jodeadline" readonly="readonly" name="jodeadline" required  placeholder="Enter Job Order Deadline" aria-label="Purchase Order Date" aria-describedby="basic-addon2"  >
-                                            </p>
+                                        <?php echo $jodeadline;  ?>    </p>
                                      </div>
                                  </div>
 
@@ -414,18 +494,9 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
   																	</div>
   																	<div class="col-sm-4">
   																		<p class="h5 custrep">
-                                        <input type="text" class="form-control joborderqty" name="joborderqty" required  placeholder="Enter Quantity" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-    																		</p>
+                                        <?php echo $joborderqty;  ?>  <?php echo $qtytype;  ?>
+                                      </p>
   																	</div>
-  																	<div class="col-sm-2">
-                                      <select class="form-control form-select qtytype" name="qtytype" id = "qtytype" aria-label="Default select example">
-      																   <option selected value="none">Select Quantity Type</option>
-      																  <option selected value="Pcs">PCS</option>
-                                        <option selected value="Meters">Meters</option>
-                                        <option selected value="Kgs">KG</option>
-      																</select>
-  																	</div>
-
   															</div>
 
                                 <div class="form-group row">
@@ -433,7 +504,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                     <p>Remarks</p>
                                   </div>
                                   <div class="col-sm-8">
-                                    <textarea class="form-control joborderremarks" name="joborderremarks" required="" placeholder="Enter remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+                                    <?php echo $joborderremarks;  ?>
                                   </div>
 
                               </div>
@@ -450,6 +521,10 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
   								</div>
   							</div>
   					</div>
+
+
+
+
 
 
 
@@ -477,34 +552,12 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
                                                        ?>
                                                  </select> -->
-                                                  <div class="col-lg-1">
-                                                    <p>Material</p>
-                                                  </div>
-
-                                                 <div class="col-lg-3">
-                                                   <select class="form-control selecttable"	id="inv" >
-                                                    <?php
-
-                                                         echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
-
-                                                         ?>
-                                                   </select>
-                                                 </div>
-
-                                                 <div class="col-lg-1">
-                                                   <p>Quantity:</p>
-                                                 </div>
-                                                 <div class="col-lg-3">
-                                                   <input type="number" class="form-control jomatqty" id="jomatqty" name="jomatqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
-                                                 </div>
 
 
-                                                 <div class="col-lg-2">
-                                                   <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="addMaterialjo(); return false"><i class="far fa-plus-square"></i> Add Item</a>
-                                                 </div>
 
 
-                                                 <div class="row gy-5"></div>
+
+                                                
                                                   <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
                                                    {
 
@@ -537,7 +590,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                          <tr>
                                                      <td><?php echo $itemarrayjoborder[$a]; ?> </td>
                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-                                                     <td><?php echo $itemarrayquantity[$a]; ?> </td>
+                                                     <td><?php echo '' ?> </td>
                                                      <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
                                                          </tr>
 
@@ -589,15 +642,15 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
   																	</div>
   																	<div class="col-sm-4">
   																		<p class="h5 custrep">
-                                        <input type="text" class="form-control extrusionsubstratesize" name="extrusionsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-    																		</p>
+                                      <?php echo $extrusionsubstratesize;  ?>
+                                    	</p>
   																	</div>
   																	<div class="col-sm-2">
   																		<p>Quantity</p>
   																	</div>
   																	<div class="col-sm-4">
-                                      <input type="text" class="form-control extrutionqty" name="extrutionqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
-                                  </div>
+                                      <?php echo $extrutionqty;  ?>
+                                      </div>
                                 </div>
 
 
@@ -606,7 +659,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                     <p>Material Blending</p>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control extrutionmaterialblend" name="extrutionmaterialblend" required  placeholder="Enter Material Blending" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                    <?php echo $extrutionmaterialblend;  ?>
                                 </div>
 
                               </div>
@@ -616,21 +669,48 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
                                <div class="card-body">
 
+                                <?php
 
-                                 <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" value="onesideprinting" name="chkextrusion[]" id="onesideprinting">
-                                   <label class="form-check-label" for="flexCheckDefault">
-                                   One Side Printing
-                                   </label>
-                                 </div>
+                                $str_arr = explode (",", $chkextrusion);
+                                if (in_array("onesideprinting", $str_arr))
+                                {
+                                  echo '<div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
+                                  <label class="form-check-label" for="flexCheckDefault">
+                                  One Side Printing
+                                  </label>
+                                  </div>';
+                                }
+                                else
+                                {
+                                  echo '<div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                  <label class="form-check-label" for="flexCheckDefault">
+                                  One Side Printing
+                                  </label>
+                                  </div>';
+                                }
 
-                                 <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" value="bothsideprinting" name="chkextrusion[]" id="bothsideprinting">
-                                   <label class="form-check-label" for="flexCheckDefault">
-                                   Both Side Printing
-                                   </label>
-                                 </div>
+                                if (in_array("bothsideprinting", $str_arr))
+                                {
+                                  echo '<div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
+                                  <label class="form-check-label" for="flexCheckDefault">
+                                  Both Side Printing
+                                  </label>
+                                  </div>';
+                                }
+                                else
+                                {
+                                  echo '<div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                  <label class="form-check-label" for="flexCheckDefault">
+                                  Both Side Printing
+                                  </label>
+                                  </div>';
+                                }
 
+                                 ?>
 
                              </div>
 
@@ -641,7 +721,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 																		<p>Remarks</p>
 																	</div>
 																	<div class="col-sm-8">
-																		<textarea class="form-control extrusionremarks" name="extrusionremarks" required="" placeholder="Enter remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+                                      <?php echo $extrusionremarks;  ?>
 																	</div>
 
 															</div>
@@ -685,14 +765,14 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 																	</div>
 																	<div class="col-sm-4">
 																		<p class="h5 custrep">
-                                      <input type="text" class="form-control printingsubstratesize" name="printingsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                    <?php echo $printingsubstratesize;  ?>
   																		</p>
 																	</div>
 																	<div class="col-sm-2">
 																		<p>Quantity</p>
 																	</div>
 																	<div class="col-sm-4">
-                                    <input type="text" class="form-control printingqty" name="printingqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                    <?php echo $printingqty;  ?>
                                 </div>
 
 
@@ -700,36 +780,93 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
                                     <div class="card-body">
 
+                                      <?php
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="onesideprinting" name="chkprint[]" id="onesideprinting">
+
+
+                                      $str_arr2= explode (",", $chkprint);
+
+                                      if (in_array("onesideprinting", $str_arr2))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         One Side Printing
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        One Side Printing
+                                        </label>
+                                        </div>';
+                                      }
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="bothsideprinting" name="chkprint[]" id="bothsideprinting">
+                                      if (in_array("bothsideprinting", $str_arr2))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Both Side Printing
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Both Side Printing
+                                        </label>
+                                        </div>';
+                                      }
 
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="reverseprint" name="chkprint[]" id="reverseprint">
+                                      if (in_array("reverseprint", $str_arr2))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Reverse Print
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Reverse Print
+                                        </label>
+                                        </div>';
+                                      }
 
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="surfraceprint" name="chkprint[]" id="surfraceprint">
+                                      if (in_array("surfraceprint", $str_arr2))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Surface Print
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        Surface Print
+                                        </label>
+                                        </div>';
+                                      }
+
+                                       ?>
+
+
 
                                   </div>
 
@@ -739,8 +876,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                   <p>Cylinder Winding Direction</p>
                                 </div>
                                 <div class="col-sm-4">
-                                  <input type="text" class="form-control printingwindingdirection" name="printingwindingdirection" required  placeholder="Enter Cylinder Winding Direction" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
-                              </div>
+                                      <?php echo $printingwindingdirection;  ?>
+                                </div>
 															</div>
 
 													<!-- END OF BAG FORM -->
@@ -782,7 +919,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 																	</div>
 																	<div class="col-sm-4">
 																		<p class="h5 custrep">
-                                      <input type="text" class="form-control laminationsubstratesize" name="laminationsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                          <?php echo $laminationsubstratesize;  ?>
   																		</p>
 																	</div>
 
@@ -792,20 +929,52 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
                                     <div class="card-body">
 
+                                      <?php
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="gplamination" name="chklaminate[]" id="GP">
+                                      $str_arr3= explode (",", $chklaminate);
+
+                                      if (in_array("gplamination", $str_arr3))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         GP
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        GP
+                                        </label>
+                                        </div>';
+                                      }
 
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="mplamination" name="chklaminate[]" id="MP">
+                                      if (in_array("mplamination", $str_arr3))
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" id="extrusion" disabled="disabled" checked="checked">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         MP
                                         </label>
-                                      </div>
+                                        </div>';
+                                      }
+                                      else
+                                      {
+                                        echo '<div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="extrusion" name="chkpext[]" disabled="disabled" id="extrusion" >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        MP
+                                        </label>
+                                        </div>';
+                                      }
+
+
+
+
+                                       ?>
 
                                   </div>
 
@@ -815,13 +984,13 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                   <p>Adhesive:</p>
                                 </div>
                                 <div class="col-sm-4">
-                                  <input type="text" class="form-control laminationadhesive" name="laminationadhesive" required  placeholder="Enter Adhesive" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
-                              </div>
+                                  <?php echo $laminationadhesive;  ?>
+                                  </div>
                                 <div class="col-sm-2">
                                   <p>KG:</p>
                                 </div>
                                 <div class="col-sm-3">
-                                  <input type="text" class="form-control laminationkg" name="laminationkg" required  placeholder="Enter KG" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                    <?php echo $laminationkg;  ?>
                                 </div>
 													</div>
 
@@ -831,7 +1000,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                               <p>Remarks:</p>
                             </div>
                             <div class="col-sm-4">
-                              <textarea class="form-control laminationremarks" name="laminationremarks" required="" placeholder="Enter Remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+                                <?php echo $laminationremarks;  ?>
                                 </div>
                           </div>
 													<!-- END OF BAG FORM -->
@@ -875,8 +1044,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                   </div>
                                   <div class="col-sm-4">
                                     <p class="h5 custrep">
-                                      <input type="text" class="form-control slittingsubstratesize" name="slittingsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                      </p>
+                                      <?php echo $slittingsubstratesize;  ?>
+                                    </p>
                                   </div>
 
                                   <div class="col-sm-2">
@@ -884,7 +1053,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                   </div>
                                   <div class="col-sm-4">
                                     <p class="h5 custrep">
-                                      <input type="text" class="form-control slittingqty" name="slittingqty" required  placeholder="Enter Quantity" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                      <?php echo $slittingqty;  ?>
                                       </p>
                                   </div>
                                 </div>
@@ -895,7 +1064,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                     </div>
                                     <div class="col-sm-4">
                                       <p class="h5 custrep">
-                                          <input type="text" class="form-control slittingnoofouts" name="slittingnoofouts" required  placeholder="Enter Number of Outs" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                        <?php echo $slittingnoofouts;  ?>
                                         </p>
                                     </div>
 
@@ -904,7 +1073,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                     </div>
                                     <div class="col-sm-4">
                                       <p class="h5 custrep">
-                                        <input type="text" class="form-control slittingwidth" name="slittingwidth" required  placeholder="Enter Slitting Width" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                        <?php echo $slittingwidth;  ?>
                                         </p>
                                     </div>
                                   </div>
@@ -915,7 +1084,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                       </div>
                                       <div class="col-sm-4">
                                         <p class="h5 custrep">
-                                            <input type="text" class="form-control slittingrepeatlength" name="slittingrepeatlength" required  placeholder="Enter Repeat Length" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                          <?php echo $slittingrepeatlength;  ?>
                                           </p>
                                       </div>
 
@@ -924,8 +1093,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                       </div>
                                       <div class="col-sm-4">
                                         <p class="h5 custrep">
-                                          <input type="text" class="form-control slittingwindingdirection" name="slittingwindingdirection" required  placeholder="Enter Winding Direction" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                          </p>
+                                          <?php echo $slittingwindingdirection;  ?>
                                       </div>
                                     </div>
 
@@ -935,7 +1103,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                         </div>
                                         <div class="col-sm-4">
                                           <p class="h5 custrep">
-                                              <input type="text" class="form-control slittingmaxnumofsplices" name="slittingmaxnumofsplices" required  placeholder="Enter max # of splices" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                              <?php echo $slittingmaxnumofsplices;  ?>
                                             </p>
                                         </div>
 
@@ -944,7 +1112,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                         </div>
                                         <div class="col-sm-4">
                                           <p class="h5 custrep">
-                                            <input type="text" class="form-control slittingtapestouse" name="slittingtapestouse" required  placeholder="Enter tapes to use" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                          <?php echo $slittingtapestouse;  ?>
                                             </p>
                                         </div>
                                       </div>
@@ -954,7 +1122,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                         <p>Remarks:</p>
                                       </div>
                                       <div class="col-sm-8">
-                                        <textarea class="form-control slittingremarks" name="slittingremarks" required="" placeholder="Enter Remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
+                                        <?php echo $slittingremarks;  ?>
                                       </div>
                                     </div>
                               </div>
@@ -992,8 +1160,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                         </div>
                                         <div class="col-sm-4">
                                           <p class="h5 custrep">
-                                            <input type="text" class="form-control cutandbagsubstratesize" name="cutandbagsubstratesize" required  placeholder="Enter Substrate Size" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                            </p>
+                                            <?php echo $cutandbagsubstratesize;  ?>
+                                          </p>
                                         </div>
 
                                         <div class="col-sm-2">
@@ -1001,7 +1169,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                         </div>
                                         <div class="col-sm-4">
                                           <p class="h5 custrep">
-                                            <input type="text" class="form-control cutandbagqty" name="cutandbagqty" required  placeholder="Enter Quantity" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                            <?php echo $cutandbagqty;  ?>
                                             </p>
                                         </div>
                                       </div>
@@ -1012,7 +1180,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                           </div>
                                           <div class="col-sm-4">
                                             <p class="h5 custrep">
-                                                <input type="text" class="form-control cutandbagwidth" name="cutandbagwidth" required  placeholder="Enter Bag Width" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+                                                <?php echo $cutandbagwidth;  ?>
                                               </p>
                                           </div>
 
@@ -1021,8 +1189,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                           </div>
                                           <div class="col-sm-4">
                                             <p class="h5 custrep">
-                                              <input type="text" class="form-control cutandbaglength" name="cutandbaglength" required  placeholder="Enter Bag Length" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                              </p>
+                                              <?php echo $cutandbaglength;  ?>
+                                            </p>
                                           </div>
                                         </div>
 
@@ -1032,8 +1200,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                             </div>
                                             <div class="col-sm-4">
                                               <p class="h5 custrep">
-                                                  <input type="text" class="form-control cutandbaggusset" name="cutandbaggusset" required  placeholder="Enter Bag Gusset" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                                </p>
+                                                <?php echo $cutandbaggusset;  ?>
+                                              </p>
                                             </div>
 
                                             <div class="col-sm-2">
@@ -1041,8 +1209,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                             </div>
                                             <div class="col-sm-4">
                                               <p class="h5 custrep">
-                                                <input type="text" class="form-control cutandbagsealposition" name="cutandbagsealposition" required  placeholder="Enter Seal Position" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                                </p>
+                                                <?php echo $cutandbagsealposition;  ?>
+                                              </p>
                                             </div>
                                           </div>
 
@@ -1052,8 +1220,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                               </div>
                                               <div class="col-sm-4">
                                                 <p class="h5 custrep">
-                                                    <input type="text" class="form-control cutandbagpcsbundles" name="cutandbagpcsbundles" required  placeholder="Enter pcs/bundles" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
-                                                  </p>
+                                                  <?php echo $cutandbagpcsbundles;  ?>
+                                                </p>
                                               </div>
 
                                             </div>
@@ -1063,8 +1231,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                   <p>Others:</p>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                  <textarea class="form-control cutandbagothers" name="cutandbagothers" required="" placeholder="Enter Others" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
-                                                </div>
+                                                  <?php echo $cutandbagothers;  ?>
+                                              </div>
                                               </div>
 
                                         <div class="form-group row"
@@ -1072,8 +1240,8 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                               <p>Remarks:</p>
                                             </div>
                                             <div class="col-sm-8">
-                                              <textarea class="form-control cutandbagremarks" name="cutandbagremarks" required="" placeholder="Enter Remarks" aria-label="Delivery Terms" aria-describedby="basic-addon2"></textarea>
-                                            </div>
+                                              <?php echo $cutandbagremarks;  ?>
+                                          </div>
                                           </div>
                                     </div>
 

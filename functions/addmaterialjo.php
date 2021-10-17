@@ -69,7 +69,7 @@ require_once __DIR__."/allfunctions.php";
 																			echo '<tr>';
 																			echo '<td>' . $itemarrayjoborder[$a] . '</td>';
 																			echo '<td>' . strtoupper($MaterialListDetails["material_name"]) . '</td>';
-																			echo '<td>' . $itemarrayquantity[0] . '</td>';
+																			echo '<td>' . $itemarrayquantity[$a] . '</td>';
 																			echo '<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo('. $a . ');
 																			return false"><i class="far fa-trash-alt"></i></a></td>';
 																			echo '</tr>';
