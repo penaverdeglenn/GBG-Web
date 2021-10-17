@@ -36,6 +36,14 @@ else
 {
  $itemarrayjoborder = array();
 }
+if(isset($_SESSION["joborderitemqty"]))
+{
+  $itemarrayquantity = $_SESSION["joborderitemqty"];
+}
+else
+{
+  $itemarrayquantity = array();
+}
 
 if(empty($_SESSION["MEMBER_ID"]) && empty($_SESSION["TYPE"]))
 {
@@ -487,7 +495,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                    <p>Quantity:</p>
                                                  </div>
                                                  <div class="col-lg-3">
-                                                   <input type="number" class="form-control jomatqty" name="jomatqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                                   <input type="number" class="form-control jomatqty" id="jomatqty" name="jomatqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
                                                  </div>
 
 
@@ -500,7 +508,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                   <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
                                                    {
 
-                                                     echo $itemarrayjoborder[$a];
+                                                     //echo $itemarrayjoborder[$a];
                                                    }
                                                      ?>
 
@@ -529,7 +537,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                          <tr>
                                                      <td><?php echo $itemarrayjoborder[$a]; ?> </td>
                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
+                                                     <td><?php echo '' ?> </td>
                                                      <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
                                                          </tr>
 

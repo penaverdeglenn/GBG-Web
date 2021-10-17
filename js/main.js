@@ -2170,39 +2170,41 @@ function addMaterial()
 
 function addMaterialjo()
 {
-  var inv = document.getElementById('inv').value; inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
-  //var invname =	$('#inv option:selected').text();
+	var jomaqtytxt = document.getElementById('jomatqty').value;
+	var inv = document.getElementById('inv').value; 
+	inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
+	//var invname =	$('#inv option:selected').text();
 
-  var checker=1;
-  if (inv == "")
-  {
-        document.getElementById("inv").style.border='1px solid red';
-		checker=3;
-  }
-  else
-  {
-        document.getElementById("inv").style.border='1px solid #c8c8c8';
-  }
-
-
-
-
-  document.getElementById('inv').value = "";
+	var checker=1;
+	if (inv == "")
+	{
+			document.getElementById("inv").style.border='1px solid red';
+			checker=3;
+	}
+	else
+	{
+			document.getElementById("inv").style.border='1px solid #c8c8c8';
+	}
 
 
-  if (checker==1)
-  {
 
-		$.get('functions/addmaterialjo.php?inv='+inv, function(data) {
-			//alert(data);
-			$(".txtResult2").html(data);
 
-	     });
-  }
-  else
-  {
-     alert("ERROR: Item already added.");
-  }
+	document.getElementById('inv').value = "";
+
+
+	if (checker==1)
+	{
+			//alert(jomaqtytxt);
+			$.get('functions/addmaterialjo.php?inv='+inv+'&jomaqtytxt='+jomaqtytxt, function(data) {
+				alert(data);
+				$(".txtResult2").html(data);
+
+			});
+	}
+	else
+	{
+		alert("ERROR: Item already added.");
+	}
 
 }
 
