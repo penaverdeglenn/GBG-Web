@@ -557,7 +557,7 @@ $(document).ready(function(){
 
 
 
-                                                
+
                                                   <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
                                                    {
 
@@ -1280,7 +1280,7 @@ $(document).ready(function(){
 
 						</div>
 						<div class="col-lg-6">
-						<button type="button" class="btn btn-success btn-lg btn-block submitjoborder" >Submit</button>
+					<!-- 	<button type="button" class="btn btn-success btn-lg btn-block submitjoborder" >Submit</button> -->
 
 						</div>
 						</form>
