@@ -16,7 +16,7 @@ require_once __DIR__."/allfunctions.php";
 	//$si_id = getRecord('sales_inquiry_id_for_quote','tbl_quotation','quotation_id ='.$qid);
     $strSQL = "SELECT * FROM tbl_salesorder WHERE status='Approved' AND id=".$qid;
     $rs1 = mysqli_query($con,$strSQL) or die (mysqli_error($con));
-
+		mysqli_close($con);
 
     $row1 = mysqli_fetch_array($rs1 ,MYSQLI_ASSOC);
 //	$cust_id = $row1["customer_id"];
@@ -25,6 +25,6 @@ require_once __DIR__."/allfunctions.php";
 	  $POnumber = $row1["POnumber"];
 
 		echo $POnumber;
- 		podatemysqli_close($con);
+
 	}
 ?>
