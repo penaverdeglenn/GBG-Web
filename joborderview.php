@@ -100,7 +100,7 @@ $con = mysqli_connect(get_dbserver(),get_dbuser(),get_dbpassword(),get_dbname())
 //$strSQL = "SELECT distinct a.itemid AS itemid,b.itemname AS itemname, b.uomid AS uomid, b.catid AS catid ";
 //$strSQL.= "FROM 10_bom a, 8_inventory b ";
 //$strSQL.= "WHERE a.status=1 AND b.status=1 AND a.itemid=b.id ORDER BY itemname" ;
-$strSQL = "SELECT * FROM tbl_joborder";
+$strSQL = "SELECT * FROM tbl_joborder WHERE id=".$joborderid;;
 
 $rs = mysqli_query($con,$strSQL) or die(mysqli_error($con));
 mysqli_close($con);
@@ -110,6 +110,8 @@ while($row=mysqli_fetch_array($rs,MYSQLI_ASSOC)) {
 
 
   $joborderIDNUM = $row['jobordernum'];
+
+
   $salesorderID = $row['salesorder'];
   $productid = $row['productid'];
   $sid = $row['saleinquiryid'];
@@ -120,6 +122,11 @@ while($row=mysqli_fetch_array($rs,MYSQLI_ASSOC)) {
   $qtytype = $row['joborderqtytype'];
   $joborderqty = $row['joborderqty'];
   $joborderremarks = $row['joborderremarks'];
+
+
+
+  $jobordermaterialid = $row['jobordermaterialid'];
+  $jobordermaterialqty = $row['jobordermaterialqty'];
 
 
   $extrusionsubstratesize = $row['extrusionsubsize'];
@@ -226,7 +233,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 <script>
 $(document).ready(function(){
     $('select[name="salesorderID"]').val("<?php echo $soid;?>").change();
-    //alert("ready! "+ $('select[name="salesinquiry"]').val());
+    //alert(<?php echo $soid;?>);
 });
 </script>
     <body id="page-top">
@@ -558,11 +565,11 @@ $(document).ready(function(){
 
 
 
-                                                  <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
-                                                   {
+                                                  <?php
 
-                                                     //echo $itemarrayjoborder[$a];
-                                                   }
+                                                  $jobordermaterialiddata = explode(",",$jobordermaterialid);
+                                                  $jobordermaterialqtydata = explode(",",$jobordermaterialqty);
+
                                                      ?>
 
                                              <!--	<button class="btn btn-primary test"  type="button" >Submit</button>			-->
@@ -574,24 +581,23 @@ $(document).ready(function(){
                                                        <thead>
                                                          <th>ID</th>
                                                          <th>Material Name</th>
-                                                         <th>Quantity</th>
-                                                         <th></th>
+
                                                        </thead>
                                                      <tbody>
                                                      <?php
-                                                     for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                     for($a=0;$a<count($jobordermaterialiddata);$a++)
                                                      {
-                                                       $MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
+                                                       $MaterialListDetails = MaterialListDetails($jobordermaterialiddata[$a]);
 
 
                                                        if($MaterialListDetails["material_id"]!="")
                                                        {
                                                      ?>
                                                          <tr>
-                                                     <td><?php echo $itemarrayjoborder[$a]; ?> </td>
+                                                     <td><?php echo $jobordermaterialiddata[$a]; ?> </td>
                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-                                                     <td><?php echo '' ?> </td>
-                                                     <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
+                                                     <td><?php echo $jobordermaterialqtydata[$a]; ?> </td>
+
                                                          </tr>
 
 

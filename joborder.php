@@ -482,7 +482,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                   </div>
 
                                                  <div class="col-lg-3">
-                                                   <select class="form-control selecttable"	id="inv" >
+                                                   <select class="form-control iteminv selecttable"	id="iteminv" name="iteminv" >
                                                     <?php
 
                                                          echo getDropdown('tbl_material',"material_status='Active'",'material_id',"material_name");
@@ -495,7 +495,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                    <p>Quantity:</p>
                                                  </div>
                                                  <div class="col-lg-3">
-                                                   <input type="number" class="form-control jomatqty" id="jomatqty" name="jomatqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
+                                                   <input type="number" class="form-control itemqty" id="itemqty" name="itemqty" required  placeholder="Enter Quantity" aria-label="Quantity" aria-describedby="basic-addon2" value="" >
                                                  </div>
 
 
@@ -505,11 +505,18 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                                  <div class="row gy-5"></div>
-                                                  <?php  for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                  <?php
+                                                  //  echo count($itemarrayjoborder);
+                                                  //  print_r(array_filter($itemarrayjoborder));
+                                                  //  print_r(array_filter($itemarrayquantity));
+                                      /*            for($a=0;$a<count($itemarrayjoborder);$a++)
                                                    {
-
-                                                     //echo $itemarrayjoborder[$a];
-                                                   }
+                                                     echo "Item";
+                                                    echo $itemarrayjoborder[$a];
+                                                     echo "QTY";
+                                                    echo $itemarrayquantity[$a];
+                                                    echo "<br>";
+                                                  } */
                                                      ?>
 
                                              <!--	<button class="btn btn-primary test"  type="button" >Submit</button>			-->
@@ -526,19 +533,22 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                                        </thead>
                                                      <tbody>
                                                      <?php
-                                                     for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                     //echo count($itemarrayjoborder);
+                                                    // for($a=0;$a<count($itemarrayjoborder);$a++)
+                                                     foreach ($itemarrayjoborder as $key=>$value)
                                                      {
-                                                       $MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
+
+                                                       $MaterialListDetails = MaterialListDetails($itemarrayjoborder[$key]);
 
 
                                                        if($MaterialListDetails["material_id"]!="")
                                                        {
                                                      ?>
                                                          <tr>
-                                                     <td><?php echo $itemarrayjoborder[$a]; ?> </td>
+                                                     <td><?php echo $itemarrayjoborder[$key]; ?> </td>
                                                      <td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-                                                     <td><?php echo $itemarrayquantity[$a]; ?> </td>
-                                                     <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
+                                                     <td><?php echo $itemarrayquantity[$key]; ?> </td>
+                                                     <td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $key; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
                                                          </tr>
 
 
@@ -618,14 +628,14 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                  <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" value="onesideprinting" name="chkextrusion[]" id="onesideprinting">
+                                   <input class="form-check-input radio" type="radio" value="onesideprinting" name="chkextrusion[]" id="onesideprinting">
                                    <label class="form-check-label" for="flexCheckDefault">
                                    One Side Printing
                                    </label>
                                  </div>
 
                                  <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" value="bothsideprinting" name="chkextrusion[]" id="bothsideprinting">
+                                   <input class="form-check-input" type="radio" value="bothsideprinting" name="chkextrusion[]" id="bothsideprinting">
                                    <label class="form-check-label" for="flexCheckDefault">
                                    Both Side Printing
                                    </label>
@@ -702,14 +712,14 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="onesideprinting" name="chkprint[]" id="onesideprinting">
+                                        <input class="form-check-input" type="radio" value="onesideprinting" name="chkprint[]" id="onesideprinting">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         One Side Printing
                                         </label>
                                       </div>
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="bothsideprinting" name="chkprint[]" id="bothsideprinting">
+                                        <input class="form-check-input" type="radio" value="bothsideprinting" name="chkprint[]" id="bothsideprinting">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Both Side Printing
                                         </label>
@@ -717,7 +727,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="reverseprint" name="chkprint[]" id="reverseprint">
+                                        <input class="form-check-input" type="radio" value="reverseprint" name="chkprint[]" id="reverseprint">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Reverse Print
                                         </label>
@@ -725,7 +735,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="surfraceprint" name="chkprint[]" id="surfraceprint">
+                                        <input class="form-check-input" type="radio" value="surfraceprint" name="chkprint[]" id="surfraceprint">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         Surface Print
                                         </label>
@@ -794,14 +804,14 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="gplamination" name="chklaminate[]" id="GP">
+                                        <input class="form-check-input" type="radio" value="gplamination" name="chklaminate[]" id="GP">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         GP
                                         </label>
                                       </div>
 
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="mplamination" name="chklaminate[]" id="MP">
+                                        <input class="form-check-input" type="radio" value="mplamination" name="chklaminate[]" id="MP">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         MP
                                         </label>

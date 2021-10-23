@@ -235,7 +235,7 @@ else
 
 
 																			   echo '<td>
-																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="joborderview.php?action=view&custid='.$salesinquirycustomer . '&soid='. $row['saleinquiryid'] .'&id='. $row['id'] .'"><i class="far fa-eye"></i></a>
+																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="joborderview.php?action=view&custid='.$salesinquirycustomer . '&soid='. $row['salesorder'] .'&id='. $row['id'] .'"><i class="far fa-eye"></i></a>
 																						';
 
 																				 /*echo '

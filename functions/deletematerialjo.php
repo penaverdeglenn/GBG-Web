@@ -9,18 +9,28 @@ require_once __DIR__."/allfunctions.php";
 	if(isset($_SESSION["joborderitemarrayinventory"]))
 	{
 	    $itemarrayjoborder = $_SESSION["joborderitemarrayinventory"];
+		$itemarrayquantity = $_SESSION["joborderitemqty"];
 	}
 	else
 	{
 	 $itemarrayjoborder = array();
+	 $itemarrayquantity = array();
 	}
 
 
 $num=$_GET["num"];
-unset($itemarrayjoborder[$num]);
+
+echo $num;
+//unset($itemarrayjoborder[$num]);
+//unset($itemarrayquantity[$num]);
 //$itemarray[$num]= "";
 //$_SESSION["joborderitemarrayinventory"]=$itemarrayjoborder;
 unset($_SESSION["joborderitemarrayinventory"][$num]);
+unset($_SESSION["joborderitemqty"][$num]);
+//$_SESSION["joborderitemarrayinventory"]=$itemarrayjoborder;
+//$_SESSION["joborderitemqty"]=$itemarrayquantity;
+$itemarrayjoborder = $_SESSION["joborderitemarrayinventory"];
+$itemarrayquantity = $_SESSION["joborderitemqty"];
 ?>
 
 															<table class="table table-bordered jomaterialtable" id="datatable" width="100%" cellspacing="0">
@@ -32,9 +42,9 @@ unset($_SESSION["joborderitemarrayinventory"][$num]);
 																		</thead>
 																	<tbody>
 																	<?php
-																	for($a=0;$a<count($itemarrayjoborder);$a++)
+																	foreach ($itemarrayjoborder as $key=>$value)
 																	{
-																		$MaterialListDetails = MaterialListDetails($itemarrayjoborder[$a]);
+																		$MaterialListDetails = MaterialListDetails($itemarrayjoborder[$key]);
 
 
 																		if($MaterialListDetails["material_id"]!="")
@@ -43,10 +53,10 @@ unset($_SESSION["joborderitemarrayinventory"][$num]);
 
 
 																					<tr>
-																	<td><?php echo $itemarrayjoborder[$a]; ?> </td>
+																	<td><?php echo $itemarrayjoborder[$key]; ?> </td>
 																	<td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-																	<td><?php echo strtoupper($MaterialListDetails["material_name"]); ?> </td>
-																	<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $a; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
+																	<td><?php echo $itemarrayquantity[$key]; ?> </td>
+																	<td> <a href="#"  class="btn btn-sm btn-primary shadow-sm" onclick="deleteMaterialjo(<?php echo $key; ?>); return false"><i class="far fa-trash-alt"></i></a></td>
 																			</tr>
 
 

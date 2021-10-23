@@ -9,7 +9,6 @@ $(document).ready(function() {
       $('.submitjoborder').click(function() {
    //alert("Test");
    var chker = 0
-
 	 var joborderIDNUM = $('.IDJO').val();
    var salesorderid = $('select[name=salesorderID] option').filter(':selected').val();
 	 //alert(salesorderid);
@@ -238,7 +237,7 @@ $(document).ready(function() {
 
      if(chker == 0)
      {
-        // alert(datastring);
+        //alert(datastring);
 
 
          $.ajax({
@@ -2170,42 +2169,60 @@ function addMaterial()
 
 function addMaterialjo()
 {
-	var jomaqtytxt = document.getElementById('jomatqty').value;
-	var inv = document.getElementById('inv').value;
-	inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
+	//var itemqty = document.getElementById('itemqty').value;
+	//var inv = document.getElementById('inv').value;
+  var itemqty = $('.itemqty').val();
+  //var inv = $('select[name=iteminv] option').filter(':selected').val();
+  var inv = $("#iteminv option:selected").val();
+	//inv=inv.replace(/#/ig,"").replace(/&/ig,"").replace(/'"/ig,"");
 	//var invname =	$('#inv option:selected').text();
 
 	var checker=1;
 	if (inv == "")
 	{
-			document.getElementById("inv").style.border='1px solid red';
+			//document.getElementById("inv").style.border='1px solid red';
+    //  alert("Select Material");
+			checker=2;
+	}
+	else
+	{
+			//document.getElementById("inv").style.border='1px solid #c8c8c8';
+	}
+
+  if (itemqty == "")
+	{
+			//document.getElementById("inv").style.border='1px solid red';
+      //alert("Enter Quantity");
 			checker=3;
 	}
 	else
 	{
-			document.getElementById("inv").style.border='1px solid #c8c8c8';
+		//	document.getElementById("inv").style.border='1px solid #c8c8c8';
 	}
 
-
-
-
-	document.getElementById('inv').value = "";
+//alert(inv);
+//alert(itemqty);
+	//document.getElementById('inv').value = "";
 
 
 	if (checker==1)
 	{
 			//alert(jomaqtytxt);
-			$.get('functions/addmaterialjo.php?inv='+inv+'&jomaqtytxt='+jomaqtytxt, function(data) {
+			$.get('functions/addmaterialjo.php?inv='+inv+'&itemqty='+itemqty, function(data) {
 				//alert(data);
+        //alert(data);
 				$(".txtResult2").html(data);
 
 			});
 	}
-	else
+	else if (checker==2)
 	{
-		alert("ERROR: Item already added.");
+		alert("ERROR: Select Material.");
 	}
-
+  else if (checker==3)
+	{
+		alert("ERROR: Enter Quantity.");
+	}
 }
 
 

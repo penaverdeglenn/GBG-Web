@@ -20,9 +20,10 @@ else
 	$fname = $_SESSION['FIRST_NAME'];
 }
 
-$jobordermaterialqty = "";
-$jobordermaterialid = "";
 
+
+$jobordermaterialqty = implode(",",$_SESSION['joborderitemqty']);
+$jobordermaterialid = implode(",",$_SESSION['joborderitemarrayinventory']);
 
 $dateToday = date('Y-m-d');
 //echo $materialdata;
@@ -80,6 +81,7 @@ $cutandbagsealposition = $_POST['cutandbagsealposition'];
 $cutandbagpcsbundles = $_POST['cutandbagpcsbundles'];
 $cutandbagothers = $_POST['cutandbagothers'];
 $cutandbagremarks = $_POST['cutandbagremarks'];
+
 
 
 $status = "Added";
