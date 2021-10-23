@@ -714,6 +714,58 @@ $(document).ready(function() {
 
   });
 
+//job oder assign
+$(document).ready(function() {
+
+
+	$(document).on('click', '.joborderassign', function(){
+	 //   $('.quotassign').click(function() {
+
+
+		 var joid = $('.joid').val();
+		 var assignperson = $('.assignperson').val();
+		 var datastring = "";
+		
+	
+		 if (assignperson!="none")
+		{
+		//alert(assignperson);
+		 datastring = datastring + "joid="+joid;
+		 datastring = datastring + "&assignedto="+assignperson;
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/joborderassign.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   {
+											 //alert(result);
+											 if(result == 1)
+											 {
+
+												 alert("Job Order Approval Assigned");
+												 window.location = "joborderlist.php";
+
+											 }
+											 else if(result == 0)
+											 {
+												 alert("Failed to assign Job Order Approval");
+												 window.location = "joborderlist.php";
+											 }
+											 
+									   }
+						 });
+
+
+		 }
+		}); 
+
+
+  });
+
+
+
+
  //sales order approver 1
  $(document).ready(function() {
 
@@ -1289,6 +1341,91 @@ $(document).ready(function() {
  });
 
 
+//approve job order
+ $(document).ready(function() {
+
+
+	//$('.approveddata').submit(function() {
+		$('.approvejoborder').click(function() {
+			//alert("Test");
+		 var joid = $('.joidapprove').val();
+		 var assignperson =  $('.assignpersonapprove').val();
+		 var datastring = "";
+		 datastring = datastring + "joid="+joid;
+		 datastring = datastring + "&assignperson="+assignperson;
+		 
+		 $.ajax({
+			type: "POST",
+			url: "functions/joborderapprove.php",
+			data: datastring,
+			success: function(result)
+			{
+				  //alert(result);
+				  if(result == 1)
+				  {
+
+					  alert("Job Order Approved");
+					  window.location = "joborderlist.php";
+
+				  }
+				  else if(result == 0)
+				  {
+					  alert("Failed to approve Job Order");
+					  window.location = "joborderlist.php";
+
+				  }
+			}
+		});
+
+	});
+ 
+ 
+  });
+
+//reject job order
+$(document).ready(function() {
+
+
+	//$('.rejectdata').submit(function() {
+	   //$(document).on('click', '.rejectdatasalesinquiry', function(){
+		  $('.rejectdatajoborder').click(function() {
+		 var sid = $('.joidr').val();
+		 //var reason = $('.reason').val();
+		 var reason = $.trim($('#reason').val());
+		 var datastring = "";
+		 datastring = datastring + "joidr="+sid;
+		 datastring = datastring + "&reason="+reason;
+		 //alert(datastring);
+		 $.ajax({
+									   type: "POST",
+									   url: "functions/joborderreject.php",
+									   data: datastring,
+									   cache: false,
+									   success: function(result)
+									   {
+											 //alert(result);
+											 if(result == 1)
+											 {
+ 
+												 alert("Job Order Rejected");
+												 window.location = "joborderlist.php";
+ 
+											 }
+											 else if(result == 0)
+											 {
+												 alert("Failed to reject Sales Inquiry");
+												 window.location = "joborderlist.php";
+ 
+											 }
+									   }
+		  });
+ 
+ 
+ 
+		});
+ 
+ 
+  });
 
 
  $(document).ready(function() {

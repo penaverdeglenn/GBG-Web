@@ -90,6 +90,8 @@ else
 
 }
 
+
+
 $joborderid = isset($joborderid)?$joborderid:'';
 $action = isset($action)?$action:'';
 
@@ -378,7 +380,7 @@ $(document).ready(function(){
 														</div>
 													</form>
 																<div class="row gy-5"></div>
-
+                                                    
 
 
 
@@ -395,6 +397,116 @@ $(document).ready(function(){
 
 
 					</div>
+        <!-- buttons for approvers and assignee -->
+        <div class="row gy-5">
+							<div class="col-lg-12">
+              <?php
+                if($action=="view")
+                {
+                  echo '<a href="#" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg" onclick=""><i class="fas fa-print fa-sm text-white-50"></i> Print </a>';
+                  echo '&nbsp';
+                  echo '<a href="javascript:history.back();" class="d-none d-sm-inline-block btn btn-lg btn-warning shadow-lg"><i class="fas fa-arrow-left fa-sm text-white-50"></i> Back </a>';
+							    
+                }
+                else
+                {
+                  echo '<a href="#" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg" onclick=""><i class="fas fa-print fa-sm text-white-50"></i> Print </a>';
+                  echo '&nbsp';
+                  echo '<a href="javascript:history.back();" class="d-none d-sm-inline-block btn btn-lg btn-warning shadow-lg"><i class="fas fa-arrow-left fa-sm text-white-50"></i> Back </a>';
+                  echo '&nbsp';
+                  echo '<a href="#" data-toggle="modal" data-target="#assignModal" class="d-none d-sm-inline-block btn btn-lg btn-info shadow-lg"><i class="fas fa-people-arrows fa-sm text-white-50"></i> Assign </a>';
+                  echo '&nbsp';
+                  echo '<a href="#" data-toggle="modal" data-target="#approveModal" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Approve </a>';
+                  echo '&nbsp';
+                  echo '<a href="#" data-toggle="modal" data-target="#rejectModal" class="d-none d-sm-inline-block btn btn-lg btn-danger shadow-lg"><i class="fas fa-address-card fa-sm text-white-50"></i> Reject </a>';
+                }
+              ?>
+              
+              				
+										
+							</div>
+					</div>
+        <!-- assign modal -->
+          <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Assign</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Assign Job Order Approver</div>
+                <div class="modal-footer">
+				<?php
+				?>
+					<select class="form-control form-select assignperson" name="assignperson" aria-label="Default select example">
+																   <option selected value="none">Select employee</option>
+
+			<?php
+																	echo getDropdownuserassign('users',"USER_TYPE = 'Approver 2' AND ACCESS_TYPE LIKE '%Job Order%'",'id',"FIRST_NAME",$memberid);
+
+
+
+             ?>
+					<option  value="Unassigned">Unassigned</option>
+					</select>
+					<input class="joid" type="hidden" id="joid" name="joid" value="<?php echo $joborderid; ?>">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+					<button class="btn btn-primary joborderassign" href="#" >Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Approve Modal-->
+<div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Approve</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+				Are you sure about this action? </div>
+                <div class="modal-footer">
+					<input class="joidapprove" type="hidden" id="joidapprove" name="joidapprove" value="<?php echo $joborderid; ?>">
+					<input class="assignperson" type="hidden" id="assignperson" name="assignperson" value="<?php echo $memberid; ?>">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary approvejoborder" href="#" >Approve</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal-->
+   <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Are you sure about this action?</div>
+                <div class="modal-footer">
+			<!-- 	<form class="user rejectdata" name="rejectdata"  id="rejectdata"> -->
+					<textarea class="form-control reason" id="reason" rows="3"></textarea>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					 <input class="joidr" type="hidden" id="joidr" name="joidr" value="<?php echo $joborderid; ?>">
+                    <button type="button" class="btn btn-primary rejectdatajoborder" href="#" >Reject</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 				<!-- Product and Image Content Row -->
 					<div class="row gy-5">
 							<div class="col-lg-12">

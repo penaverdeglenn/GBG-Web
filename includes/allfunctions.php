@@ -192,7 +192,7 @@ function logindetails(){
   $result .=  '            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>';
   $result .=  '            <div class="modal-footer">';
   $result .=  '                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>';
-  $result .=  '               <a class="btn btn-primary" href="../gbgv2/destroy.php">Logout</a>';
+  $result .=  '               <a class="btn btn-primary" href="../GBG-WEB/destroy.php">Logout</a>';
   $result .=  '            </div>';
   $result .=  '        </div>';
   $result .=  '    </div>';

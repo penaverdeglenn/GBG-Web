@@ -242,32 +242,19 @@ else
 																						<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderview.php?action=approve&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>
 																						';
 																				 */
+                                                                                if ($status=="Waiting for Approval" or $status=="Rejected" or $status=="Approved")
+                                                                                {
+                                                                                    if ($status=="Waiting for Approval" and $memberid== $row['assignedTo'])
+                                                                                    {
+                                                                                        echo '<a type="button" class="btn btn-sm btn-primary shadow-sm" href="joborderview.php?action=approve   &custid='.$salesinquirycustomer . '&soid='. $row['salesorder'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>';
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    echo '<a type="button" class="btn btn-sm btn-primary shadow-sm" href="joborderview.php?action=approve   &custid='.$salesinquirycustomer . '&soid='. $row['salesorder'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>';
+                                                                                    
+                                                                                }
 
-																			  if (!str_contains($type,"Approver"))
-																			  {
-																			  	if(empty($assigned_approver_id))
-																			  	{
-																			  		echo '
-																								<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderapprove.php?action=assign&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>
-																								';
-																			  	}
-																			  }
-																			  else
-																			  {
-
-																			  	if(str_contains($type,'Approver 1') and ($status =="Waiting for Approval"))
-																			  	{
-																			  		echo '
-																					  		<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderapprove.php?action=approve&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>
-																								';
-																			  	}
-																				elseif(str_contains($type,'Approver 2') and ($status== "Pending Approval Level 2"))
-																				{
-																					echo '
-																							<a type="button" class="btn btn-sm btn-primary shadow-sm" href="salesorderapprove2.php?action=approve&custid='.$salesinquirycustomer . '&sid='. $row['salesinquiryID'] .'&qid='. $row['quotationID'] .'&id='. $row['id'] .'"><i class="fas fa-people-arrows"></i></a>
-																								';
-																				}
-																			  }
 																				echo '</td>';
 																				echo '</tr>';
 																	}
