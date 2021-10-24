@@ -360,6 +360,9 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                                           <input type="text" class="form-control joborderID" value="JO-<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
                                           <input type="hidden" class="form-control IDJO" value="<?php echo $joborder; ?>" name="joborderID" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
 
+
+                                          <input type="hidden" class="form-control mfgprocessdata" value="" name="mfgprocessdata" readonly="readonly" required  placeholder="Job Order ID" aria-label="Substrate Size" aria-describedby="basic-addon2" value="" >
+
                                         </p>
      																	</div>
      															</div>
@@ -577,8 +580,10 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
               							</div>
               					</div>
 
+                        
+                        <?php ?>
 
-          <div class="row gy-5">
+          <div class="row gy-5 extrusionpanel hidden">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -674,7 +679,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 					</div>
 
 
-          <div class="row gy-5">
+          <div class="row gy-5 printingpanel hidden">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -771,7 +776,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 					</div>
 
 
-          <div class="row gy-5">
+          <div class="row gy-5 laminationpanel hidden">
 							<div class="col-lg-12">
 								<div class="card border-left-info shadow h-100 py-2">
 									<div class="card-body">
@@ -864,7 +869,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
 
 
 
-          <div class="row gy-5">
+          <div class="row gy-5 slittingpanel hidden">
               <div class="col-lg-12">
                 <div class="card border-left-info shadow h-100 py-2">
                   <div class="card-body">
@@ -981,7 +986,7 @@ $result .= " value='".$row[$param]."'>".$row[$select]."</option>";
                 </div>
 
 
-                <div class="row gy-5">
+                <div class="row gy-5 cutbagpanel hidden">
                     <div class="col-lg-12">
                       <div class="card border-left-info shadow h-100 py-2">
                         <div class="card-body">

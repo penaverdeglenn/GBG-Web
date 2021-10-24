@@ -44,6 +44,7 @@ require_once __DIR__."/allfunctions.php";
     $SI_product_name  = getRecord('product_name','tbl_product','product_id ='.$SI_product_id);
     $SI_product_size  = getRecord('product_size','tbl_product','product_id ='.$SI_product_id);
     $SI_product_material_type  = getRecord('product_material_type','tbl_product','product_id ='.$SI_product_id);
+		$getmfgprocess  = getRecord('product_manufacturing_process','tbl_sales_inquiry','sales_inquiry_id  ='.$sales_inquiry_id);
  	mysqli_close($con);
 	}
 ?>
@@ -52,8 +53,8 @@ require_once __DIR__."/allfunctions.php";
 
 																	<input type="hidden"  class="cust_id" name="cust_id" id ="cust_id" value="<?php echo $cust_id; ?>">
 																	<input type="hidden"  class="SI_product_id" name="SI_product_id" id ="SI_product_id" value="<?php echo $SI_product_id; ?>">
-																	<input type="hidden"  class="sid" name="sid" id ="sid" value="<?php echo $sales_inquiry_id; ?>">
-
+																	<input type="hidden"  class="saleinquiryid2" name="sid" id ="sid" value="<?php echo $sales_inquiry_id; ?>">
+																	<input type="hidden"  class="mfgprocess" name="sid" id ="sid" value="<?php echo $getmfgprocess; ?>">
 																	<div class="col-sm-3">
 																		<p>Sales Inquiry ID:</p>
 																	</div>

@@ -280,20 +280,17 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-
-
 $(document).ready(function() {
 
 
 	$('select[name="salesorderID"]').on('change', function() {
 		var quotation_id = $(this).val();
-	//	alert("Tesst");
-		//alert(salesinquiryid);
+
+	//alert("Tesst");
+		//alert(salesinquiryid);saleinquiryid2
 		$("#quotID").val(quotation_id);
+  //  alert(quotation_id);
+
 		//$('input[name="salesinquiryID"]').val(salesinquiryid);
 		if (quotation_id!="none")
 	   {
@@ -308,6 +305,66 @@ $(document).ready(function() {
 						$(".joborderdata").html(data);
 						$("#joborderdata").show();
 						//alert(data);
+            var mfgprocess = $('.mfgprocess').val().split(",");
+
+            if(jQuery.inArray("extrusion", mfgprocess) != -1) {
+                      $('.extrusionpanel').removeClass('hidden');
+                      $('.extrusionpanel').show();
+
+                } else {
+                  $('.extrusionpanel').hide();
+
+                }
+
+          if(jQuery.inArray("printing", mfgprocess) != -1) {
+                          $('.printingpanel').removeClass('hidden');
+                          $('.printingpanel').show();
+
+            } else {
+                      $('.printingpanel').hide();
+
+            }
+
+
+          if(jQuery.inArray("1stlamination", mfgprocess) != -1) {
+                            $('.laminationpanel').removeClass('hidden');
+                            $('.laminationpanel').show();
+
+          } else {
+                        $('.laminationpanel').hide();
+
+          }
+
+
+          if(jQuery.inArray("2ndlamination", mfgprocess) != -1) {
+                              $('.laminationpanel').removeClass('hidden');
+                              $('.laminationpanel').show();
+
+          } else {
+                          $('.laminationpanel').hide();
+
+          }
+
+          if(jQuery.inArray("slitting", mfgprocess) != -1) {
+                                $('.slittingpanel').removeClass('hidden');
+                                $('.slittingpanel').show();
+
+         } else {
+                            $('.slittingpanel').hide();
+
+          }
+
+
+          if(jQuery.inArray("cuttingandbagging", mfgprocess) != -1) {
+                                  $('.cutbagpanel').removeClass('hidden');
+                                  $('.cutbagpanel').show();
+
+          } else {
+                              $('.cutbagpanel').hide();
+
+          }
+
+
 
 
 				}
@@ -342,6 +399,7 @@ $(document).ready(function() {
 		});
 
 
+
 		}
 		else
 		{
@@ -355,6 +413,13 @@ $(document).ready(function() {
 
 });
 
+
+
+$(document).ready(function() {
+//alert("TEST");
+
+
+});
 
 
 $(document).ready(function() {
@@ -725,8 +790,8 @@ $(document).ready(function() {
 		 var joid = $('.joid').val();
 		 var assignperson = $('.assignperson').val();
 		 var datastring = "";
-		
-	
+
+
 		 if (assignperson!="none")
 		{
 		//alert(assignperson);
@@ -752,13 +817,13 @@ $(document).ready(function() {
 												 alert("Failed to assign Job Order Approval");
 												 window.location = "joborderlist.php";
 											 }
-											 
+
 									   }
 						 });
 
 
 		 }
-		}); 
+		});
 
 
   });
@@ -1353,7 +1418,7 @@ $(document).ready(function() {
 		 var datastring = "";
 		 datastring = datastring + "joid="+joid;
 		 datastring = datastring + "&assignperson="+assignperson;
-		 
+
 		 $.ajax({
 			type: "POST",
 			url: "functions/joborderapprove.php",
@@ -1378,8 +1443,8 @@ $(document).ready(function() {
 		});
 
 	});
- 
- 
+
+
   });
 
 //reject job order
@@ -1406,25 +1471,25 @@ $(document).ready(function() {
 											 //alert(result);
 											 if(result == 1)
 											 {
- 
+
 												 alert("Job Order Rejected");
 												 window.location = "joborderlist.php";
- 
+
 											 }
 											 else if(result == 0)
 											 {
 												 alert("Failed to reject Sales Inquiry");
 												 window.location = "joborderlist.php";
- 
+
 											 }
 									   }
 		  });
- 
- 
- 
+
+
+
 		});
- 
- 
+
+
   });
 
 
